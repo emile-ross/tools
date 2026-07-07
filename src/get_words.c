@@ -36,3 +36,34 @@ int main(int argc, char *argv[])
 	}
 	return 0;
 }
+
+word_list parse_cmd(int num_args, char *arg[])
+{
+	word_list word_list_qualifiers = { NULL, False, 0, 0 };
+	uint16_t i = 0;
+	uint16_t next = i + 1;
+
+	if (!(UINT16MAX >= num_args))
+	{
+		fprintf(stderr, "Too many arguments were specified");
+		word_list_qualifiers.success = False;
+		return word_list_qualifiers;
+	}
+	for (i = 0; i < num_args; i++)
+	{
+		if (strcmp(arg[i], "-s") == 0 || strcmp(arg[i], "-i") == 0)
+		{
+			if (!word_list_qualifiers.success)
+			{
+				if (num_args > next)
+				{
+					word_list_qualifiers.source_file = arg[next];
+					word_list_qualifiers.success = True;
+				}
+			}
+		}
+		next++;
+	}
+	return word_list_qualifiers;
+}
+
