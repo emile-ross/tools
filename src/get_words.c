@@ -86,7 +86,6 @@ word_list parse_cmd(int num_args, char *arg[])
 				word_list_qualifiers.success = True;
 			}
 		}
-
 		next++;
 	}
 	return word_list_qualifiers;
@@ -94,18 +93,43 @@ word_list parse_cmd(int num_args, char *arg[])
 
 void file_reading(word_list *list_args)
 {
-	if (list_args->source_file != NULL)
-	{
-		FILE *fp = fopen(list_args->source_file, "r");
-		if (fp == NULL)
-		{
-			fprintf(stderr, "No such file or directory\n");
-			exit(1);
-		}
-	}
-	else
+	FILE *fp;
+	uint32_t line_count = 0;
+
+	char char_read = '\0';
+	if (list_args->source_file == NULL)
 	{
 		fprintf(stderr, "Unspecified file path\n");
 		exit(1);
 	}
+
+	fp = fopen(list_args->source_file, "r");
+	/* checks if the file can be opened and if it exists */
+	if (fp == NULL)
+	{
+		fprintf(stderr, "No such file or directory\n");
+		exit(1);
+	}
+
+	for (char_read = (char)fgetc(fp); char_read != EOF; char_read = (char)fgetc(fp))
+	{
+		if (char_read == '\n')    
+		{
+			line_count++;
+		}
+	}
+
+	/* count the last line even though it might end in EOF instead of \n */
+	if (line_count > 0 || fgetc(fp) != EOF)
+	{
+		line_count++;
+	}
+
+	if (line_count == 0)
+	{
+		fprintf(stderr, "No lines in the file\n");
+		exit(1);
+	}
+
+	fclose(fp);
 }
