@@ -5,6 +5,7 @@
 
 #define UINT8MAX (255)
 #define UINT16MAX (65535)
+#define UINT32MAX (4294967295)
 
 /* my own implementation of the stdbool.h library (C99 extension) */
 typedef enum
@@ -23,7 +24,7 @@ typedef struct
 } word_list;
 
 word_list parse_cmd(int num_args, char *arg[]);
-void file_reading(word_list *list_args);
+void get_lines(word_list *list_args);
 
 int main(int argc, char *argv[])
 {
@@ -91,10 +92,10 @@ word_list parse_cmd(int num_args, char *arg[])
 	return word_list_qualifiers;
 }
 
-void file_reading(word_list *list_args)
+void get_lines(word_list *list_args)
 {
 	FILE *fp;
-	uint32_t line_count = 0;
+	uint64_t line_count = 0;
 
 	char char_read = '\0';
 	if (list_args->source_file == NULL)
@@ -130,6 +131,16 @@ void file_reading(word_list *list_args)
 		fprintf(stderr, "No lines in the file\n");
 		exit(1);
 	}
+
+	if (UINT32MAX < line_count)
+	{
+		fprintf(stderr, "Too many lines in the file\n");
+		fprintf(stderr, "Max lines: %ld\n", UINT32MAX);
+		exit(1);
+	}
+
+	/* write the line_count to the list_args struct */
+	list_args->total_words = (uint32_t)line_count;
 
 	fclose(fp);
 }
