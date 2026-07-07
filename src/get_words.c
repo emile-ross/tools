@@ -31,6 +31,8 @@ int main(int argc, char *argv[])
 	if (argc > 1)
 	{
 		word_list list_args = parse_cmd(argc, argv);
+		get_lines(&list_args);
+		printf("%u lines \n", list_args.total_words);
 	}
 	else
 	{
@@ -43,8 +45,9 @@ int main(int argc, char *argv[])
 word_list parse_cmd(int num_args, char *arg[])
 {
 	word_list word_list_qualifiers = { NULL, False, 0, 0, 0 };
-	uint16_t i = 0;
+	uint16_t i = 1;
 	uint16_t next = i + 1;
+	Bool implicit = False;
 
 	if (!(UINT16MAX >= num_args))
 	{
@@ -53,7 +56,7 @@ word_list parse_cmd(int num_args, char *arg[])
 		return word_list_qualifiers;
 	}
 
-	for (i = 0; i < num_args; i++)
+	for (; i < num_args; i++)
 	{
 		if (strcmp(arg[i], "-s") == 0 || strcmp(arg[i], "-i") == 0)
 		{
@@ -71,7 +74,7 @@ word_list parse_cmd(int num_args, char *arg[])
 					return word_list_qualifiers;
 				}
 			}
-			else
+			else if (!implicit)
 			{
 				fprintf(stderr, "Duplicate use of the %s flag is not permitted\n", arg[i]);
 				word_list_qualifiers.success = False;
@@ -85,6 +88,7 @@ word_list parse_cmd(int num_args, char *arg[])
 				printf("Implicit use of %s as the filename\nUse -s for explicitly using it\n", arg[i]);
 				word_list_qualifiers.source_file = arg[i];
 				word_list_qualifiers.success = True;
+				implicit = True;
 			}
 		}
 		next++;
