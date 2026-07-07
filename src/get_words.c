@@ -92,3 +92,20 @@ word_list parse_cmd(int num_args, char *arg[])
 	return word_list_qualifiers;
 }
 
+void file_reading(word_list *list_args)
+{
+	if (list_args->source_file != NULL)
+	{
+		FILE *fp = fopen(list_args->source_file, "r");
+		if (fp == NULL)
+		{
+			fprintf(stderr, "No such file or directory\n");
+			exit(1);
+		}
+	}
+	else
+	{
+		fprintf(stderr, "Unspecified file path\n");
+		exit(1);
+	}
+}
