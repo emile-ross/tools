@@ -86,9 +86,14 @@ word_list parse_cmd(int num_args, char *arg[])
 			if (num_args > next)
 			{
 				temp_input = strtol(arg[next], &endptr, 10);
-				if (temp_input > UINT8MAX || temp_input <= 0)
+				if (temp_input > UINT8MAX)
 				{
 					fprintf(stderr, "Invalid word length %ld is larger than %d\n", temp_input, UINT8MAX);
+					exit(1);
+				}
+				else if (temp_input <= 0)
+				{
+					fprintf(stderr, "Word length cannot be zero\n");
 					exit(1);
 				}
 				i++;
