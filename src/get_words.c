@@ -54,8 +54,7 @@ word_list parse_cmd(int num_args, char *arg[])
 	if (!(UINT16MAX >= num_args))
 	{
 		fprintf(stderr, "Too many arguments were specified");
-		word_list_qualifiers.success = False;
-		return word_list_qualifiers;
+		exit(1);
 	}
 
 	for (; i < num_args; i++)
@@ -73,15 +72,13 @@ word_list parse_cmd(int num_args, char *arg[])
 				else
 				{
 					fprintf(stderr, "Expected filename after %s flag\n", arg[i]);
-					word_list_qualifiers.success = False;
-					return word_list_qualifiers;
+					exit(1);
 				}
 			}
 			else if (!implicit)
 			{
 				fprintf(stderr, "Duplicate use of the %s flag is not permitted\n", arg[i]);
-				word_list_qualifiers.success = False;
-				return word_list_qualifiers;
+				exit(1);
 			}
 		}
 		else if (strcmp(arg[i], "-l") == 0 || strcmp(arg[i], "--length") == 0)
@@ -92,6 +89,7 @@ word_list parse_cmd(int num_args, char *arg[])
 				if (temp_input > UINT8MAX || temp_input <= 0)
 				{
 					fprintf(stderr, "Invalid word length %ld is larger than %d\n", temp_input, UINT8MAX);
+					exit(1);
 				}
 				i++;
 			}
