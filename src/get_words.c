@@ -78,11 +78,13 @@ word_list parse_cmd(int num_args, char *arg[])
 	{
 		if (strcmp(arg[i], "-s") == 0 || strcmp(arg[i], "-i") == 0)
 		{
+			used_args[i] = True;	/* argument is used up by a flag */
 			implicit = False;
 			if (!word_list_qualifiers.success)
 			{
 				if (num_args > next)
 				{
+					used_args[next] = True;	/* argument is used up by a flag */
 					word_list_qualifiers.source_file = arg[next];
 					word_list_qualifiers.success = True;
 				}
@@ -100,6 +102,7 @@ word_list parse_cmd(int num_args, char *arg[])
 		}
 		else if (strcmp(arg[i], "-l") == 0 || strcmp(arg[i], "--length") == 0)
 		{
+			used_args[i] = True;	/* argument is used up by a flag */
 			if (num_args > next)
 			{
 				temp_input = strtol(arg[next], &endptr, 10);
@@ -113,14 +116,19 @@ word_list parse_cmd(int num_args, char *arg[])
 					fprintf(stderr, "Word length cannot be zero\n");
 					exit(1);
 				}
-				word_list_qualifiers.letters_word = (uint8_t)temp_input;
-				i++;
+				else
+				{
+					used_args[next] = True;	/* used up by the index */
+					word_list_qualifiers.letters_word = (uint8_t)temp_input;
+				}
 			}
 		}
 		else if (strcmp(arg[i], "-o") == 0 || strcmp(arg[i], "--output") == 0)
 		{
+			used_args[i] = True;	/* argument is used up by a flag */
 			if (num_args > next)
 			{
+				used_args[next] = True;	/* used up by the index */
 				word_list_qualifiers.output_file = arg[next];
 			}
 			else
@@ -131,12 +139,15 @@ word_list parse_cmd(int num_args, char *arg[])
 		}
 		else
 		{
-			if (!word_list_qualifiers.success)
+			if (!used_args[i])
 			{
-				printf("Implicit use of %s as the filename\nUse -s for explicitly using it\n", arg[i]);
-				word_list_qualifiers.source_file = arg[i];
-				word_list_qualifiers.success = True;
-				implicit = True;
+				if (!word_list_qualifiers.success)
+				{
+					printf("Implicit use of %s as the filename\nUse -s for explicitly using it\n", arg[i]);
+					word_list_qualifiers.source_file = arg[i];
+					word_list_qualifiers.success = True;
+					implicit = True;
+				}
 			}
 		}
 		next++;
