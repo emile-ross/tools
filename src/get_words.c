@@ -32,7 +32,12 @@ int main(int argc, char *argv[])
 	{
 		word_list list_args = parse_cmd(argc, argv);
 		get_lines(&list_args);
-		printf("%u lines \n", list_args.total_words);
+		/* only print the number of lines in the target file
+		 * if the operation was successful */
+		if (list_args.success)
+		{
+			printf("%u lines \n", list_args.total_words);
+		}
 	}
 	else
 	{
@@ -96,6 +101,7 @@ word_list parse_cmd(int num_args, char *arg[])
 					fprintf(stderr, "Word length cannot be zero\n");
 					exit(1);
 				}
+				word_list_qualifiers.letters_word = (uint8_t)temp_input;
 				i++;
 			}
 		}
