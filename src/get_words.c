@@ -188,8 +188,6 @@ void get_lines(word_list *list_args)
 	fclose(fp);
 }
 
-
-
 void get_words(word_list *list_args)
 {
 	/* allocate space for all words accounting for null terminator */
@@ -226,6 +224,22 @@ void get_words(word_list *list_args)
 		 * of letters in a word + 1 (NULL terminator) */
 		printf("%s\n", buffer + i * (list_args->letters_word + 1));
 	}
-	
+
+	if (list_args->output_file != NULL)
+	{
+		out = fopen(list_args->output_file, "w");
+		if (out == NULL)
+		{
+			free(buffer);
+			exit(1);
+		}
+		
+		for (i = 0; i < valid_i; i++)
+		{
+			fprintf(out, "%s\n", buffer + i * (list_args->letters_word + 1));
+		}
+		fclose(out);	
+	}
+
 	free(buffer);
 }
