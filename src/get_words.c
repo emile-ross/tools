@@ -38,6 +38,7 @@ int main(int argc, char *argv[])
 		{
 			printf("%u lines \n", list_args.total_words);
 		}
+		get_words(&list_args);
 	}
 	else
 	{
@@ -171,4 +172,22 @@ void get_lines(word_list *list_args)
 	list_args->total_words = (uint32_t)line_count;
 
 	fclose(fp);
+}
+
+void get_words(word_list *list_args)
+{
+	char *buffer = malloc(list_args->total_words * (list_args->letters_word + 1));
+	uint8_t i = 0;
+	char temp[256];
+	FILE *fp = fopen(list_args->source_file, "r");
+	while (valid_i < list_args->total_words && fscanf(fp, "%255s", temp) == 1)
+	{
+		if (strlen(temp) == list_args->letters_word)
+		{
+			dest = buffer + valid_i * (list_args->letters_word + 1);
+			strncpy(dest, temp, (list_args->letters_word + 1));
+			valid_i++;
+		}
+	}
+	free(buffer);
 }
