@@ -17,6 +17,7 @@ typedef enum
 typedef struct
 {
 	char *source_file;
+	char *output_file;
 	Bool success;
 	uint8_t letters_word;
 	uint32_t total_words;
@@ -51,7 +52,7 @@ int main(int argc, char *argv[])
 
 word_list parse_cmd(int num_args, char *arg[])
 {
-	word_list word_list_qualifiers = { NULL, False, 0, 0, 0 };
+	word_list word_list_qualifiers = { NULL, NULL, False, 0, 0, 0 };
 	uint16_t i = 1;
 	uint16_t next = i + 1;
 	Bool implicit = False;
@@ -105,6 +106,18 @@ word_list parse_cmd(int num_args, char *arg[])
 				}
 				word_list_qualifiers.letters_word = (uint8_t)temp_input;
 				i++;
+			}
+		}
+		else if (strcmp(arg[i], "-o") == 0 || strcmp(arg[i], "--output") == 0)
+		{
+			if (num_args > next)
+			{
+				word_list_qualifiers.output_file = arg[next];
+			}
+			else
+			{
+				fprintf(stderr, "Expected filename after %s flag\n", arg[i]);
+				exit(1);
 			}
 		}
 		else
@@ -183,6 +196,7 @@ void get_words(word_list *list_args)
 	char *buffer = malloc(list_args->total_words * (list_args->letters_word + 1));
 	uint32_t valid_i = 0;
 	char *dest;
+	FILE *out;
 	uint8_t i = 0;
 	char temp[256];
 	FILE *fp = fopen(list_args->source_file, "r");
