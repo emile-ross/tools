@@ -25,6 +25,7 @@ typedef struct
 
 word_list parse_cmd(int num_args, char *arg[]);
 void get_lines(word_list *list_args);
+void get_words(word_list *list_args);
 
 int main(int argc, char *argv[])
 {
@@ -174,9 +175,14 @@ void get_lines(word_list *list_args)
 	fclose(fp);
 }
 
+
+
 void get_words(word_list *list_args)
 {
+	/* allocate space for all words accounting for null terminator */
 	char *buffer = malloc(list_args->total_words * (list_args->letters_word + 1));
+	uint32_t valid_i = 0;
+	char *dest;
 	uint8_t i = 0;
 	char temp[256];
 	FILE *fp = fopen(list_args->source_file, "r");
@@ -189,5 +195,15 @@ void get_words(word_list *list_args)
 			valid_i++;
 		}
 	}
+	list_args->valid_words = valid_i;
+	fclose(fp);
+	
+	for (; i < valid_i; i++)
+	{
+		/* increment the pointer into the buffer by the number
+		 * of letters in a word + 1 (NULL terminator) */
+		printf("%s\n", buffer + i * (list_args->letters_word + 1));
+	}
+	
 	free(buffer);
 }
