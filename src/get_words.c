@@ -186,6 +186,13 @@ void get_words(word_list *list_args)
 	uint8_t i = 0;
 	char temp[256];
 	FILE *fp = fopen(list_args->source_file, "r");
+
+	if (buffer == NULL || fp == NULL)
+	{
+		fclose(fp);
+		exit(1);
+	}
+
 	while (valid_i < list_args->total_words && fscanf(fp, "%255s", temp) == 1)
 	{
 		if (strlen(temp) == list_args->letters_word)
@@ -195,6 +202,7 @@ void get_words(word_list *list_args)
 			valid_i++;
 		}
 	}
+
 	list_args->valid_words = valid_i;
 	fclose(fp);
 	
