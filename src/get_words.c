@@ -60,6 +60,7 @@ word_list parse_cmd(int num_args, char *arg[])
 	{
 		if (strcmp(arg[i], "-s") == 0 || strcmp(arg[i], "-i") == 0)
 		{
+			implicit = False;
 			if (!word_list_qualifiers.success)
 			{
 				if (num_args > next)
@@ -79,6 +80,13 @@ word_list parse_cmd(int num_args, char *arg[])
 				fprintf(stderr, "Duplicate use of the %s flag is not permitted\n", arg[i]);
 				word_list_qualifiers.success = False;
 				return word_list_qualifiers;
+			}
+		}
+		else if (strcmp(arg[i], "-l") == 0 || strcmp(arg[i], "--length") == 0)
+		{
+			if (num_args > next)
+			{
+				
 			}
 		}
 		else
