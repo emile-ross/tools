@@ -6,6 +6,7 @@
 #define UINT8MAX (255)
 #define UINT16MAX (65535)
 #define UINT32MAX (4294967295)
+#define max_args (8)
 
 /* my own implementation of the stdbool.h library (C99 extension) */
 typedef enum
@@ -53,11 +54,19 @@ int main(int argc, char *argv[])
 word_list parse_cmd(int num_args, char *arg[])
 {
 	word_list word_list_qualifiers = { NULL, NULL, False, 0, 0, 0 };
-	uint16_t i = 1;
-	uint16_t next = i + 1;
+	uint8_t i = 0;
+	uint8_t base_arg_r = 1;
+	uint16_t next = base_arg_r + 1;
 	Bool implicit = False;
 	long temp_input = 0;
 	char *endptr;
+	Bool used_args[max_args];
+
+	for (i = base_arg_r; i < max_args; i++)
+		used_args[i] = False;
+
+	for (i = 0; i < base_arg_r; i++)
+		used_args[i] = True;
 
 	if (!(UINT16MAX >= num_args))
 	{
@@ -65,7 +74,7 @@ word_list parse_cmd(int num_args, char *arg[])
 		exit(1);
 	}
 
-	for (; i < num_args; i++)
+	for (i = base_arg_r; i < num_args; i++)
 	{
 		if (strcmp(arg[i], "-s") == 0 || strcmp(arg[i], "-i") == 0)
 		{
