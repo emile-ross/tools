@@ -231,6 +231,7 @@ void get_words(word_list *list_args)
 		{
 			dest = buffer + valid_i * (list_args->letters_word + 1);
 			strncpy(dest, temp, (list_args->letters_word + 1));
+			dest[0] = '\0';
 			valid_i++;
 		}
 	}
