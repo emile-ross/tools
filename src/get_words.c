@@ -8,12 +8,15 @@
 #define UINT32MAX (4294967295)
 #define max_args (8)
 
+
 /* my own implementation of the stdbool.h library (C99 extension) */
 typedef enum
 {
 	True = 1,
 	False = 0
 } Bool;
+
+const Bool verbose = False;
 
 typedef struct
 {
@@ -39,9 +42,21 @@ int main(int argc, char *argv[])
 		 * if the operation was successful */
 		if (list_args.success)
 		{
-			printf("%u lines \n", list_args.total_words);
+			if (verbose)
+			{
+				printf("%s: %u lines \n", list_args.source_file, list_args.total_words);
+			}
 		}
+
 		get_words(&list_args);
+		if (verbose)
+		{
+			printf("%s: %u valid words \n", list_args.output_file, list_args.valid_words);
+		}
+		else
+		{
+			printf("%u words were matching the length\n", list_args.valid_words);
+		}
 	}
 	else
 	{
@@ -231,7 +246,6 @@ void get_words(word_list *list_args)
 		{
 			dest = buffer + valid_i * (list_args->letters_word + 1);
 			strncpy(dest, temp, (list_args->letters_word + 1));
-			dest[0] = '\0';
 			valid_i++;
 		}
 	}
@@ -242,7 +256,11 @@ void get_words(word_list *list_args)
 
 	if (list_args->output_file != NULL)
 	{
-		printf("The words were written to %s\n", list_args->output_file);
+		if (verbose)
+		{
+			printf("The words were written to %s\n", list_args->output_file);
+		}
+
 		out = fopen(list_args->output_file, "w");
 		if (out == NULL)
 		{
