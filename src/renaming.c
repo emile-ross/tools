@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdint.h>
 
 
 typedef enum
@@ -9,7 +10,6 @@ typedef enum
 	single_file_flag,
 	invalid_flag,
 } flag_type;
-
 
 /* this will rename files with certain characters in the filename */
 int main(int argc, char *argv[])
