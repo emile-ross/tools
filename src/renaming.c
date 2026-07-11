@@ -16,26 +16,27 @@ int main(int argc, char *argv[])
 {
 	if (argc > 2)
 	{
-		flag_type command_flag_types;
-		if (strcmp("-c", argv[1]) == 0)
+		uint8_t i = 0;
+		flag_type command_flag_types[argc];
+		for (; i < argc; i++)
 		{
-			command_flag_types = char_flag;
-		}
-		else if (strcmp("--all", argv[1]) == 0 || strcmp("-a", argv[1]) == 0)
-		{
-			/* all files option */
-			command_flag_types = all_files_flag;
-		}
-		else if (strcmp("-c", argv[1]) == 0)
-		{
-		}
-		else if (strcmp("-s", argv[1]) == 0)
-		{
-			command_flag_types = single_file_flag;
-		}
-		else
-		{
-			command_flag_types = invalid_flag;
+			if (strcmp("-c", argv[1]) == 0)
+			{
+				command_flag_types = char_flag;
+			}
+			else if (strcmp("--all", argv[1]) == 0 || strcmp("-a", argv[1]) == 0)
+			{
+				/* all files option */
+				command_flag_types = all_files_flag;
+			}
+			else if (strcmp("-s", argv[1]) == 0)
+			{
+				command_flag_types = single_file_flag;
+			}
+			else
+			{
+				command_flag_types = invalid_flag;
+			}
 		}
 	}
 	else
