@@ -20,16 +20,19 @@ int main(int argc, char *argv[])
 		flag_type command_flag_types[argc];
 		for (; i < argc; i++)
 		{
-			if (strcmp("-c", argv[1]) == 0)
+			if (strcmp("-c", argv[i]) == 0)
 			{
 				command_flag_types = char_flag;
 			}
-			else if (strcmp("--all", argv[1]) == 0 || strcmp("-a", argv[1]) == 0)
+			else if (strcmp("--all", argv[i]) == 0 || strcmp("-a", argv[i]) == 0)
 			{
 				/* all files option */
 				command_flag_types = all_files_flag;
 			}
-			else if (strcmp("-s", argv[1]) == 0)
+			else if (strcmp("-c", argv[i]) == 0)
+			{
+			}
+			else if (strcmp("-s", argv[i]) == 0)
 			{
 				command_flag_types = single_file_flag;
 			}
