@@ -1,8 +1,8 @@
-
 #include <stdio.h>
 #include <stdint.h>
 #include <string.h>
 
+/* the max number of arguments that can be specified per command */
 #define max_args 16
 
 typedef enum
@@ -19,6 +19,13 @@ typedef enum
 	True = 1,
 	False = 0
 } Bool;
+
+typedef struct 
+{
+	Bool use_all_files;
+	char prev_char;
+	char new_char;
+} all_files_opt;
 
 /* this will rename files with certain characters in the filename */
 int main(int argc, char *argv[])
