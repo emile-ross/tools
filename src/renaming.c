@@ -14,6 +14,12 @@ typedef enum
 	invalid_flag
 } flag_type;
 
+typedef enum
+{
+	True = 1,
+	False = 0
+} Bool;
+
 /* this will rename files with certain characters in the filename */
 int main(int argc, char *argv[])
 {
