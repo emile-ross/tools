@@ -34,12 +34,29 @@ int main(int argc, char *argv[])
 	{
 		uint8_t i = 0;
 		uint8_t next_index = i + 1;
+
 		flag_type command_flag_types[max_args];
 		for (; i < argc; i++)
 		{
+			if (strcmp("-r", argv[i]) == 0 || strcmp("--replace", argv[i]) == 0)
+			{
+				command_flag_types[i] = char_flag;
+
+				if (next_index > argc)
+				{
+					fprintf(stderr, "Missing arguments after %s\nExpected character to replace\n", argv[i]);
+					return 1;
+				}
+			}
 			else if (strcmp("-c", argv[i]) == 0 || strcmp("--character", argv[i]) == 0)
 			{
 				command_flag_types[i] = char_flag;
+
+				if (next_index > argc)
+				{
+					fprintf(stderr, "Missing arguments after %s\nExpected the new characters\n", argv[i]);
+					return 1;
+				}
 			}
 			else if (strcmp("--all", argv[i]) == 0 || strcmp("-a", argv[i]) == 0)
 			{
