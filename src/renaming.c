@@ -33,10 +33,11 @@ int main(int argc, char *argv[])
 	if (argc > 2)
 	{
 		uint8_t i = 0;
+		uint8_t next_index = i + 1;
 		flag_type command_flag_types[max_args];
 		for (; i < argc; i++)
 		{
-			if (strcmp("-c", argv[i]) == 0)
+			else if (strcmp("-c", argv[i]) == 0 || strcmp("--character", argv[i]) == 0)
 			{
 				command_flag_types[i] = char_flag;
 			}
@@ -45,17 +46,18 @@ int main(int argc, char *argv[])
 				/* all files option */
 				command_flag_types[i] = all_files_flag;
 			}
-			else if (strcmp("-c", argv[i]) == 0)
-			{
-			}
 			else if (strcmp("-s", argv[i]) == 0)
 			{
 				command_flag_types[i] = single_file_flag;
 			}
 			else
 			{
-				command_flag_types[i] = invalid_flag;
+				if (command_flag_types[i] == undefined_flag || command_flag_types[i] == invalid_flag)
+				{
+					command_flag_types[i] = invalid_flag;
+				}
 			}
+			next_index++;
 		}
 	}
 	else
