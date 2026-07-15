@@ -29,8 +29,8 @@ void backup_passwords(void);
 int main(int argc, char *argv[])
 {
 	/* used to optimise checking by avoiding to check the entire struct */
-	Bool full_backup = False;
 	backup_data_type backup = { False, False, False, False };
+	backup_data_type all_backup_struct = { True, True, True, True };
 	backup_data_type *pbackup = &backup;
 	if (argc > min_args)
 	{
@@ -39,6 +39,7 @@ int main(int argc, char *argv[])
 		{
 			if (strcmp(argv[i], "-a") == 0 || strcmp(argv[i], "--all") == 0)
 			{
+				pbackup = &all_backup_struct;
 				break;	/* if we don't expect anything else */
 			}
 			else if (strcmp(argv[i], "-p") == 0 || strcmp(argv[i], "--passwords") == 0)
@@ -60,22 +61,20 @@ int main(int argc, char *argv[])
 	{
 		full_backup = True;
 	}
-	if (full_backup)
+
+	/* backup specific configs */
+	if (pbackup->gitconfig)
 	{
-		/* do full backup */
+		/* char config_name[16] = ".gitconfig"; */
 		backup_passwords();
 	}
-	else
+	else if (pbackup->bookmarks)
 	{
-		/* backup specific configs */
-		if (backup.gitconfig)
-		{
-			char config_name[16] = ".gitconfig";
-		}
-		else if (backup.bookmarks)
-		{
-		}
 	}
+	else if (pbackup->passwords)
+	{
+	}
+
 	return 0;
 }
 
