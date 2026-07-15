@@ -1,5 +1,6 @@
 #define POSIX_C_SOURCE 199506L
 #include <stdio.h>
+/* #include <stdlib.h> */
 #include <stdint.h>
 #include <string.h>
 
@@ -35,6 +36,16 @@ int main(int argc, char *argv[])
 			}
 			else if (strcmp(argv[i], "-p") == 0 || strcmp(argv[i], "--passwords") == 0)
 			{
+				backup.passwords = True;
+			}
+			else if (strcmp(argv[i], "-b") == 0 || strcmp(argv[i], "--bookmarks") == 0)
+			{
+				backup.bookmarks = True;
+			}
+			else if (strcmp(argv[i], "-g") == 0 || strcmp(argv[i], "--gitconfig") == 0
+					|| strcmp(argv[i], "--git") == 0)
+			{
+				backup.gitconfig = True;
 			}
 		}
 	}
@@ -49,6 +60,15 @@ int main(int argc, char *argv[])
 	else
 	{
 		/* backup specific configs */
+		if (backup.gitconfig)
+		{
+		}
+		else if (backup.bookmarks)
+		{
+		}
+		else if (backup.passwords)
+		{
+		}
 	}
 	return 0;
 }
