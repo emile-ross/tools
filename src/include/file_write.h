@@ -21,3 +21,18 @@ size_t ssnprintf(char *buffer, size_t buffer_size, const char *format, ...)
 	va_end(ap);
 	return return_value;
 }
+
+char *bmalloc(const char *format, ...)
+{
+	va_list args, copy;
+	va_start(args, format);
+	va_copy(copy, args);
+
+	size_t string_size = 1 + (size_t)vsnprintf(NULL, 0, format, copy);
+	va_end(copy);
+
+	char *format_str = malloc(string_size);
+	vsnprintf(format_str, string_size, format, args);
+	va_end(args);
+	return format_str;
+}
