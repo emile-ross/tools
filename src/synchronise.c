@@ -3,12 +3,12 @@
 #include <string.h>
 #include "include/file_write.h"
 
-#define min_args (3)
+#define min_args (1)
 #define base_args (1)	/* the number of useless arguments preceeding the command (with info) */
 
 /* choose the name of your password database (including its path) */
-const char passwords_name[16] = ".passwords.kdbx";
-void backup_passwords(void);
+const char passwords_file[16] = ".passwords.kdbx";
+
 
 typedef enum
 {
@@ -23,6 +23,8 @@ typedef struct
 	Bool gitconfig;
 	Bool wifi_logs;
 } backup_data_type;
+
+void backup_passwords(void);
 
 int main(int argc, char *argv[])
 {
@@ -55,7 +57,7 @@ int main(int argc, char *argv[])
 	}
 	else
 	{
-		full_backup = False;
+		full_backup = True;
 	}
 	if (full_backup)
 	{
