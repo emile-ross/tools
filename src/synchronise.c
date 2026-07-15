@@ -1,6 +1,3 @@
-#define POSIX_C_SOURCE 199506L
-#include <stdio.h>
-/* #include <stdlib.h> */
 #define POSIX_C_SOURCE 200112L
 #include <stdint.h>
 #include <string.h>
@@ -8,6 +5,9 @@
 
 #define min_args (3)
 #define base_args (1)	/* the number of useless arguments preceeding the command (with info) */
+
+/* choose the name of your password database (including its path) */
+const char passwords_name[16] = ".passwords.kdbx";
 
 typedef enum
 {
@@ -20,13 +20,14 @@ typedef struct
 	Bool passwords;
 	Bool bookmarks;
 	Bool gitconfig;
+	Bool wifi_logs;
 } backup_data_type;
 
 int main(int argc, char *argv[])
 {
 	/* used to optimise checking by avoiding to check the entire struct */
 	Bool full_backup = False;
-	backup_data_type backup = { False, False, False };
+	backup_data_type backup = { False, False, False, False };
 	if (argc > min_args)
 	{
 		uint8_t i = 0;
@@ -64,6 +65,7 @@ int main(int argc, char *argv[])
 		/* backup specific configs */
 		if (backup.gitconfig)
 		{
+			char config_name[16] = ".gitconfig";
 		}
 		else if (backup.bookmarks)
 		{
@@ -73,4 +75,9 @@ int main(int argc, char *argv[])
 		}
 	}
 	return 0;
+}
+
+void backup_passwords(void)
+{
+
 }
