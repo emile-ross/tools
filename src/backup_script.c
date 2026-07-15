@@ -5,15 +5,25 @@
 
 #define min_args (3)
 #define base_args (1)	/* the number of useless arguments preceeding the command (with info) */
+
 typedef enum
 {
 	True = 1,
 	False = 0
 } Bool;
 
+typedef struct
+{
+	Bool passwords;
+	Bool bookmarks;
+	Bool gitconfig;
+} backup_data_type;
+
 int main(int argc, char *argv[])
 {
-	Bool full_backup = True;
+	/* used to optimise checking by avoiding to check the entire struct */
+	Bool full_backup = False;
+	backup_data_type backup = { False, False, False };
 	if (argc > min_args)
 	{
 		uint8_t i = 0;
@@ -21,7 +31,10 @@ int main(int argc, char *argv[])
 		{
 			if (strcmp(argv[i], "-a") == 0 || strcmp(argv[i], "--all") == 0)
 			{
-				full_backup = False;
+				full_backup = True;
+			}
+			else if (strcmp(argv[i], "-p") == 0 || strcmp(argv[i], "--passwords") == 0)
+			{
 			}
 		}
 	}
