@@ -1,8 +1,10 @@
 #define POSIX_C_SOURCE 199506L
 #include <stdio.h>
 /* #include <stdlib.h> */
+#define POSIX_C_SOURCE 200112L
 #include <stdint.h>
 #include <string.h>
+#include "include/file_write.h"
 
 #define min_args (3)
 #define base_args (1)	/* the number of useless arguments preceeding the command (with info) */
