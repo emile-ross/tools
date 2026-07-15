@@ -28,10 +28,19 @@ char *bmalloc(const char *format, ...)
 	va_start(args, format);
 	va_copy(copy, args);
 
+	/* calculate the length of the message + null terminator */
 	size_t string_size = 1 + (size_t)vsnprintf(NULL, 0, format, copy);
 	va_end(copy);
 
+	/* allocate memory for the warning message */
 	char *format_str = malloc(string_size);
+	if (format_str == NULL)
+	{
+		fprintf(stderr, "malloc() call failed and returned NULL\n");
+		free(format_str);
+		exit(1);
+	}
+
 	vsnprintf(format_str, string_size, format, args);
 	va_end(args);
 	return format_str;

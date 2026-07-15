@@ -8,6 +8,7 @@
 
 /* choose the name of your password database (including its path) */
 const char passwords_name[16] = ".passwords.kdbx";
+void backup_passwords(void);
 
 typedef enum
 {
