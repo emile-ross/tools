@@ -31,6 +31,7 @@ int main(int argc, char *argv[])
 	/* used to optimise checking by avoiding to check the entire struct */
 	Bool full_backup = False;
 	backup_data_type backup = { False, False, False, False };
+	backup_data_type *pbackup = &backup;
 	if (argc > min_args)
 	{
 		uint8_t i = 0;
@@ -38,7 +39,7 @@ int main(int argc, char *argv[])
 		{
 			if (strcmp(argv[i], "-a") == 0 || strcmp(argv[i], "--all") == 0)
 			{
-				full_backup = True;
+				break;	/* if we don't expect anything else */
 			}
 			else if (strcmp(argv[i], "-p") == 0 || strcmp(argv[i], "--passwords") == 0)
 			{
@@ -62,6 +63,7 @@ int main(int argc, char *argv[])
 	if (full_backup)
 	{
 		/* do full backup */
+		backup_passwords();
 	}
 	else
 	{
@@ -73,14 +75,15 @@ int main(int argc, char *argv[])
 		else if (backup.bookmarks)
 		{
 		}
-		else if (backup.passwords)
-		{
-		}
 	}
 	return 0;
 }
 
 void backup_passwords(void)
 {
+	char home_directory[64] = "/home/dir/";
+	char *source_file = bmalloc("%s%s", home_directory, passwords_file);
 
+	printf("%s\n", source_file);
+	free(source_file);
 }
