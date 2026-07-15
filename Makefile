@@ -2,10 +2,9 @@ CC = zig cc
 
 ALL_FLAGS := -Wconversion -Wextra -Wall -Wpedantic -std=c89
 
-OUT = -o listwords
-get_words_cmd := src/get_words.c $(OUT)
-renaming_cmd := src/renaming.c $(OUT)
-backup_cmd := src/backup_script.c $(OUT)
+get_words_cmd := src/get_words.c -o listwords
+renaming_cmd := src/renaming.c -o rename
+backup_cmd := src/synchronise.c -o sync
 
 base: all
 

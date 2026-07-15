@@ -5,5 +5,7 @@ src/*.o
 ID_RSA
 id_rsa
 listwords
+sync
+rename
 .gitconfig
 file.txt
