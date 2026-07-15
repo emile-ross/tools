@@ -2,6 +2,8 @@
 #include <stdint.h>
 #include <string.h>
 
+/* NOT functional */
+
 /* the max number of arguments that can be specified per command */
 #define max_args 16
 
