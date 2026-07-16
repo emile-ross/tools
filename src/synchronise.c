@@ -1,4 +1,5 @@
 #define POSIX_C_SOURCE 200112L
+
 #include <stdint.h>
 #include <string.h>
 #include "include/file_write.h"
@@ -6,19 +7,20 @@
 #define min_args (1)
 #define base_args (1)	/* the number of useless arguments preceeding the command (with info) */
 
-/* choose the name of your password database (including its path) */
 typedef enum
 {
 	True = 1,
 	False = 0
 } Bool;
 
+/* choose the name of your password database (including its path) */
 const char passwords_file[16] = "passwords.kdbx";
-Bool use_home_dir = False;
 const char bookmarks_file[16] = "bookmarks.json";
 const char gitconfig_file[16] = ".gitconfig";
 
-Bool verbose = True;
+Bool use_home_dir = False;
+
+const Bool verbose = True;
 
 typedef struct
 {
@@ -28,7 +30,7 @@ typedef struct
 	Bool wifi_logs;
 } backup_data_type;
 
-void backup_passwords(char *home);
+int backupfn(backup_data_type *dataBackup, char *home);
 
 int main(int argc, char *argv[])
 {
@@ -74,64 +76,74 @@ int main(int argc, char *argv[])
 		pbackup = &all_backup_struct;
 	}
 
-	char *home = bmalloc(getenv("HOME"));
+	char *home = NULL;
+	if (use_home_dir)
+	{
+		home = bmalloc(getenv("HOME"));
+		backupfn(pbackup, home);
+	}
+	else
+	{
+		if (verbose)
+		{
+			printf("verbose: Not using home directory\n");
+		}
+		backupfn(pbackup, NULL);
+	}
 
 	free(home);
 	return 0;
 }
 
-void backup_gitconfig(char *home)
-{
-	char *source_file = bmalloc("%s%s", home, ".gitconfig");
-
-	printf("%s\n", source_file);
-	free(source_file);
-}
-
-void backup_bookmarks(char *home)
-{
-	char *source_file = bmalloc("%s%s", home, bookmarks_file);
-
-	printf("%s\n", source_file);
-	free(source_file);
-}
+int backup_data(char *home, char *filepath);
 
 int backupfn(backup_data_type *dataBackup, char *home)
 {
+	Bool data_backed_up = False;	/* set to true whenever data has been backed up */
 	if (dataBackup->gitconfig)
 	{
+		data_backed_up = True;
+		char *file = bmalloc(gitconfig_file);
+		backup_data(home, file);
+		free(file);
 	}
-	else if (dataBackup->bookmarks)
+
+	if (dataBackup->bookmarks)
 	{
+		data_backed_up = True;
+		char *file = bmalloc(bookmarks_file);
+		backup_data(home, file);
+		free(file);
 	}
-	else if (dataBackup->passwords)
+
+	if (dataBackup->passwords)
 	{
+		data_backed_up = True;
+		char *file = bmalloc(passwords_file);
+		backup_data(home, file);
+		free(file);
 	}
-	else
+	else if (!data_backed_up)
 	{
 		fprintf(stderr, "No data was backed up\n");
 		free(home);
 		return 1;
 	}
 
-	char *source_file = bmalloc("%s/%s", home, passwords_file);
-
-	printf("%s\n", source_file);
-	free(source_file);
 	return 0;
 }
 
-int backup_data(char *home)
+int backup_data(char *home, char *filepath)
 {
 	char *source_file = NULL;
 
 	if (home == NULL)
 	{
-		source_file = bmalloc("%s", passwords_file);
+		source_file = bmalloc("%s", filepath);
 	}
 	else
 	{
-		source_file = bmalloc("%s/%s", home, passwords_file);
+		source_file = bmalloc("%s/%s", home, filepath);
 	}
 
 	if (verbose)
