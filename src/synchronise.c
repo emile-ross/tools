@@ -34,7 +34,7 @@ int main(int argc, char *argv[])
 	backup_data_type *pbackup = &backup;
 	if (argc > min_args)
 	{
-		uint8_t i = 0;
+		uint8_t i = base_args;
 		for (; i < argc; i++)
 		{
 			if (strcmp(argv[i], "-a") == 0 || strcmp(argv[i], "--all") == 0)
@@ -55,24 +55,28 @@ int main(int argc, char *argv[])
 			{
 				backup.gitconfig = True;
 			}
+			else
+			{
+				printf("%s flag ignored (unknown flag)\n", argv[i]);
+			}
 		}
 	}
 	else
 	{
-		full_backup = True;
+		pbackup = &all_backup_struct;
 	}
 
 	/* backup specific configs */
 	if (pbackup->gitconfig)
 	{
 		/* char config_name[16] = ".gitconfig"; */
-		backup_passwords();
 	}
 	else if (pbackup->bookmarks)
 	{
 	}
 	else if (pbackup->passwords)
 	{
+		backup_passwords();
 	}
 
 	return 0;
