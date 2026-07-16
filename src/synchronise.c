@@ -7,8 +7,6 @@
 #define base_args (1)	/* the number of useless arguments preceeding the command (with info) */
 
 /* choose the name of your password database (including its path) */
-const char passwords_file[16] = "passwords.kdbx";
-const char bookmarks_file[16] = "bookmarks.json";
 
 
 
@@ -17,6 +15,10 @@ typedef enum
 	True = 1,
 	False = 0
 } Bool;
+
+const char passwords_file[16] = "passwords.kdbx";
+Bool use_home_dir = False;
+const char bookmarks_file[16] = "bookmarks.json";
 
 typedef struct
 {
@@ -85,6 +87,12 @@ int main(int argc, char *argv[])
 	else if (pbackup->passwords)
 	{
 		backup_passwords(home);
+	}
+	else
+	{
+		fprintf(stderr, "No data was backed up\n");
+		free(home);
+		return 1;
 	}
 
 	free(home);
