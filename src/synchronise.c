@@ -7,7 +7,9 @@
 #define base_args (1)	/* the number of useless arguments preceeding the command (with info) */
 
 /* choose the name of your password database (including its path) */
-const char passwords_file[16] = ".passwords.kdbx";
+const char passwords_file[16] = "passwords.kdbx";
+const char bookmarks_file[16] = "bookmarks.json";
+
 
 
 typedef enum
@@ -85,7 +87,14 @@ int main(int argc, char *argv[])
 	return 0;
 }
 
-void backup_passwords(void)
+void backup_bookmarks(char *home)
+{
+	char *source_file = bmalloc("%s%s", home, bookmarks_file);
+
+	printf("%s\n", source_file);
+	free(source_file);
+}
+
 void backup_passwords(char *home)
 {
 	char *source_file = bmalloc("%s/%s", home, passwords_file);
