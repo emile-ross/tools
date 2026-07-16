@@ -14,7 +14,8 @@ typedef enum
 	False = 0
 } Bool;
 
-/* choose the name of your password database (including its path) */
+/* choose the name of your password database (including its path) 
+ * make sure you don't include the home path unless you've disabled use_home_dir_src */
 const char passwords_src[16] = "passwords.kdbx";
 const char passwords_dst[48] = "backup/passwords/%s-passwords.kdbx";
 
@@ -80,7 +81,7 @@ int main(int argc, char *argv[])
 			}
 			else
 			{
-				printf("%s flag ignored (unknown flag)\n", argv[i]);
+				verbose_print("%s flag ignored (unknown flag)\n", argv[i]);
 			}
 		}
 	}
@@ -94,17 +95,25 @@ int main(int argc, char *argv[])
 	{
 		if (verbose)
 		{
-			printf("verbose: using home directory for source file\n");
+			verbose_print("using home directory for source file\n");
 		}
 
-		home = bmalloc(getenv("HOME"));
+		char *home_dir = getenv("HOME");
+		if (home_dir == NULL)
+		{
+			fprintf(stderr, "Failed to get home directory\n");
+			return 1;
+		}
+		home = bmalloc(home_dir);
+		
+
 		backupfn(pbackup, home);
 	}
 	else
 	{
 		if (verbose)
 		{
-			printf("verbose: Not using home directory for source file\n");
+			verbose_print("Not using home directory for source file\n");
 		}
 		backupfn(pbackup, NULL);
 	}
@@ -181,8 +190,8 @@ int backup_data(char *home, char *src_filepath, char *dst_filepath)
 
 	if (verbose)
 	{
-		printf("%s\n", source_file);
-		printf("%s\n", dest_file);
+		verbose_print("%s", source_file);
+		verbose_print("%s", dest_file);
 	}
 
 	if (!testing)

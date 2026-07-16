@@ -8,7 +8,7 @@ backup_cmd := src/synchronise.c -o sync
 
 base: all
 
-all: list_words renaming backup_script
+all: list_words renaming sync
 
 renaming:
 	$(CC) $(renaming_cmd) $(ALL_FLAGS) -std=c89
@@ -16,5 +16,6 @@ renaming:
 list_words:
 	$(CC) $(get_words_cmd) $(ALL_FLAGS) -std=c89
 
-backup_script:
+sync: synchronise
+synchronise:
 	$(CC) $(backup_cmd) $(ALL_FLAGS) -std=c99
