@@ -42,6 +42,7 @@ typedef struct
 
 int backupfn(backup_data_type *dataBackup, char *home);
 char *get_time_str(void);
+int backup_data(char *home, char *src_filepath, char *dst_filepath);
 
 int main(int argc, char *argv[])
 {
@@ -115,12 +116,17 @@ int main(int argc, char *argv[])
 int backupfn(backup_data_type *dataBackup, char *home)
 {
 	Bool data_backed_up = False;	/* set to true whenever data has been backed up */
+
+	char *time_string = get_time_str();
 	if (dataBackup->gitconfig)
 	{
 		data_backed_up = True;
 		char *src_file = bmalloc(gitconfig_src);
 		char *dst_file = bmalloc(gitconfig_dst, time_string);
 		backup_data(home, src_file, dst_file);
+
+		free(src_file);
+		free(dst_file);
 	}
 
 	if (dataBackup->bookmarks)
@@ -129,6 +135,9 @@ int backupfn(backup_data_type *dataBackup, char *home)
 		char *src_file = bmalloc(bookmarks_src);
 		char *dst_file = bmalloc(bookmarks_dst, time_string);
 		backup_data(home, src_file, dst_file);
+
+		free(src_file);
+		free(dst_file);
 	}
 
 	if (dataBackup->passwords)
@@ -137,10 +146,14 @@ int backupfn(backup_data_type *dataBackup, char *home)
 		char *src_file = bmalloc(passwords_src);
 		char *dst_file = bmalloc(passwords_dst, time_string);
 		backup_data(home, src_file, dst_file);
+
+		free(src_file);
+		free(dst_file);
 	}
 	else if (!data_backed_up)
 	{
 		fprintf(stderr, "No data was backed up\n");
+		free(time_string);
 		free(home);
 		return 1;
 	}
