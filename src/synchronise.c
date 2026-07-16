@@ -2,6 +2,7 @@
 
 #include <stdint.h>
 #include <string.h>
+#include <time.h>
 #include "include/file_write.h"
 
 #define min_args (1)
@@ -40,6 +41,7 @@ typedef struct
 } backup_data_type;
 
 int backupfn(backup_data_type *dataBackup, char *home);
+char *get_time_str(void);
 
 int main(int argc, char *argv[])
 {
@@ -172,3 +174,13 @@ int backup_data(char *home, char *src_filepath, char *dst_filepath)
 	return 0;
 }
 
+char *get_time_str(void)
+{
+	time_t default_time = time(NULL);
+	struct tm *cur_time = localtime(&default_time);
+
+	uint8_t day = (uint8_t)cur_time->tm_mday;
+	uint8_t month = 1 + (uint8_t)cur_time->tm_mon;
+	uint32_t year = 1900 + (uint32_t)cur_time->tm_year;
+	return bmalloc("%u-%hhu-%hhu", year, month, day);
+}
