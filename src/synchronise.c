@@ -14,11 +14,20 @@ typedef enum
 } Bool;
 
 /* choose the name of your password database (including its path) */
-const char passwords_file[16] = "passwords.kdbx";
-const char bookmarks_file[16] = "bookmarks.json";
-const char gitconfig_file[16] = ".gitconfig";
+const char passwords_src[16] = "passwords.kdbx";
+const char passwords_dst[48] = "backup/passwords/%s-passwords.kdbx";
 
-Bool use_home_dir = False;
+const char bookmarks_src[16] = "bookmarks.json";
+const char bookmarks_dst[32] = "backup/%s-bookmarks.json";
+
+const char gitconfig_src[16] = ".gitconfig";
+const char gitconfig_dst[32] = "backup/git/.%s-gitconfig";
+
+const char wifi_logs_src[24] = "logs/wifi_log.log";
+const char wifi_logs_dst[24] = "backup/logs/%s-wifi.log";
+
+Bool use_home_dir_src = True;
+Bool use_home_dir_dst = True;
 
 const Bool verbose = True;
 
@@ -77,8 +86,13 @@ int main(int argc, char *argv[])
 	}
 
 	char *home = NULL;
-	if (use_home_dir)
+	if (use_home_dir_src)
 	{
+		if (verbose)
+		{
+			printf("verbose: using home directory for source file\n");
+		}
+
 		home = bmalloc(getenv("HOME"));
 		backupfn(pbackup, home);
 	}
@@ -86,7 +100,7 @@ int main(int argc, char *argv[])
 	{
 		if (verbose)
 		{
-			printf("verbose: Not using home directory\n");
+			printf("verbose: Not using home directory for source file\n");
 		}
 		backupfn(pbackup, NULL);
 	}
@@ -103,7 +117,7 @@ int backupfn(backup_data_type *dataBackup, char *home)
 	if (dataBackup->gitconfig)
 	{
 		data_backed_up = True;
-		char *file = bmalloc(gitconfig_file);
+		char *file = bmalloc(gitconfig_src);
 		backup_data(home, file);
 		free(file);
 	}
@@ -111,7 +125,7 @@ int backupfn(backup_data_type *dataBackup, char *home)
 	if (dataBackup->bookmarks)
 	{
 		data_backed_up = True;
-		char *file = bmalloc(bookmarks_file);
+		char *file = bmalloc(bookmarks_src);
 		backup_data(home, file);
 		free(file);
 	}
@@ -119,7 +133,7 @@ int backupfn(backup_data_type *dataBackup, char *home)
 	if (dataBackup->passwords)
 	{
 		data_backed_up = True;
-		char *file = bmalloc(passwords_file);
+		char *file = bmalloc(passwords_src);
 		backup_data(home, file);
 		free(file);
 	}
