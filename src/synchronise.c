@@ -31,6 +31,7 @@ Bool use_home_dir_src = True;
 Bool use_home_dir_dst = True;
 
 const Bool verbose = True;
+const Bool testing = False;
 
 typedef struct
 {
@@ -47,7 +48,6 @@ void verbose_print(const char *format, ...);
 
 int main(int argc, char *argv[])
 {
-	/* used to optimise checking by avoiding to check the entire struct */
 	backup_data_type backup = { False, False, False, False };
 	backup_data_type *pbackup = &backup;	/* make a pointer to a struct & point to backup struct */
 
@@ -185,6 +185,22 @@ int backup_data(char *home, char *src_filepath, char *dst_filepath)
 		printf("%s\n", dest_file);
 	}
 
+	if (!testing)
+	{
+		char *cmd = bmalloc("cp %s %s", source_file, dest_file);
+		if (verbose)
+		{
+			verbose_print("Backing up %s...", source_file);
+		}
+
+		printf("\x1B[91m\x1B[1m\n");	/* start a bold red sequence */
+
+		system(cmd);
+
+		printf("\x1B[0m");	/* reset colour */
+		free(cmd);
+	}
+
 	free(source_file);
 	free(dest_file);
 	return 0;
@@ -198,17 +214,18 @@ char *get_time_str(void)
 	uint8_t day = (uint8_t)cur_time->tm_mday;
 	uint8_t month = 1 + (uint8_t)cur_time->tm_mon;
 	uint32_t year = 1900 + (uint32_t)cur_time->tm_year;
+
 	return bmalloc("%u-%hhu-%hhu", year, month, day);
 }
 
 void verbose_print(const char *format, ...)
 {
 	va_list args;
-	printf("\x1B[96m");
+	printf("\x1B[96m");	/* start a light cyan sequence */
 	
 	va_start(args, format);
 	vprintf(format, args);
 	va_end(args);
 	
-	printf("\x1B[0m");	/* reset colour */
+	printf("\x1B[0m\n");	/* reset colour */
 }
