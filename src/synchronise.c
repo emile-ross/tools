@@ -19,6 +19,7 @@ typedef enum
 const char passwords_file[16] = "passwords.kdbx";
 Bool use_home_dir = False;
 const char bookmarks_file[16] = "bookmarks.json";
+Bool verbose = True;
 
 typedef struct
 {
@@ -124,4 +125,23 @@ int backupfn(backup_data_type dataBackup*, char *home)
 
 	printf("%s\n", source_file);
 	free(source_file);
+	return 0;
+
+int backup_data(char *home)
+{
+	char *source_file = NULL;
+
+	if (home == NULL)
+	{
+		source_file = bmalloc("%s", passwords_file);
+	}
+	else
+	{
+		source_file = bmalloc("%s/%s", home, passwords_file);
+	}
+
+	if (verbose)
+	{
+		printf("%s\n", source_file);
+	}
 }
