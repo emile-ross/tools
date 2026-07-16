@@ -118,25 +118,25 @@ int backupfn(backup_data_type *dataBackup, char *home)
 	if (dataBackup->gitconfig)
 	{
 		data_backed_up = True;
-		char *file = bmalloc(gitconfig_src);
-		backup_data(home, file);
-		free(file);
+		char *src_file = bmalloc(gitconfig_src);
+		char *dst_file = bmalloc(gitconfig_dst, time_string);
+		backup_data(home, src_file, dst_file);
 	}
 
 	if (dataBackup->bookmarks)
 	{
 		data_backed_up = True;
-		char *file = bmalloc(bookmarks_src);
-		backup_data(home, file);
-		free(file);
+		char *src_file = bmalloc(bookmarks_src);
+		char *dst_file = bmalloc(bookmarks_dst, time_string);
+		backup_data(home, src_file, dst_file);
 	}
 
 	if (dataBackup->passwords)
 	{
 		data_backed_up = True;
-		char *file = bmalloc(passwords_src);
-		backup_data(home, file);
-		free(file);
+		char *src_file = bmalloc(passwords_src);
+		char *dst_file = bmalloc(passwords_dst, time_string);
+		backup_data(home, src_file, dst_file);
 	}
 	else if (!data_backed_up)
 	{
@@ -145,6 +145,7 @@ int backupfn(backup_data_type *dataBackup, char *home)
 		return 1;
 	}
 
+	free(time_string);
 	return 0;
 }
 
