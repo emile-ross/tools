@@ -32,8 +32,12 @@ int main(int argc, char *argv[])
 {
 	/* used to optimise checking by avoiding to check the entire struct */
 	backup_data_type backup = { False, False, False, False };
+	backup_data_type *pbackup = &backup;	/* make a pointer to a struct & point to backup struct */
+
+	/* this is just all set to true in order to make the process
+	 * of setting everything to true easier */
 	backup_data_type all_backup_struct = { True, True, True, True };
-	backup_data_type *pbackup = &backup;
+
 	if (argc > min_args)
 	{
 		uint8_t i = base_args;
@@ -85,6 +89,14 @@ int main(int argc, char *argv[])
 
 	free(home);
 	return 0;
+}
+
+void backup_gitconfig(char *home)
+{
+	char *source_file = bmalloc("%s%s", home, ".gitconfig");
+
+	printf("%s\n", source_file);
+	free(source_file);
 }
 
 void backup_bookmarks(char *home)
