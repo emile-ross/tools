@@ -1,10 +1,15 @@
-CC = zig cc
+CC = clang
 
 ALL_FLAGS := -Wconversion -Wextra -Wall -Wpedantic -Wstrict-prototypes -Wcast-qual -Wcast-align -Wshadow -Wwrite-strings -Wswitch-default -Werror
 
 get_words_cmd := src/get_words.c -o listwords
 renaming_cmd := src/renaming.c -o rename
-backup_cmd := src/synchronise.c -o sync
+
+SYNC_FILENAMES = main config strings file_write backup
+SYNC_FILES := $(addprefix src/sync/, $(SYNC_FILENAMES))
+SRCS := $(addsuffix .c, $(SYNC_FILES))
+
+backup_cmd := $(SRCS) -o sync
 
 base: all
 

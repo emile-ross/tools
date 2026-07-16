@@ -1,6 +1,4 @@
-#include <stdarg.h>
-#include <stdio.h>
-#include <stdlib.h>
+#include "header.h"
 
 size_t ssnprintf(char *buffer, size_t buffer_size, const char *format, ...)
 {

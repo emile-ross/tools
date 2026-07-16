@@ -1,0 +1,95 @@
+#include "header.h"
+
+int backup_data(char *home, char *src_filepath, char *dst_filepath);
+
+int backupfn(backup_data_type *dataBackup, char *home)
+{
+	Bool data_backed_up = False;	/* set to true whenever data has been backed up */
+
+	char *time_string = get_time_str();
+	if (dataBackup->gitconfig)
+	{
+		data_backed_up = True;
+		char *src_file = bmalloc(gitconfig_src);
+		char *dst_file = bmalloc(gitconfig_dst, time_string);
+		backup_data(home, src_file, dst_file);
+
+		free(src_file);
+		free(dst_file);
+	}
+
+	if (dataBackup->bookmarks)
+	{
+		data_backed_up = True;
+		char *src_file = bmalloc(bookmarks_src);
+		char *dst_file = bmalloc(bookmarks_dst, time_string);
+		backup_data(home, src_file, dst_file);
+
+		free(src_file);
+		free(dst_file);
+	}
+
+	if (dataBackup->passwords)
+	{
+		data_backed_up = True;
+		char *src_file = bmalloc(passwords_src);
+		char *dst_file = bmalloc(passwords_dst, time_string);
+		backup_data(home, src_file, dst_file);
+
+		free(src_file);
+		free(dst_file);
+	}
+	else if (!data_backed_up)
+	{
+		fprintf(stderr, "No data was backed up\n");
+		free(time_string);
+		free(home);
+		return 1;
+	}
+
+	free(time_string);
+	return 0;
+}
+
+int backup_data(char *home, char *src_filepath, char *dst_filepath)
+{
+	char *source_file = NULL;
+	char *dest_file = NULL;
+
+	if (home == NULL)
+	{
+		source_file = bmalloc("%s", src_filepath);
+		dest_file = bmalloc("%s/%s", home, dst_filepath);
+	}
+	else
+	{
+		source_file = bmalloc("%s/%s", home, src_filepath);
+		dest_file = bmalloc("%s/%s", home, dst_filepath);
+	}
+
+	if (verbose)
+	{
+		verbose_print("%s", source_file);
+		verbose_print("%s", dest_file);
+	}
+
+	if (!testing)
+	{
+		char *cmd = bmalloc("cp %s %s", source_file, dest_file);
+		if (verbose)
+		{
+			verbose_print("Backing up %s...", source_file);
+		}
+
+		printf("\x1B[91m\x1B[1m\n");	/* start a bold red sequence */
+
+		system(cmd);
+
+		printf("\x1B[0m");	/* reset colour */
+		free(cmd);
+	}
+
+	free(source_file);
+	free(dest_file);
+	return 0;
+}
