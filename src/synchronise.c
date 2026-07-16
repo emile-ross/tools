@@ -109,7 +109,6 @@ int main(int argc, char *argv[])
 	return 0;
 }
 
-int backup_data(char *home, char *filepath);
 
 int backupfn(backup_data_type *dataBackup, char *home)
 {
@@ -147,17 +146,20 @@ int backupfn(backup_data_type *dataBackup, char *home)
 	return 0;
 }
 
-int backup_data(char *home, char *filepath)
+int backup_data(char *home, char *src_filepath, char *dst_filepath)
 {
 	char *source_file = NULL;
+	char *dest_file = NULL;
 
 	if (home == NULL)
 	{
-		source_file = bmalloc("%s", filepath);
+		source_file = bmalloc("%s", src_filepath);
+		dest_file = bmalloc("%s/%s", home, dst_filepath);
 	}
 	else
 	{
-		source_file = bmalloc("%s/%s", home, filepath);
+		source_file = bmalloc("%s/%s", home, src_filepath);
+		dest_file = bmalloc("%s/%s", home, dst_filepath);
 	}
 
 	if (verbose)
@@ -166,5 +168,7 @@ int backup_data(char *home, char *filepath)
 	}
 
 	free(source_file);
+	free(dest_file);
 	return 0;
 }
+
