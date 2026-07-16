@@ -76,25 +76,6 @@ int main(int argc, char *argv[])
 
 	char *home = bmalloc(getenv("HOME"));
 
-	/* backup specific configs */
-	if (pbackup->gitconfig)
-	{
-		/* char config_name[16] = ".gitconfig"; */
-	}
-	else if (pbackup->bookmarks)
-	{
-	}
-	else if (pbackup->passwords)
-	{
-		backup_passwords(home);
-	}
-	else
-	{
-		fprintf(stderr, "No data was backed up\n");
-		free(home);
-		return 1;
-	}
-
 	free(home);
 	return 0;
 }
@@ -117,6 +98,28 @@ void backup_bookmarks(char *home)
 
 void backup_passwords(char *home)
 {
+}
+
+int backupfn(backup_data_type dataBackup*, char *home)
+{
+	if (pbackup->gitconfig)
+	{
+		/* char config_name[16] = ".gitconfig"; */
+	}
+	else if (pbackup->bookmarks)
+	{
+	}
+	else if (pbackup->passwords)
+	{
+		backup_passwords(home);
+	}
+	else
+	{
+		fprintf(stderr, "No data was backed up\n");
+		free(home);
+		return 1;
+	}
+
 	char *source_file = bmalloc("%s/%s", home, passwords_file);
 
 	printf("%s\n", source_file);
