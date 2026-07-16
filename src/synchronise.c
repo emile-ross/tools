@@ -43,6 +43,7 @@ typedef struct
 int backupfn(backup_data_type *dataBackup, char *home);
 char *get_time_str(void);
 int backup_data(char *home, char *src_filepath, char *dst_filepath);
+void verbose_print(const char *format, ...);
 
 int main(int argc, char *argv[])
 {
@@ -181,6 +182,7 @@ int backup_data(char *home, char *src_filepath, char *dst_filepath)
 	if (verbose)
 	{
 		printf("%s\n", source_file);
+		printf("%s\n", dest_file);
 	}
 
 	free(source_file);
@@ -197,4 +199,16 @@ char *get_time_str(void)
 	uint8_t month = 1 + (uint8_t)cur_time->tm_mon;
 	uint32_t year = 1900 + (uint32_t)cur_time->tm_year;
 	return bmalloc("%u-%hhu-%hhu", year, month, day);
+}
+
+void verbose_print(const char *format, ...)
+{
+	va_list args;
+	printf("\x1B[96m");
+	
+	va_start(args, format);
+	vprintf(format, args);
+	va_end(args);
+	
+	printf("\x1B[0m");	/* reset colour */
 }
