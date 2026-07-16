@@ -24,7 +24,7 @@ typedef struct
 	Bool wifi_logs;
 } backup_data_type;
 
-void backup_passwords(void);
+void backup_passwords(char *home);
 
 int main(int argc, char *argv[])
 {
@@ -66,6 +66,8 @@ int main(int argc, char *argv[])
 		pbackup = &all_backup_struct;
 	}
 
+	char *home = bmalloc(getenv("HOME"));
+
 	/* backup specific configs */
 	if (pbackup->gitconfig)
 	{
@@ -76,16 +78,17 @@ int main(int argc, char *argv[])
 	}
 	else if (pbackup->passwords)
 	{
-		backup_passwords();
+		backup_passwords(home);
 	}
 
+	free(home);
 	return 0;
 }
 
 void backup_passwords(void)
+void backup_passwords(char *home)
 {
-	char home_directory[64] = "/home/dir/";
-	char *source_file = bmalloc("%s%s", home_directory, passwords_file);
+	char *source_file = bmalloc("%s/%s", home, passwords_file);
 
 	printf("%s\n", source_file);
 	free(source_file);
