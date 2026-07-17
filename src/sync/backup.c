@@ -1,9 +1,9 @@
 #include "header.h"
 
-int backup_data(char *home, char *src_filepath, char *dst_filepath);
+int backup_data(char *src_filepath, char *dst_filepath);
 int backup_file_conversion(void *buf_arr[], uint8_t *buffer_iterator, struct filename_type *filename_data);
 
-int backupfn(Bool backup_data_arr[], char *home)
+int backupfn(Bool backup_data_arr[NUM_DATA_BACKUP], char *home)
 {
 	struct filename_type filename_data = 
 	{
@@ -23,9 +23,7 @@ int backupfn(Bool backup_data_arr[], char *home)
 	void *buf_arr[5] = { home, filename_data.time_string, NULL, NULL, NULL };
 	uint8_t buf_i = 2;	/* iterator for the buf_arr */
 
-backup_data_arr[gitconfig_data]
-backup_data_arr[wifi_logs_data]
-	if (backup_data_arr[])
+	if (backup_data_arr[gitconfig_data])
 	{
 		data_backed_up = True;
 		filename_data.source_filepath = gitconfig_src;
@@ -59,23 +57,15 @@ backup_data_arr[wifi_logs_data]
 	return 0;
 }
 
-int backup_data(char *home, char *src_filepath, char *dst_filepath)
+int backup_data(char *src_filepath, char *dst_filepath)
 {
 	char *source_file = NULL;
 	char *dest_file = NULL;
 
-	void *buf_arr[4] = { home, NULL, NULL, NULL };
+	void *buf_arr[3] = { src_filepath, dst_filepath, NULL };
 
-	if (home == NULL)
-	{
-		source_file = bmalloc(buf_arr, "%s", src_filepath);
-		dest_file = bmalloc(buf_arr, "%s", dst_filepath);
-	}
-	else
-	{
-		source_file = bmalloc(buf_arr, "%s/%s", home, src_filepath);
-		dest_file = bmalloc(buf_arr, "%s/%s", home, dst_filepath);
-	}
+	source_file = bmalloc(buf_arr, "%s", src_filepath);
+	dest_file = bmalloc(buf_arr, "%s", dst_filepath);
 
 	if (verbose)
 	{
@@ -99,8 +89,6 @@ int backup_data(char *home, char *src_filepath, char *dst_filepath)
 		free(cmd);
 	}
 
-	free(source_file);
-	free(dest_file);
 	return 0;
 }
 
@@ -110,9 +98,24 @@ int backup_file_conversion(void *buf_arr[], uint8_t *buffer_iterator, struct fil
 	uint8_t buf_i = *buffer_iterator;
 	const uint8_t prev_buf_i = buf_i;
 
-	char *src_file = bmalloc(buf_arr, filename_data->source_filepath);
-	char *dst_file = bmalloc(buf_arr, filename_data->destination_filepath, filename_data->time_string);
+	char *src_file = NULL;
+	char *dst_file = NULL;
 
+	if (filename_data->home_string != NULL)
+	{
+		char *home_path = "%s/%s";
+		src_file = bmalloc(buf_arr, home_path, filename_data->source_filepath, 
+				filename_data->home_string);
+		dst_file = bmalloc(buf_arr, home_path, filename_data->destination_filepath, 
+				filename_data->time_string, filename_data->home_string);
+	}
+	else
+	{
+		src_file = bmalloc(buf_arr, filename_data->source_filepath);
+		dst_file = bmalloc(buf_arr, filename_data->destination_filepath, filename_data->time_string);
+	}
+	
+	backup_data(src_file, dst_file);
 	/* remove from buf_arr[] */
 	buf_arr[buf_i] = dst_file; buf_i++;
 	buf_arr[buf_i] = src_file; buf_i++;
