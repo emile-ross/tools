@@ -26,19 +26,25 @@ int backupfn(backup_data_type *dataBackup, char *home)
 	if (dataBackup->gitconfig)
 	{
 		data_backed_up = True;
-		backup_file_conversion(buf_arr, &buf_i, gitconfig_src, gitconfig_dst, time_string, home);
+		filename_data.source_filepath = gitconfig_src;
+		filename_data.destination_filepath = gitconfig_dst;
+		backup_file_conversion(buf_arr, &buf_i, filename_data);
 	}
 
 	if (dataBackup->bookmarks)
 	{
 		data_backed_up = True;
-		backup_file_conversion(buf_arr, &buf_i, bookmarks_src, bookmarks_dst, time_string, home);
+		filename_data.source_filepath = bookmarks_src;
+		filename_data.destination_filepath = bookmarks_dst;
+		backup_file_conversion(buf_arr, &buf_i, filename_data);
 	}
 
 	if (dataBackup->passwords)
 	{
 		data_backed_up = True;
-		backup_file_conversion(buf_arr, &buf_i, passwords_src, passwords_dst, time_string, home);
+		filename_data.source_filepath = passwords_src;
+		filename_data.destination_filepath = passwords_dst;
+		backup_file_conversion(buf_arr, &buf_i, filename_data);
 	}
 	else if (!data_backed_up)
 	{
@@ -96,19 +102,18 @@ int backup_data(char *home, char *src_filepath, char *dst_filepath)
 	return 0;
 }
 
-int backup_file_conversion(void *buf_arr[], uint8_t *buffer_iterator, char *source_file, char *destination_file, char *time_string, char *home)
+int backup_file_conversion(void *buf_arr[], uint8_t *buffer_iterator, struct filename_type *filename_data)
 {
 	/* set buffer iterators */
 	uint8_t buf_i = *buffer_iterator;
 	const uint8_t prev_buf_i = buf_i;
 
-	char *src_file = bmalloc(buf_arr, source_file);
-	char *dst_file = bmalloc(buf_arr, destination_file, time_string);
+	char *src_file = bmalloc(buf_arr, filename_data->source_filepath);
+	char *dst_file = bmalloc(buf_arr, filename_data->destination_filepath, filename_data->time_string);
 
 	/* remove from buf_arr[] */
 	buf_arr[buf_i] = dst_file; buf_i++;
 	buf_arr[buf_i] = src_file; buf_i++;
-
 
 	while (buf_i > prev_buf_i)
 	{
