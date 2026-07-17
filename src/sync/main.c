@@ -5,12 +5,15 @@
 
 int main(int argc, char *argv[])
 {
-	backup_data_type backup = { False, False, False, False };
-	backup_data_type *pbackup = &backup;	/* make a pointer to a struct & point to backup struct */
+	Bool backup_data_arr[NUM_DATA_BACKUP];
+	
+	for (uint8_t i = 0; i < NUM_DATA_BACKUP; i++)
+	{
+		backup_data_arr[i] = False;
+	}
 
 	/* this is just all set to true in order to make the process
 	 * of setting everything to true easier */
-	backup_data_type all_backup_struct = { True, True, True, True };
 
 	if (argc > min_args)
 	{
@@ -19,7 +22,10 @@ int main(int argc, char *argv[])
 		{
 			if (strcmp(argv[i], "-a") == 0 || strcmp(argv[i], "--all") == 0)
 			{
-				pbackup = &all_backup_struct;
+				for (uint8_t j = 0; j < NUM_DATA_BACKUP; i++)
+				{
+					backup_data_arr[i] = True;
+				}
 				break;	/* if we don't expect anything else */
 			}
 			else if (strcmp(argv[i], "-p") == 0 || strcmp(argv[i], "--passwords") == 0)
@@ -43,7 +49,10 @@ int main(int argc, char *argv[])
 	}
 	else
 	{
-		pbackup = &all_backup_struct;
+		for (uint8_t j = 0; j < NUM_DATA_BACKUP; i++)
+		{
+			backup_data_arr[i] = True;
+		}
 	}
 
 	char *home = NULL;	/* will be allocated soon (maybe) */
