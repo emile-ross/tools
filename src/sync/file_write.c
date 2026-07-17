@@ -34,19 +34,7 @@ char *bmalloc(void *bufs_to_free[], const char *format, ...)
 	char *format_str = malloc(string_size);
 	if (format_str == NULL)
 	{
-		if (bufs_to_free != NULL)
-		{
-			uint8_t i = 0;
-			for (; bufs_to_free[i] != NULL; i++)
-			{
-				free(bufs_to_free[i]);
-			}
-
-			if (verbose)
-			{
-				verbose_print("Successfully freed %hhu buffers", i);
-			}
-		}
+		free_buffers(bufs_to_free);	/* frees buffers that are currently used */
 		fprintf(stderr, "malloc() call failed and returned NULL\n");
 		exit(1);
 	}
@@ -54,4 +42,21 @@ char *bmalloc(void *bufs_to_free[], const char *format, ...)
 	vsnprintf(format_str, string_size, format, args);
 	va_end(args);
 	return format_str;
+}
+
+void free_buffers(void *buffers)
+{
+	if (bufs_to_free != NULL)
+	{
+		uint8_t i = 0;
+		for (; bufs_to_free[i] != NULL; i++)
+		{
+			free(bufs_to_free[i]);
+		}
+
+		if (verbose)
+		{
+			verbose_print("Successfully freed %hhu buffers", i);
+		}
+	}
 }
