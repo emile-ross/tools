@@ -44,14 +44,14 @@ char *bmalloc(void *bufs_to_free[], const char *format, ...)
 	return format_str;
 }
 
-void free_buffers(void *buffers)
+void free_buffers(void *buffers[])
 {
-	if (bufs_to_free != NULL)
+	if (buffers != NULL)
 	{
 		uint8_t i = 0;
-		for (; bufs_to_free[i] != NULL; i++)
+		for (; buffers[i] != NULL; i++)
 		{
-			free(bufs_to_free[i]);
+			free(buffers[i]);
 		}
 
 		if (verbose)

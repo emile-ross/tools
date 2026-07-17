@@ -15,19 +15,19 @@ int backupfn(backup_data_type *dataBackup, char *home)
 		data_backed_up = True;
 
 		/* allocate memory */
-		char *src_file = bmalloc(gitconfig_src);
-		char *dst_file = bmalloc(gitconfig_dst, time_string);
+		char *src_file = bmalloc(buf_arr, gitconfig_src);
+		char *dst_file = bmalloc(buf_arr, gitconfig_dst, time_string);
 
 		/* add it in the buf_arr[] */
-		buf_arr[buf_i] == dst_file; buf_i++;
-		buf_arr[buf_i] == src_file; buf_i++;
+		buf_arr[buf_i] = dst_file; buf_i++;
+		buf_arr[buf_i] = src_file; buf_i++;
 		backup_data(home, src_file, dst_file);
 
 		/* remove from buf_arr[] */
 		while (buf_i > prev_buf_i)
 		{
 			free(buf_arr[buf_i]);
-			buf_arr[buf_i] == NULL;
+			buf_arr[buf_i] = NULL;
 			buf_i--;
 		}
 	}
@@ -36,16 +36,16 @@ int backupfn(backup_data_type *dataBackup, char *home)
 	{
 		uint8_t prev_buf_i = buf_i;
 		data_backed_up = True;
-		char *src_file = bmalloc(bookmarks_src);
-		char *dst_file = bmalloc(bookmarks_dst, time_string);
+		char *src_file = bmalloc(buf_arr, bookmarks_src);
+		char *dst_file = bmalloc(buf_arr, bookmarks_dst, time_string);
 
-		buf_arr[buf_i] == dst_file; buf_i++;
-		buf_arr[buf_i] == src_file; buf_i++;
+		buf_arr[buf_i] = dst_file; buf_i++;
+		buf_arr[buf_i] = src_file; buf_i++;
 		backup_data(home, src_file, dst_file);
 		while (buf_i > prev_buf_i)
 		{
 			free(buf_arr[buf_i]);
-			buf_arr[buf_i] == NULL;
+			buf_arr[buf_i] = NULL;
 			buf_i--;
 		}
 	}
@@ -54,16 +54,16 @@ int backupfn(backup_data_type *dataBackup, char *home)
 	{
 		uint8_t prev_buf_i = buf_i;
 		data_backed_up = True;
-		char *src_file = bmalloc(passwords_src);
-		char *dst_file = bmalloc(passwords_dst, time_string);
+		char *src_file = bmalloc(buf_arr, passwords_src);
+		char *dst_file = bmalloc(buf_arr, passwords_dst, time_string);
 		backup_data(home, src_file, dst_file);
 
-		buf_arr[buf_i] == dst_file; buf_i++;
-		buf_arr[buf_i] == src_file; buf_i++;
+		buf_arr[buf_i] = dst_file; buf_i++;
+		buf_arr[buf_i] = src_file; buf_i++;
 		while (buf_i > prev_buf_i)
 		{
 			free(buf_arr[buf_i]);
-			buf_arr[buf_i] == NULL;
+			buf_arr[buf_i] = NULL;
 			buf_i--;
 		}
 	}

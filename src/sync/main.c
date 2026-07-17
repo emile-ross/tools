@@ -47,7 +47,7 @@ int main(int argc, char *argv[])
 	}
 
 	char *home = NULL;	/* will be allocated soon */
-	void *buf_arr[2] = { home, NULL };
+	void *buf_arr[2] = { NULL, NULL };
 
 	if (use_home_dir_src)
 	{
@@ -62,7 +62,10 @@ int main(int argc, char *argv[])
 			fprintf(stderr, "Failed to get home directory\n");
 			return 1;
 		}
-		home = bmalloc(home_dir);
+
+		/* buf_arr will be NULL at this point 
+		 * but this doesn't cause any unwanted problems */
+		home = bmalloc(buf_arr, home_dir);
 
 		backupfn(pbackup, home);
 	}

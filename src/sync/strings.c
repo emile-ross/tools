@@ -9,7 +9,9 @@ char *get_time_str(void)
 	uint8_t month = 1 + (uint8_t)cur_time->tm_mon;
 	uint32_t year = 1900 + (uint32_t)cur_time->tm_year;
 
-	return bmalloc("%u-%hhu-%hhu", year, month, day);
+	/* TODO fix this memory leak (home address isn't available) bmalloc() 
+	 * will not free the 'home' buffer on error */
+	return bmalloc(NULL, "%u-%hhu-%hhu", year, month, day);
 }
 
 void verbose_print(const char *format, ...)
