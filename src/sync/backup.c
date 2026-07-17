@@ -8,64 +8,25 @@ int backupfn(backup_data_type *dataBackup, char *home)
 	Bool data_backed_up = False;	/* set to true whenever data has been backed up */
 
 	char *time_string = get_time_str();
-	void *buf_arr[5] = { home, NULL, NULL, NULL, NULL };
-	uint8_t buf_i = 1;	/* iterator for the buf_arr */
-	uint8_t prev_buf_i = buf_i;
+	void *buf_arr[5] = { home, time_string, NULL, NULL, NULL };
+	uint8_t buf_i = 2;	/* iterator for the buf_arr */
 
 	if (dataBackup->gitconfig)
 	{
 		data_backed_up = True;
-
-		/* allocate memory */
-		char *src_file = bmalloc(buf_arr, gitconfig_src);
-		char *dst_file = bmalloc(buf_arr, gitconfig_dst, time_string);
-
-		/* add it in the buf_arr[] */
-		buf_arr[buf_i] = dst_file; buf_i++;
-		buf_arr[buf_i] = src_file; buf_i++;
-		backup_data(home, src_file, dst_file);
-
-		/* remove from buf_arr[] */
-		while (buf_i > prev_buf_i)
-		{
-			free(buf_arr[buf_i]);
-			buf_arr[buf_i] = NULL;
-			buf_i--;
-		}
+		backup_file_conversion(buf_arr, &buf_i, gitconfig_src, gitconfig_dst, time_string, home);
 	}
 
 	if (dataBackup->bookmarks)
 	{
 		data_backed_up = True;
-		char *src_file = bmalloc(buf_arr, bookmarks_src);
-		char *dst_file = bmalloc(buf_arr, bookmarks_dst, time_string);
-
-		buf_arr[buf_i] = dst_file; buf_i++;
-		buf_arr[buf_i] = src_file; buf_i++;
-		backup_data(home, src_file, dst_file);
-		while (buf_i > prev_buf_i)
-		{
-			free(buf_arr[buf_i]);
-			buf_arr[buf_i] = NULL;
-			buf_i--;
-		}
+		backup_file_conversion(buf_arr, &buf_i, bookmarks_src, bookmarks_dst, time_string, home);
 	}
 
 	if (dataBackup->passwords)
 	{
 		data_backed_up = True;
-		char *src_file = bmalloc(buf_arr, passwords_src);
-		char *dst_file = bmalloc(buf_arr, passwords_dst, time_string);
-		backup_data(home, src_file, dst_file);
-
-		buf_arr[buf_i] = dst_file; buf_i++;
-		buf_arr[buf_i] = src_file; buf_i++;
-		while (buf_i > prev_buf_i)
-		{
-			free(buf_arr[buf_i]);
-			buf_arr[buf_i] = NULL;
-			buf_i--;
-		}
+		backup_file_conversion(buf_arr, &buf_i, passwords_src, passwords_dst, time_string, home);
 	}
 	else if (!data_backed_up)
 	{
@@ -131,10 +92,13 @@ int backup_file_conversion(void *buf_arr[], uint8_t *buffer_iterator, char sourc
 
 	char *src_file = bmalloc(buf_arr, source_file);
 	char *dst_file = bmalloc(buf_arr, destination_file, time_string);
-	backup_data(home, src_file, dst_file);
 
+	/* remove from buf_arr[] */
 	buf_arr[buf_i] = dst_file; buf_i++;
 	buf_arr[buf_i] = src_file; buf_i++;
+
+	backup_data(home, src_file, dst_file);
+
 	while (buf_i > prev_buf_i)
 	{
 		free(buf_arr[buf_i]);

@@ -2,7 +2,7 @@ CC = clang
 
 OUT = backup-sync
 
-ALL_FLAGS := -Wconversion -Wextra -Wall -Wpedantic -Wstrict-prototypes -Wcast-qual -Wcast-align -Wshadow -Wwrite-strings -Wswitch-default -Werror
+ALL_FLAGS := -Wconversion -Wextra -Wall -Wpedantic -Wstrict-prototypes -Wcast-qual -Wcast-align -Wshadow -Wwrite-strings -Wswitch-default -Werror -Wshadow
 
 get_words_cmd := src/get_words.c -o listwords
 renaming_cmd := src/renaming.c -o rename
