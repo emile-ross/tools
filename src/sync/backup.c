@@ -11,13 +11,23 @@ int backupfn(backup_data_type *dataBackup, char *home)
 	uint8_t buf_i = 1;	/* iterator for the buf_arr */
 	if (dataBackup->gitconfig)
 	{
+		uint8_t prev_buf_i = buf_i;
 		data_backed_up = True;
 		char *src_file = bmalloc(gitconfig_src);
 		char *dst_file = bmalloc(gitconfig_dst, time_string);
+		buf_arr[buf_i] == dst_file; buf_i++;
+		buf_arr[buf_i] == src_file; buf_i++;
 		backup_data(home, src_file, dst_file);
 
 		free(src_file);
 		free(dst_file);
+
+		while (buf_i > prev_buf_i)
+		{
+			free(buf_arr[buf_i]);
+			buf_arr[buf_i] == NULL;
+			buf_i--;
+		}
 	}
 
 	if (dataBackup->bookmarks)
