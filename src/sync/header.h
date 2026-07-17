@@ -1,5 +1,7 @@
 #define POSIX_C_SOURCE 200112L
 
+#define NUM_DATA_BACKUP (4)
+
 #include <stdint.h>
 #include <string.h>
 #include <time.h>
@@ -13,13 +15,13 @@ typedef enum
 	False = 0
 } Bool;
 
-typedef struct
+typedef enum
 {
-	Bool passwords;
-	Bool bookmarks;
-	Bool gitconfig;
-	Bool wifi_logs;
-} backup_data_type;
+	gitconfig_data = 0,
+	passwords_data,
+	bookmarks_data,
+	wifi_logs_data,
+} data_types;
 
 struct filename_type
 {
@@ -60,5 +62,5 @@ extern const Bool testing;
 	char *get_time_str(void);
 
 /* backup.c */
-	int backupfn(backup_data_type *dataBackup, char *home);
+	int backupfn(Bool backup_data_arr[NUM_DATA_BACKUP], char *home);
 

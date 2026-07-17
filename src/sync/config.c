@@ -1,7 +1,5 @@
 #include "header.h"
 
-#define NUM_DATA_BACKUP (4)
-
 /* choose the name of your password database (including its path) 
  * make sure you don't include the home path unless you've disabled use_home_dir_src */
 char *passwords_src = "passwords.kdbx";
@@ -21,11 +19,3 @@ const Bool use_home_dir_dst = True;
 
 const Bool verbose = True;
 const Bool testing = False;
-
-typedef enum
-{
-	gitconfig_data = 0,
-	passwords_data,
-	bookmarks_data,
-	wifi_logs_data,
-} data_types;
