@@ -55,15 +55,17 @@ int backup_data(char *home, char *src_filepath, char *dst_filepath)
 	char *source_file = NULL;
 	char *dest_file = NULL;
 
+	void *buf_arr[4] = { home, NULL, NULL, NULL };
+
 	if (home == NULL)
 	{
-		source_file = bmalloc("%s", src_filepath);
-		dest_file = bmalloc("%s/%s", home, dst_filepath);
+		source_file = bmalloc(buf_arr, "%s", src_filepath);
+		dest_file = bmalloc(buf_arr, "%s/%s", home, dst_filepath);
 	}
 	else
 	{
-		source_file = bmalloc("%s/%s", home, src_filepath);
-		dest_file = bmalloc("%s/%s", home, dst_filepath);
+		source_file = bmalloc(buf_arr, "%s/%s", home, src_filepath);
+		dest_file = bmalloc(buf_arr, "%s/%s", home, dst_filepath);
 	}
 
 	if (verbose)
@@ -74,7 +76,7 @@ int backup_data(char *home, char *src_filepath, char *dst_filepath)
 
 	if (!testing)
 	{
-		char *cmd = bmalloc("cp %s %s", source_file, dest_file);
+		char *cmd = bmalloc(buf_arr, "cp %s %s", source_file, dest_file);
 		if (verbose)
 		{
 			verbose_print("Backing up %s...", source_file);

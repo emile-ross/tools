@@ -41,7 +41,7 @@ extern const Bool testing;
 
 /* file_write.c */
 	size_t ssnprintf(char *buffer, size_t buffer_size, const char *format, ...);
-	char *bmalloc(const char *format, ...);
+	char *bmalloc(void *bufs_to_free, const char *format, ...);
 
 /* strings.c */
 	void verbose_print(const char *format, ...);

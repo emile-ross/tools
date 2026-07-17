@@ -20,7 +20,7 @@ size_t ssnprintf(char *buffer, size_t buffer_size, const char *format, ...)
 	return return_value;
 }
 
-char *bmalloc(const char *format, ...)
+char *bmalloc(void *bufs_to_free, const char *format, ...)
 {
 	va_list args, copy;
 	va_start(args, format);
@@ -35,7 +35,6 @@ char *bmalloc(const char *format, ...)
 	if (format_str == NULL)
 	{
 		fprintf(stderr, "malloc() call failed and returned NULL\n");
-		free(format_str);
 		exit(1);
 	}
 
