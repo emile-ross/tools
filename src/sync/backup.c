@@ -43,7 +43,6 @@ int backupfn(backup_data_type *dataBackup, char *home)
 	{
 		fprintf(stderr, "No data was backed up\n");
 		free(time_string);
-		free(home);
 		return 1;
 	}
 

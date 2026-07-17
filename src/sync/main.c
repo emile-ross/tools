@@ -61,7 +61,6 @@ int main(int argc, char *argv[])
 			return 1;
 		}
 		home = bmalloc(home_dir);
-		
 
 		backupfn(pbackup, home);
 	}
@@ -77,5 +76,3 @@ int main(int argc, char *argv[])
 	free(home);
 	return 0;
 }
-
-
