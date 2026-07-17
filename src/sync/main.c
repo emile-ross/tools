@@ -46,7 +46,9 @@ int main(int argc, char *argv[])
 		pbackup = &all_backup_struct;
 	}
 
-	char *home = NULL;
+	char *home = NULL;	/* will be allocated soon */
+	void *buf_arr[2] = { home, NULL };
+
 	if (use_home_dir_src)
 	{
 		if (verbose)
@@ -73,6 +75,6 @@ int main(int argc, char *argv[])
 		backupfn(pbackup, NULL);
 	}
 
-	free(home);
+	free_buffers(buf_arr);
 	return 0;
 }

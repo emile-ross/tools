@@ -7,6 +7,8 @@ int backupfn(backup_data_type *dataBackup, char *home)
 	Bool data_backed_up = False;	/* set to true whenever data has been backed up */
 
 	char *time_string = get_time_str();
+	void *buf_arr[5] = { home, NULL, NULL, NULL, NULL };
+	uint8_t buf_i = 1;	/* iterator for the buf_arr */
 	if (dataBackup->gitconfig)
 	{
 		data_backed_up = True;
