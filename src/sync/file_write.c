@@ -20,7 +20,7 @@ size_t ssnprintf(char *buffer, size_t buffer_size, const char *format, ...)
 	return return_value;
 }
 
-char *bmalloc(void *bufs_to_free, const char *format, ...)
+char *bmalloc(void *bufs_to_free[], const char *format, ...)
 {
 	va_list args, copy;
 	va_start(args, format);
@@ -34,6 +34,19 @@ char *bmalloc(void *bufs_to_free, const char *format, ...)
 	char *format_str = malloc(string_size);
 	if (format_str == NULL)
 	{
+		if (bufs_to_free != NULL)
+		{
+			uint8_t i = 0;
+			for (; bufs_to_free[i] != NULL; i++)
+			{
+				free(bufs_to_free[i]);
+			}
+
+			if (verbose)
+			{
+				verbose_print("Successfully freed %hhu buffers", i);
+			}
+		}
 		fprintf(stderr, "malloc() call failed and returned NULL\n");
 		exit(1);
 	}
