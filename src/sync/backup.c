@@ -1,7 +1,7 @@
 #include "header.h"
 
 int backup_data(char *home, char *src_filepath, char *dst_filepath);
-int backup_file_conversion(void *buf_arr[], uint8_t *buffer_iterator, char source_file[], char destination_file[], char *time_string, char *home);
+int backup_file_conversion(void *buf_arr[], uint8_t *buffer_iterator, char *source_file, char *destination_file, char *time_string, char *home);
 
 int backupfn(backup_data_type *dataBackup, char *home)
 {
@@ -84,7 +84,7 @@ int backup_data(char *home, char *src_filepath, char *dst_filepath)
 	return 0;
 }
 
-int backup_file_conversion(void *buf_arr[], uint8_t *buffer_iterator, char source_file[], char destination_file[], char *time_string, char *home)
+int backup_file_conversion(void *buf_arr[], uint8_t *buffer_iterator, char *source_file, char *destination_file, char *time_string, char *home)
 {
 	/* set buffer iterators */
 	uint8_t buf_i = *buffer_iterator;
@@ -97,7 +97,6 @@ int backup_file_conversion(void *buf_arr[], uint8_t *buffer_iterator, char sourc
 	buf_arr[buf_i] = dst_file; buf_i++;
 	buf_arr[buf_i] = src_file; buf_i++;
 
-	backup_data(home, src_file, dst_file);
 
 	while (buf_i > prev_buf_i)
 	{
