@@ -48,6 +48,7 @@ int main(int argc, char *argv[])
 
 	char *home = NULL;	/* will be allocated soon */
 	void *buf_arr[2] = { NULL, NULL };
+	uint8_t buf_i = 0;
 
 	if (use_home_dir_src)
 	{
@@ -66,6 +67,7 @@ int main(int argc, char *argv[])
 		/* buf_arr will be NULL at this point 
 		 * but this doesn't cause any unwanted problems */
 		home = bmalloc(buf_arr, home_dir);
+		buf_arr[buf_i] = home; buf_i++;
 
 		backupfn(pbackup, home);
 	}

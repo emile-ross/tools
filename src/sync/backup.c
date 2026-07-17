@@ -9,9 +9,10 @@ int backupfn(backup_data_type *dataBackup, char *home)
 	char *time_string = get_time_str();
 	void *buf_arr[5] = { home, NULL, NULL, NULL, NULL };
 	uint8_t buf_i = 1;	/* iterator for the buf_arr */
+	uint8_t prev_buf_i = buf_i;
+
 	if (dataBackup->gitconfig)
 	{
-		uint8_t prev_buf_i = buf_i;
 		data_backed_up = True;
 
 		/* allocate memory */
@@ -34,7 +35,6 @@ int backupfn(backup_data_type *dataBackup, char *home)
 
 	if (dataBackup->bookmarks)
 	{
-		uint8_t prev_buf_i = buf_i;
 		data_backed_up = True;
 		char *src_file = bmalloc(buf_arr, bookmarks_src);
 		char *dst_file = bmalloc(buf_arr, bookmarks_dst, time_string);
@@ -52,7 +52,6 @@ int backupfn(backup_data_type *dataBackup, char *home)
 
 	if (dataBackup->passwords)
 	{
-		uint8_t prev_buf_i = buf_i;
 		data_backed_up = True;
 		char *src_file = bmalloc(buf_arr, passwords_src);
 		char *dst_file = bmalloc(buf_arr, passwords_dst, time_string);
@@ -98,8 +97,8 @@ int backup_data(char *home, char *src_filepath, char *dst_filepath)
 
 	if (verbose)
 	{
-		verbose_print("%s", source_file);
-		verbose_print("%s", dest_file);
+		verbose_print("Source file path: %s", source_file);
+		verbose_print("Destination path: %s", dest_file);
 	}
 
 	if (!testing)
