@@ -1,9 +1,9 @@
 #include "header.h"
 
 int backup_data(char *home, char *src_filepath, char *dst_filepath);
-int backup_file_conversion(void *buf_arr[], uint8_t *buffer_iterator, struct filename_type filename_data);
+int backup_file_conversion(void *buf_arr[], uint8_t *buffer_iterator, struct filename_type *filename_data);
 
-int backupfn(backup_data_type *dataBackup, char *home)
+int backupfn(Bool backup_data_arr[], char *home)
 {
 	struct filename_type filename_data = 
 	{
@@ -20,40 +20,50 @@ int backupfn(backup_data_type *dataBackup, char *home)
 
 	filename_data.time_string = get_time_str();
 	filename_data.home_string = home;
-	void *buf_arr[5] = { home, time_string, NULL, NULL, NULL };
+	void *buf_arr[5] = { home, filename_data.time_string, NULL, NULL, NULL };
 	uint8_t buf_i = 2;	/* iterator for the buf_arr */
 
-	if (dataBackup->gitconfig)
+
+backup_data_arr[gitconfig_data]
+
+
+backup_data_arr[wifi_logs_data]
+
+
+
+
+
+	if (backup_data_arr[])
 	{
 		data_backed_up = True;
 		filename_data.source_filepath = gitconfig_src;
 		filename_data.destination_filepath = gitconfig_dst;
-		backup_file_conversion(buf_arr, &buf_i, filename_data);
+		backup_file_conversion(buf_arr, &buf_i, &filename_data);
 	}
 
-	if (dataBackup->bookmarks)
+	if (backup_data_arr[bookmarks_data])
 	{
 		data_backed_up = True;
 		filename_data.source_filepath = bookmarks_src;
 		filename_data.destination_filepath = bookmarks_dst;
-		backup_file_conversion(buf_arr, &buf_i, filename_data);
+		backup_file_conversion(buf_arr, &buf_i, &filename_data);
 	}
 
-	if (dataBackup->passwords)
+	if (backup_data_arr[passwords_data])
 	{
 		data_backed_up = True;
 		filename_data.source_filepath = passwords_src;
 		filename_data.destination_filepath = passwords_dst;
-		backup_file_conversion(buf_arr, &buf_i, filename_data);
+		backup_file_conversion(buf_arr, &buf_i, &filename_data);
 	}
 	else if (!data_backed_up)
 	{
 		fprintf(stderr, "No data was backed up\n");
-		free(time_string);
+		free(filename_data.time_string);
 		return 1;
 	}
 
-	free(time_string);
+	free(filename_data.time_string);
 	return 0;
 }
 
