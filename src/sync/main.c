@@ -22,9 +22,9 @@ int main(int argc, char *argv[])
 		{
 			if (strcmp(argv[i], "-a") == 0 || strcmp(argv[i], "--all") == 0)
 			{
-				for (uint8_t j = 0; j < NUM_DATA_BACKUP; i++)
+				for (uint8_t j = 0; j < NUM_DATA_BACKUP; j++)
 				{
-					backup_data_arr[i] = True;
+					backup_data_arr[j] = True;
 				}
 				break;	/* if we don't expect anything else */
 			}
@@ -49,9 +49,9 @@ int main(int argc, char *argv[])
 	}
 	else
 	{
-		for (uint8_t j = 0; j < NUM_DATA_BACKUP; i++)
+		for (uint8_t j = 0; j < NUM_DATA_BACKUP; j++)
 		{
-			backup_data_arr[i] = True;
+			backup_data_arr[j] = True;
 		}
 	}
 

@@ -23,16 +23,8 @@ int backupfn(Bool backup_data_arr[], char *home)
 	void *buf_arr[5] = { home, filename_data.time_string, NULL, NULL, NULL };
 	uint8_t buf_i = 2;	/* iterator for the buf_arr */
 
-
 backup_data_arr[gitconfig_data]
-
-
 backup_data_arr[wifi_logs_data]
-
-
-
-
-
 	if (backup_data_arr[])
 	{
 		data_backed_up = True;
