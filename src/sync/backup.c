@@ -49,7 +49,7 @@ int backup_data(char *home, char *src_filepath, char *dst_filepath)
 	if (home == NULL)
 	{
 		source_file = bmalloc(buf_arr, "%s", src_filepath);
-		dest_file = bmalloc(buf_arr, "%s/%s", home, dst_filepath);
+		dest_file = bmalloc(buf_arr, "%s", dst_filepath);
 	}
 	else
 	{
