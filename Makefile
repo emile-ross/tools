@@ -2,7 +2,7 @@ CC = clang
 
 OUT = backup-sync
 
-ALL_FLAGS := -Wconversion -Wextra -Wall -Wpedantic -Wstrict-prototypes -Wcast-qual -Wcast-align -Wshadow -Wwrite-strings -Wswitch-default -Werror -Wshadow
+ALL_FLAGS := -Wconversion -Wextra -Wall -Wpedantic -Wstrict-prototypes -Wcast-qual -Wcast-align -Wshadow -Wswitch-default -Werror -Wshadow
 
 get_words_cmd := src/get_words.c -o listwords
 renaming_cmd := src/renaming.c -o rename
@@ -18,10 +18,10 @@ base: all
 all: list_words renaming sync
 
 renaming:
-	$(CC) $(renaming_cmd) $(ALL_FLAGS) -std=c89
+	$(CC) $(renaming_cmd) $(ALL_FLAGS) -std=c89 -Wwrite-strings 
 
 list_words:
-	$(CC) $(get_words_cmd) $(ALL_FLAGS) -std=c89
+	$(CC) $(get_words_cmd) $(ALL_FLAGS) -std=c89 -Wwrite-strings 
 
 sync: synchronise
 synchronise:
