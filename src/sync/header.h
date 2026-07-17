@@ -21,6 +21,16 @@ typedef struct
 	Bool wifi_logs;
 } backup_data_type;
 
+struct filename_type
+{
+	char *source_filepath;
+	char *destination_filepath;
+	char *time_string;
+	char *home_string;
+	char *version_string;	/* unused */
+	char *duplicate_string;	/* unused */
+	char *custom_string;	/* unused */
+};
 
 extern char *passwords_src;
 extern char *passwords_dst;
