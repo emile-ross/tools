@@ -1,13 +1,25 @@
 #include "header.h"
 
 int backup_data(char *home, char *src_filepath, char *dst_filepath);
-int backup_file_conversion(void *buf_arr[], uint8_t *buffer_iterator, char *source_file, char *destination_file, char *time_string, char *home);
+int backup_file_conversion(void *buf_arr[], uint8_t *buffer_iterator, struct filename_type filename_data);
 
 int backupfn(backup_data_type *dataBackup, char *home)
 {
+	struct filename_type filename_data = 
+	{
+		NULL,
+		NULL,
+		NULL,
+		NULL,
+		NULL,
+		NULL,
+		NULL
+	};
+
 	Bool data_backed_up = False;	/* set to true whenever data has been backed up */
 
-	char *time_string = get_time_str();
+	filename_data.time_string = get_time_str();
+	filename_data.home_string = home;
 	void *buf_arr[5] = { home, time_string, NULL, NULL, NULL };
 	uint8_t buf_i = 2;	/* iterator for the buf_arr */
 
