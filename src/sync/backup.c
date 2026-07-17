@@ -121,3 +121,22 @@ int backup_data(char *home, char *src_filepath, char *dst_filepath)
 	free(dest_file);
 	return 0;
 }
+
+int backup_file_conversion(void *buf_arr[], uint8_t *buffer_iterator, char source_file[], char destination_file[], char *time_string, char *home)
+{
+	uint8_t buf_i = *buffer_iterator;
+	const uint8_t prev_buf_i = buf_i;
+
+	char *src_file = bmalloc(buf_arr, source_file);
+	char *dst_file = bmalloc(buf_arr, destination_file, time_string);
+	backup_data(home, src_file, dst_file);
+
+	buf_arr[buf_i] = dst_file; buf_i++;
+	buf_arr[buf_i] = src_file; buf_i++;
+	while (buf_i > prev_buf_i)
+	{
+		free(buf_arr[buf_i]);
+		buf_arr[buf_i] = NULL;
+		buf_i--;
+	}
+}
