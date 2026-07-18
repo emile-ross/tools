@@ -7,7 +7,8 @@ ALL_FLAGS := -Wconversion -Wextra -Wall -Wpedantic -Wstrict-prototypes -Wcast-qu
 get_words_cmd := src/get_words.c -o listwords
 renaming_cmd := src/renaming.c -o rename
 
-SYNC_FILENAMES = main config strings file_write backup match_config
+SYNC_FILENAMES = backup config file_write main match_config mem strings
+
 SYNC_FILES := $(addprefix src/sync/, $(SYNC_FILENAMES))
 SRCS := $(addsuffix .c, $(SYNC_FILES))
 
@@ -29,3 +30,5 @@ synchronise:
 
 install: 
 	sudo cp $(OUT) /usr/bin/
+
+
