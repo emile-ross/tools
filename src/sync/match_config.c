@@ -21,6 +21,18 @@ int match_config(uint8_t buf_i, void *buf_arr[], Bool backup_data_arr[NUM_DATA_B
 		backup_file_conversion(buf_arr, &buf_i, filename_data);
 	}
 
+	if (backup_data_arr[passwords_data])
+	{
+		data_backed_up = True;
+		filename_data->source_filepath = passwords_src;
+		filename_data->destination_filepath = passwords_dst;
+		backup_file_conversion(buf_arr, &buf_i, filename_data);
+	}
+	else if (!data_backed_up)
+	{
+		fprintf(stderr, "No data was backed up\n");
+		free(filename_data->time_string);
+		return 1;
 	}
 
 	return 0;
