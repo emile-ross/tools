@@ -30,16 +30,16 @@ int main(int argc, char *argv[])
 			}
 			else if (strcmp(argv[i], "-p") == 0 || strcmp(argv[i], "--passwords") == 0)
 			{
-				backup.passwords = True;
+				backup_data_arr[passwords_data] = True;
 			}
 			else if (strcmp(argv[i], "-b") == 0 || strcmp(argv[i], "--bookmarks") == 0)
 			{
-				backup.bookmarks = True;
+				backup_data_arr[bookmarks_data] = True;
 			}
 			else if (strcmp(argv[i], "-g") == 0 || strcmp(argv[i], "--gitconfig") == 0
 					|| strcmp(argv[i], "--git") == 0)
 			{
-				backup.gitconfig = True;
+				backup_data_arr[gitconfig_data] = True;
 			}
 			else
 			{
@@ -78,7 +78,7 @@ int main(int argc, char *argv[])
 		home = bmalloc(buf_arr, home_dir);
 		buf_arr[buf_i] = home; buf_i++;
 
-		backupfn(pbackup, home);
+		backupfn(backup_data_arr, home);
 	}
 	else
 	{
@@ -86,7 +86,7 @@ int main(int argc, char *argv[])
 		{
 			verbose_print("Not using home directory for source file\n");
 		}
-		backupfn(pbackup, NULL);
+		backupfn(backup_data_arr, NULL);
 	}
 
 	free_buffers(buf_arr);
