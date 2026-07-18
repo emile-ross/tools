@@ -43,21 +43,3 @@ char *bmalloc(void *bufs_to_free[], const char *format, ...)
 	va_end(args);
 	return format_str;
 }
-
-void free_buffers(void *buffers[])
-{
-	if (buffers != NULL)
-	{
-		uint8_t i = 0;
-		for (; buffers[i] != NULL; i++)
-		{
-			free(buffers[i]);
-			buffers[i] = NULL;
-		}
-
-		if (verbose)
-		{
-			verbose_print("Successfully freed %hhu buffers", i);
-		}
-	}
-}

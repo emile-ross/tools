@@ -10,6 +10,21 @@ int arrfree(uint16_t buffer_i, uint16_t prev_i, void *buf_array[])
 		{
 			free(buf_arr[buf_i]);
 			buf_arr[buf_i] = NULL;
+
+void free_buffers(void *buffers[])
+{
+	if (buffers != NULL)
+	{
+		uint8_t i = 0;
+		for (; buffers[i] != NULL; i++)
+		{
+			free(buffers[i]);
+			buffers[i] = NULL;
+		}
+
+		if (verbose)
+		{
+			verbose_print("Successfully freed %hhu buffers", i);
 		}
 	}
 }
