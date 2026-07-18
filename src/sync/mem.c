@@ -3,7 +3,8 @@
 /* frees an array of buffers backwards until it reaches the previous point (prev_i) */
 int arrfree(uint16_t buffer_i, uint16_t prev_i, void *buf_array[])
 {
-	while (buf_i > prev_buf_i)
+	uint16_t buf_i = buffer_i;
+	while (buf_i > prev_i)
 	{
 		buf_i--;
 		if (buf_array[buf_i] != NULL)
@@ -12,6 +13,8 @@ int arrfree(uint16_t buffer_i, uint16_t prev_i, void *buf_array[])
 			buf_array[buf_i] = NULL;
 		}
 	}
+	buffer_i = buf_i;
+	return 0;
 }
 
 void free_buffers(void *buffers[])
