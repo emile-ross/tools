@@ -1,7 +1,5 @@
 #include "header.h"
-
-int backup_data(char *src_filepath, char *dst_filepath);
-int backup_file_conversion(void *buf_arr[], uint8_t *buffer_iterator, struct filename_type *filename_data);
+#include "head_backup.h"
 
 int backupfn(Bool backup_data_arr[NUM_DATA_BACKUP], char *home)
 {
@@ -16,42 +14,12 @@ int backupfn(Bool backup_data_arr[NUM_DATA_BACKUP], char *home)
 		NULL
 	};
 
-	Bool data_backed_up = False;	/* set to true whenever data has been backed up */
-
 	filename_data.time_string = get_time_str();
 	filename_data.home_string = home;
 	void *buf_arr[5] = { home, filename_data.time_string, NULL, NULL, NULL };
 	uint8_t buf_i = 2;	/* iterator for the buf_arr */
 
-	if (backup_data_arr[gitconfig_data])
-	{
-		data_backed_up = True;
-		filename_data.source_filepath = gitconfig_src;
-		filename_data.destination_filepath = gitconfig_dst;
-		backup_file_conversion(buf_arr, &buf_i, &filename_data);
-	}
-
-	if (backup_data_arr[bookmarks_data])
-	{
-		data_backed_up = True;
-		filename_data.source_filepath = bookmarks_src;
-		filename_data.destination_filepath = bookmarks_dst;
-		backup_file_conversion(buf_arr, &buf_i, &filename_data);
-	}
-
-	if (backup_data_arr[passwords_data])
-	{
-		data_backed_up = True;
-		filename_data.source_filepath = passwords_src;
-		filename_data.destination_filepath = passwords_dst;
-		backup_file_conversion(buf_arr, &buf_i, &filename_data);
-	}
-	else if (!data_backed_up)
-	{
-		fprintf(stderr, "No data was backed up\n");
-		free(filename_data.time_string);
-		return 1;
-	}
+	match_config(buf_i, buf_arr, backup_data_arr, &filename_data);
 
 	free(filename_data.time_string);
 	return 0;
