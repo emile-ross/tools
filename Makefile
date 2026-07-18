@@ -25,7 +25,7 @@ list_words:
 
 sync: synchronise
 synchronise:
-	$(CC) $(backup_cmd) $(ALL_FLAGS) -std=c99
+	$(CC) $(backup_cmd) $(ALL_FLAGS) -std=c99 -g
 
 install: 
 	sudo cp $(OUT) /usr/bin/

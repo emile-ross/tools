@@ -52,6 +52,7 @@ void free_buffers(void *buffers[])
 		for (; buffers[i] != NULL; i++)
 		{
 			free(buffers[i]);
+			buffers[i] = NULL;
 		}
 
 		if (verbose)
