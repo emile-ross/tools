@@ -90,17 +90,17 @@ int backup_file_conversion(void *buf_arr[], uint8_t *buffer_iterator, struct fil
 	
 	backup_data(src_file, dst_file);
 	/* remove from buf_arr[] */
-	buf_arr[buf_i] = dst_file; buf_i++;
 	buf_arr[buf_i] = src_file; buf_i++;
+	buf_arr[buf_i] = dst_file; buf_i++;
 
 	while (buf_i > prev_buf_i)
 	{
+		buf_i--;
 		if (buf_arr[buf_i] != NULL)
 		{
 			free(buf_arr[buf_i]);
 			buf_arr[buf_i] = NULL;
 		}
-		buf_i--;
 	}
 	*(buffer_iterator) = buf_i;
 	return 0;
