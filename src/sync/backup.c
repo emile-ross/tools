@@ -93,6 +93,7 @@ int backup_file_conversion(void *buf_arr[], uint8_t *buffer_iterator, struct fil
 	buf_arr[buf_i] = src_file; buf_i++;
 	buf_arr[buf_i] = dst_file; buf_i++;
 
+	arrfree(uint16_t buffer_i, uint16_t prev_i, void *buf_array[]);
 	while (buf_i > prev_buf_i)
 	{
 		buf_i--;

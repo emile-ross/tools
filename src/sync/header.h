@@ -64,3 +64,6 @@ extern const Bool testing;
 /* backup.c */
 	int backupfn(Bool backup_data_arr[NUM_DATA_BACKUP], char *home);
 
+/* mem.c */
+
+	int arrfree(uint16_t buffer_i, uint16_t prev_i, void *buf_array[]);
