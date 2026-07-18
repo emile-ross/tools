@@ -20,7 +20,6 @@ int backupfn(Bool backup_data_arr[NUM_DATA_BACKUP], char *home)
 	uint8_t buf_i = 2;	/* iterator for the buf_arr */
 
 	match_config(buf_i, buf_arr, backup_data_arr, &filename_data);
-
 	free_buffers(buf_arr);
 
 	return 0;
@@ -78,10 +77,10 @@ int backup_file_conversion(void *buf_arr[], uint8_t *buffer_iterator, struct fil
 	if (filename_data->home_string != NULL)
 	{
 		char *home_path = "%s/%s";
-		src_file = bmalloc(buf_arr, home_path, filename_data->source_filepath, 
-				filename_data->home_string);
-		dst_file = bmalloc(buf_arr, home_path, filename_data->destination_filepath, 
-				filename_data->time_string, filename_data->home_string);
+		src_file = bmalloc(buf_arr, home_path, filename_data->home_string, 
+				filename_data->source_filepath);
+		dst_file = bmalloc(buf_arr, home_path, filename_data->home_string, 
+				filename_data->time_string, filename_data->destination_filepath);
 	}
 	else
 	{
