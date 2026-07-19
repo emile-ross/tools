@@ -1,6 +1,6 @@
 #include "header.h"
 
-int match_config(uint16_t buf_i, void *buf_to_free, Bool backup_data_arr[NUM_DATA_BACKUP], struct filename_type *filename_data)
+int match_config(void *buf_to_free, Bool backup_data_arr[NUM_DATA_BACKUP], struct filename_type *filename_data)
 {
 	Bool data_backed_up = False;
 

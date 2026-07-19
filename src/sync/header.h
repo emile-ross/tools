@@ -59,11 +59,11 @@ struct filename_type
 /* backup.c */
 	int backupfn(Bool backup_data_arr[NUM_DATA_BACKUP], char *home);
 	int backup_data(char *src_filepath, char *dst_filepath);
-	int backup_file_conversion(void **buf_arr[], uint16_t *buffer_iterator, struct filename_type *filename_data);
+	int backup_file_conversion(void *buf_to_free, struct filename_type *filename_data);
 
 /* mem.c */
 	int arrfree(uint16_t *buffer_i, uint16_t *prev_i, void *buf_array[]);
 
 /* in match_config.c */
-	int match_config(uint16_t buf_i, void *buf_to_free, Bool backup_data_arr[NUM_DATA_BACKUP], struct filename_type *filename_data);
+	int match_config(void *buf_to_free, Bool backup_data_arr[NUM_DATA_BACKUP], struct filename_type *filename_data);
 
