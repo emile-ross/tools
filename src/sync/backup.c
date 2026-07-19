@@ -1,5 +1,4 @@
 #include "header.h"
-#include "head_backup.h"
 
 int backupfn(Bool backup_data_arr[NUM_DATA_BACKUP], char *home)
 {
