@@ -18,33 +18,25 @@ int backupfn(Bool backup_data_arr[NUM_DATA_BACKUP], char *home)
 
 	match_config((void*)filename_data.time_string, backup_data_arr, &filename_data);
 
+	free(filename_data.time_string);
+
 	return 0;
 }
 
 int backup_data(char *src_filepath, char *dst_filepath)
 {
-	char *source_file = NULL;
-	char *dest_file = NULL;
-	uint8_t buf_i = 0;
-	void *buf_arr[6] = { NULL, NULL, NULL, NULL, NULL, NULL };
-
-	source_file = bmalloc(buf_arr, "%s", src_filepath);
-	buf_arr[buf_i] = source_file; buf_i++;
-	dest_file = bmalloc(buf_arr, "%s", dst_filepath);
-	buf_arr[buf_i] = dest_file; buf_i++;
-
 	if (verbose)
 	{
-		verbose_print("Source file path: %s", source_file);
-		verbose_print("Destination path: %s", dest_file);
+		verbose_print("Source file path: %s", src_filepath);
+		verbose_print("Destination path: %s", dst_filepath);
 	}
 
 	if (!testing)
 	{
-		char *cmd = bmalloc(buf_arr, "cp %s %s", source_file, dest_file);
+		char *cmd = bmalloc(NULL, "cp %s %s", src_filepath, dst_filepath);
 		if (verbose)
 		{
-			verbose_print("Backing up %s...", source_file);
+			verbose_print("Backing up %s...", src_filepath);
 		}
 
 		printf("\x1B[91m\x1B[1m\n");	/* start a bold red sequence */
@@ -54,8 +46,6 @@ int backup_data(char *src_filepath, char *dst_filepath)
 		printf("\x1B[0m");	/* reset colour */
 		free(cmd);
 	}
-
-	free_buffers(buf_arr);
 
 	return 0;
 }
