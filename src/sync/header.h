@@ -59,7 +59,7 @@ extern const Bool testing;
 
 /* strings.c */
 	void verbose_print(const char *format, ...);
-	char *get_time_str(void);
+	char *get_time_str(void *buf_to_free);
 
 /* backup.c */
 	int backupfn(Bool backup_data_arr[NUM_DATA_BACKUP], char *home);

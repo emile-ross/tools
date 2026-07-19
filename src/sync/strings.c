@@ -11,7 +11,8 @@ char *get_time_str(void *buf_to_free)
 
 	/* TODO fix this memory leak (home address isn't available) bmalloc() 
 	 * will not free the 'home' buffer on error */
-	return bmalloc(NULL, "%u-%hhu-%hhu", year, month, day);
+	void *arr[2] = { buf_to_free, NULL };
+	return bmalloc(arr, "%u-%hhu-%hhu", year, month, day);
 }
 
 void verbose_print(const char *format, ...)

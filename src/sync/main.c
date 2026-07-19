@@ -57,7 +57,7 @@ int main(int argc, char *argv[])
 
 	char *home = NULL;	/* will be allocated soon (maybe) */
 	void *buf_arr[3] = { NULL, NULL, NULL };
-	uint8_t buf_i = 0;
+	uint16_t buf_i = 0;
 
 	if (use_home_dir_src)
 	{
