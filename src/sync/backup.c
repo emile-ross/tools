@@ -13,7 +13,7 @@ int backupfn(Bool backup_data_arr[NUM_DATA_BACKUP], char *home)
 		NULL
 	};
 
-	filename_data.time_string = get_time_str();
+	filename_data.time_string = get_time_str(home);
 	filename_data.home_string = home;
 	void *buf_arr[5] = { home, filename_data.time_string, NULL, NULL, NULL };
 	uint8_t buf_i = 2;	/* iterator for the buf_arr */

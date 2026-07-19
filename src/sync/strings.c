@@ -1,6 +1,6 @@
 #include "header.h"
 
-char *get_time_str(void)
+char *get_time_str(void *buf_to_free)
 {
 	time_t default_time = time(NULL);
 	struct tm *cur_time = localtime(&default_time);
