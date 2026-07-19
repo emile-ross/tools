@@ -16,10 +16,8 @@ int backupfn(Bool backup_data_arr[NUM_DATA_BACKUP], char *home)
 
 	filename_data.time_string = get_time_str(home);
 	filename_data.home_string = home;
-	uint16_t buf_i = 1;
-	void *buf_arr[6] = { filename_data.time_string, NULL, NULL, NULL };
 
-	match_config(buf_i, buf_arr, backup_data_arr, &filename_data);
+	match_config((void*)filename_data.time_string, backup_data_arr, &filename_data);
 
 	if (home != NULL)
 	{
@@ -68,13 +66,21 @@ int backup_data(char *src_filepath, char *dst_filepath)
 	return 0;
 }
 
-int backup_file_conversion(void **buf_arr[], uint16_t *buffer_iterator, struct filename_type *filename_data)
+int backup_file_conversion(void *buf_to_free, struct filename_type *filename_data)
 {
 	/* set buffer iterators */
-	uint16_t buf_i = *buffer_iterator;
 
 	char *src_file = NULL;
 	char *dst_file = NULL;
+
+	void *temp_mem_alloc[3] = 
+	{
+		dst_file,
+		src_file,
+		NULL
+	};
+
+	void *buf_arr[2] = { buf_to_free, NULL };
 
 	if (filename_data->home_string != NULL)
 	{
@@ -91,10 +97,7 @@ int backup_file_conversion(void **buf_arr[], uint16_t *buffer_iterator, struct f
 	}
 	
 	backup_data(src_file, dst_file);
-	/* remove from buf_arr[] */
-	*(buf_arr[buf_i]) = src_file; buf_i++;
-	*(buf_arr[buf_i]) = dst_file; buf_i++;
 
-	*(buffer_iterator) = buf_i;
+	free_buffers(temp_mem_alloc);
 	return 0;
 }
