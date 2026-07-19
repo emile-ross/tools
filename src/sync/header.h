@@ -66,4 +66,4 @@ extern const Bool testing;
 
 /* mem.c */
 
-	int arrfree(uint16_t buffer_i, uint16_t prev_i, void *buf_array[]);
+	int arrfree(uint16_t *buffer_i, uint16_t *prev_i, void *buf_array[]);
