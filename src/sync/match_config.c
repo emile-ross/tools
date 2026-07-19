@@ -30,7 +30,7 @@ int match_config(uint16_t buf_i, void *buf_arr[], Bool backup_data_arr[NUM_DATA_
 	else if (!data_backed_up)
 	{
 		fprintf(stderr, "No data was backed up\n");
-		free(filename_data->time_string);
+		free_buffers(buf_arr);
 		return 1;
 	}
 
