@@ -65,5 +65,5 @@ struct filename_type
 	int arrfree(uint16_t *buffer_i, uint16_t *prev_i, void *buf_array[]);
 
 /* in match_config.c */
-	int match_config(uint16_t buf_i, void *buf_arr[], Bool backup_data_arr[NUM_DATA_BACKUP], struct filename_type *filename_data);
+	int match_config(uint16_t buf_i, void *buf_to_free, Bool backup_data_arr[NUM_DATA_BACKUP], struct filename_type *filename_data);
 
