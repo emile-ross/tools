@@ -57,12 +57,8 @@ int backup_file_conversion(void *buf_to_free, struct filename_type *filename_dat
 	char *src_file = NULL;
 	char *dst_file = NULL;
 
-	void *temp_mem_alloc[3] = 
-	{
-		dst_file,
-		src_file,
-		NULL
-	};
+	void *temp_mem_alloc[3] = { NULL, NULL, NULL };
+	uint16_t buf_i = 0;
 
 	void *buf_arr[2] = { buf_to_free, NULL };
 
@@ -71,12 +67,14 @@ int backup_file_conversion(void *buf_to_free, struct filename_type *filename_dat
 		char *home_path = "%s/%s";
 		src_file = bmalloc(*buf_arr, home_path, filename_data->home_string, 
 				filename_data->source_filepath);
-		temp_mem_alloc[0] = src_file;
+		temp_mem_alloc[buf_i] = src_file;
+		buf_i++;
 		char *dst_file_path = bmalloc(*buf_arr, home_path, filename_data->home_string, 
 				filename_data->destination_filepath, filename_data->time_string);
 		dst_file = bmalloc(*buf_arr, dst_file_path, filename_data->time_string);
 		free(dst_file_path);
-		temp_mem_alloc[1] = dst_file;
+		temp_mem_alloc[buf_i] = dst_file;
+		buf_i++;
 	}
 	else
 	{
