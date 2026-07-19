@@ -56,8 +56,6 @@ int main(int argc, char *argv[])
 	}
 
 	char *home = NULL;	/* will be allocated soon (maybe) */
-	void *buf_arr[3] = { NULL, NULL, NULL };
-	uint16_t buf_i = 0;
 
 	if (use_home_dir_src)
 	{
@@ -73,11 +71,6 @@ int main(int argc, char *argv[])
 			return 1;
 		}
 
-		/* buf_arr will be NULL at this point 
-		 * but this doesn't cause any unwanted problems */
-		home = bmalloc(buf_arr, home_dir);
-		buf_arr[buf_i] = home; buf_i++;
-
 		backupfn(backup_data_arr, home);
 	}
 	else
@@ -89,6 +82,5 @@ int main(int argc, char *argv[])
 		backupfn(backup_data_arr, NULL);
 	}
 
-	free_buffers(buf_arr);
 	return 0;
 }
