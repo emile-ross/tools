@@ -1,13 +1,7 @@
 #define POSIX_C_SOURCE 200112L
+#include "libs.h"
 
 #define NUM_DATA_BACKUP (4)
-
-#include <stdint.h>
-#include <string.h>
-#include <time.h>
-#include <stdarg.h>
-#include <stdlib.h>
-#include <stdio.h>
 
 typedef enum
 {
@@ -34,23 +28,24 @@ struct filename_type
 	char *custom_string;	/* unused */
 };
 
-extern char *passwords_src;
-extern char *passwords_dst;
-
-extern char *bookmarks_src;
-extern char *bookmarks_dst;
-
-extern char *gitconfig_src;
-extern char *gitconfig_dst;
-
-extern char *wifi_logs_src;
-extern char *wifi_logs_dst;
-
-extern const Bool use_home_dir_src;
-extern const Bool use_home_dir_dst;
-
-extern const Bool verbose;
-extern const Bool testing;
+/* global variables */
+	extern char *passwords_src;
+	extern char *passwords_dst;
+	
+	extern char *bookmarks_src;
+	extern char *bookmarks_dst;
+	
+	extern char *gitconfig_src;
+	extern char *gitconfig_dst;
+	
+	extern char *wifi_logs_src;
+	extern char *wifi_logs_dst;
+	
+	extern const Bool use_home_dir_src;
+	extern const Bool use_home_dir_dst;
+	
+	extern const Bool verbose;
+	extern const Bool testing;
 
 /* file_write.c */
 	size_t ssnprintf(char *buffer, size_t buffer_size, const char *format, ...);
