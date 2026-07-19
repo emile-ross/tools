@@ -2,7 +2,6 @@
 
 int backupfn(Bool backup_data_arr[NUM_DATA_BACKUP], char *home)
 {
-	
 	struct filename_type filename_data = 
 	{
 		NULL,
@@ -14,15 +13,10 @@ int backupfn(Bool backup_data_arr[NUM_DATA_BACKUP], char *home)
 		NULL
 	};
 
-	filename_data.time_string = get_time_str(home);
+	filename_data.time_string = get_time_str();
 	filename_data.home_string = home;
 
 	match_config((void*)filename_data.time_string, backup_data_arr, &filename_data);
-
-	if (home != NULL)
-	{
-		free(home);
-	}
 
 	return 0;
 }
