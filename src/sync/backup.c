@@ -65,11 +65,11 @@ int backup_data(char *src_filepath, char *dst_filepath)
 	return 0;
 }
 
-int backup_file_conversion(void *buf_arr[], uint8_t *buffer_iterator, struct filename_type *filename_data)
+int backup_file_conversion(void *buf_arr[], uint16_t *buffer_iterator, struct filename_type *filename_data)
 {
 	/* set buffer iterators */
-	uint8_t buf_i = *buffer_iterator;
-	const uint8_t prev_buf_i = buf_i;
+	uint16_t buf_i = *buffer_iterator;
+	uint16_t prev_buf_i = buf_i;
 
 	char *src_file = NULL;
 	char *dst_file = NULL;
@@ -93,7 +93,7 @@ int backup_file_conversion(void *buf_arr[], uint8_t *buffer_iterator, struct fil
 	buf_arr[buf_i] = src_file; buf_i++;
 	buf_arr[buf_i] = dst_file; buf_i++;
 
-	arrfree(uint16_t buffer_i, uint16_t prev_i, void *buf_array[]);
+	arrfree(&buf_i, &prev_buf_i, buf_arr);
 	*(buffer_iterator) = buf_i;
 	return 0;
 }

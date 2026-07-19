@@ -1,10 +1,10 @@
 #include "header.h"
 
 /* frees an array of buffers backwards until it reaches the previous point (prev_i) */
-int arrfree(uint16_t buffer_i, uint16_t prev_i, void *buf_array[])
+int arrfree(uint16_t *buffer_i, uint16_t *prev_i, void *buf_array[])
 {
-	uint16_t buf_i = buffer_i;
-	while (buf_i > prev_i)
+	uint16_t buf_i = *buffer_i;
+	while (buf_i > *prev_i)
 	{
 		buf_i--;
 		if (buf_array[buf_i] != NULL)
@@ -18,7 +18,7 @@ int arrfree(uint16_t buffer_i, uint16_t prev_i, void *buf_array[])
 			return 1;
 		}
 	}
-	buffer_i = buf_i;
+	*(buffer_i) = buf_i;
 	return 0;
 }
 
