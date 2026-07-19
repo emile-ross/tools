@@ -6,7 +6,7 @@ char *passwords_src = "passwords.kdbx";
 char *passwords_dst = "backup/passwords/%s-passwords.kdbx";
 
 char *bookmarks_src = "bookmarks.json";
-char *bookmarks_dst = "backup/%s-bookmarks.json";
+char *bookmarks_dst = "backup/bookmarks/%s-bookmarks.json";
 
 char *gitconfig_src = ".gitconfig";
 char *gitconfig_dst = "backup/git/.%s-gitconfig";
