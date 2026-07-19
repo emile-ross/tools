@@ -55,8 +55,6 @@ int main(int argc, char *argv[])
 		}
 	}
 
-	char *home = NULL;	/* will be allocated soon (maybe) */
-
 	if (use_home_dir_src)
 	{
 		if (verbose)
@@ -71,7 +69,7 @@ int main(int argc, char *argv[])
 			return 1;
 		}
 
-		backupfn(backup_data_arr, home);
+		backupfn(backup_data_arr, home_dir);
 	}
 	else
 	{
