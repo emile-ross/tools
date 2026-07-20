@@ -40,6 +40,10 @@ int main(int argc, char *argv[])
 			{
 				backup_data_arr[bookmarks_data] = True;
 			}
+			else if (strcmp(argv[i], "-w") == 0 || strcmp(argv[i], "--wifi") == 0)
+			{
+				backup_data_arr[wifi_logs_data] = True;
+			}
 			else if (strcmp(argv[i], "-g") == 0 || strcmp(argv[i], "--gitconfig") == 0
 					|| strcmp(argv[i], "--git") == 0)
 			{
