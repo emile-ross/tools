@@ -11,8 +11,12 @@ char *bookmarks_dst = "backup/bookmarks/%s-bookmarks.json";
 char *gitconfig_src = ".gitconfig";
 char *gitconfig_dst = "backup/git/.%s-gitconfig";
 
+char *dns_logs_src = "logs/dns.log";
+char *dns_logs_dst = "backup/dns-logs/%s-dns.log";	
+
 char *wifi_logs_src = "logs/wifi_log.log";
-char *wifi_logs_dst = "backup/logs/%s-wifi.log";
+char *wifi_logs_dst = "backup/logs/%s-wifi.log";	
+/* the %s will be replaced by the time at which the backup takes place */ 
 
 const Bool use_home_dir_src = True;
 const Bool use_home_dir_dst = True;

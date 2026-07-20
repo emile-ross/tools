@@ -40,6 +40,9 @@ struct filename_type
 	
 	extern char *wifi_logs_src;
 	extern char *wifi_logs_dst;
+
+	extern char *dns_logs_src;
+	extern char *dns_logs_dst;
 	
 	extern const Bool use_home_dir_src;
 	extern const Bool use_home_dir_dst;
