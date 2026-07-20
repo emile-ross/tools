@@ -32,6 +32,10 @@ int main(int argc, char *argv[])
 			{
 				backup_data_arr[passwords_data] = True;
 			}
+			else if (strcmp(argv[i], "-d") == 0 || strcmp(argv[i], "--dns") == 0)
+			{
+				backup_data_arr[dns_logs_data] = True;
+			}
 			else if (strcmp(argv[i], "-b") == 0 || strcmp(argv[i], "--bookmarks") == 0)
 			{
 				backup_data_arr[bookmarks_data] = True;

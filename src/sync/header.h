@@ -1,7 +1,7 @@
 #define POSIX_C_SOURCE 200112L
 #include "libs.h"
 
-#define NUM_DATA_BACKUP (4)
+#define NUM_DATA_BACKUP (5)
 
 typedef enum
 {
@@ -15,6 +15,7 @@ typedef enum
 	passwords_data,
 	bookmarks_data,
 	wifi_logs_data,
+	dns_logs_data
 } data_types;
 
 struct filename_type
