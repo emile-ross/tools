@@ -39,7 +39,6 @@ int match_config(void *buf_to_free, Bool backup_data_arr[NUM_DATA_BACKUP], struc
 
 	if (backup_data_arr[passwords_data])
 	{
-		data_backed_up = True;
 		filename_data->source_filepath = passwords_src;
 		filename_data->destination_filepath = passwords_dst;
 		backup_file_conversion(buf_to_free, filename_data);

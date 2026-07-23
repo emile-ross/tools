@@ -66,6 +66,7 @@ struct filename_type
 	int backup_file_conversion(void *buf_to_free, struct filename_type *filename_data);
 
 /* mem.c */
+	void free_buffers(void *buffers[]);
 	int arrfree(uint16_t *buffer_i, uint16_t *prev_i, void *buf_array[]);
 
 /* in match_config.c */
