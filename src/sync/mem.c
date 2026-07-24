@@ -14,7 +14,7 @@ int arrfree(uint16_t *buffer_i, uint16_t *prev_i, void *buf_array[])
 		}
 		else
 		{
-			fprintf(stderr, "buf_array[] has a NULL pointer (freed)\n");
+			err("buf_array[] has a NULL pointer (freed)");
 			return 1;
 		}
 	}

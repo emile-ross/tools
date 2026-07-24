@@ -73,7 +73,7 @@ int main(int argc, char *argv[])
 		char *home_dir = getenv("HOME");
 		if (home_dir == NULL)
 		{
-			fprintf(stderr, "Failed to get home directory\n");
+			err("Failed to get home directory");
 			return 1;
 		}
 

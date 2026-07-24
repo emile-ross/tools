@@ -26,13 +26,13 @@ void verbose_print(const char *format, ...)
 	printf("\x1B[0m\n");	/* reset colour */
 }
 
-void err(const char *fmt, ...)
+void err(const char *format, ...)
 {
 	va_list args;
 	fprintf(stderr, "\x1b[31merror: ");	/* start a light cyan sequence */
 	
-	va_start(args, fmt);
-	vfprintf(stderr, fmt, args);
+	va_start(args, format);
+	vfprintf(stderr, format, args);
 	va_end(args);
 	
 	fprintf(stderr, "\x1B[0m\n");	/* reset colour */
