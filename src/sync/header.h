@@ -59,6 +59,7 @@ struct filename_type
 /* strings.c */
 	void verbose_print(const char *format, ...);
 	char *get_time_str(void);
+	void err(const char *fmt, ...);
 
 /* backup.c */
 	int backupfn(Bool backup_data_arr[NUM_DATA_BACKUP], char *home);

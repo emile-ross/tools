@@ -25,3 +25,7 @@ void verbose_print(const char *format, ...)
 	
 	printf("\x1B[0m\n");	/* reset colour */
 }
+
+void err(const char *fmt, ...)
+{
+}
