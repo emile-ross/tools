@@ -37,6 +37,7 @@ int backup_data(char *src_filepath, char *dst_filepath)
 		if (verbose)
 		{
 			verbose_print("Backing up %s...", src_filepath);
+			verbose_print("Executing: \"%s\"", cmd);
 		}
 
 		printf("\x1B[91m\x1B[1m\n");	/* start a bold red sequence */

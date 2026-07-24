@@ -8,7 +8,6 @@
 #define UINT32MAX (4294967295)
 #define max_args (8)
 
-
 /* my own implementation of the stdbool.h library (C99 extension) */
 typedef enum
 {
