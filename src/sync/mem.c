@@ -45,7 +45,6 @@ void free_buffers(void *buffers[])
 
 size_t string_length(const char *s)
 {
-
 	mbstate_t state = {0};
 	size_t len = 0;
 	size_t n;
@@ -53,8 +52,13 @@ size_t string_length(const char *s)
 	while (*s)
 	{
 		n = mbrlen(s, MB_CUR_MAX, &state);
+		
+		if (n == (size_t)-1 || n == (size_t)-2)
+			return (size_t)-1; // Invalid UTF-8
+		
 		s += n;
 		len++;
 	}
+	
 	return len;
 }
