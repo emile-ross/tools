@@ -153,15 +153,12 @@ word_list parse_cmd(int num_args, char *arg[])
 		}
 		else
 		{
-			if (!used_args[i])
+			if (!used_args[i] && !word_list_qualifiers.success)
 			{
-				if (!word_list_qualifiers.success)
-				{
-					printf("Implicit use of %s as the filename\nUse -s for explicitly using it\n", arg[i]);
-					word_list_qualifiers.source_file = arg[i];
-					word_list_qualifiers.success = True;
-					implicit = True;
-				}
+				printf("Implicit use of %s as the filename\nUse -s for explicitly using it\n", arg[i]);
+				word_list_qualifiers.source_file = arg[i];
+				word_list_qualifiers.success = True;
+				implicit = True;
 			}
 		}
 		next++;
