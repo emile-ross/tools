@@ -1,8 +1,5 @@
 #include "header.h"
 
-#include <locale.h>
-#include <wchar.h>
-
 /* frees an array of buffers backwards until it reaches the previous point (prev_i) */
 int arrfree(uint16_t *buffer_i, uint16_t *prev_i, void *buf_array[])
 {
@@ -41,24 +38,4 @@ void free_buffers(void *buffers[])
 			verbose_print("Successfully freed %hhu buffers", i);
 		}
 	}
-}
-
-size_t string_length(const char *s)
-{
-	mbstate_t state = {0};
-	size_t len = 0;
-	size_t n;
-	
-	while (*s)
-	{
-		n = mbrlen(s, MB_CUR_MAX, &state);
-		
-		if (n == (size_t)-1 || n == (size_t)-2)
-			return (size_t)-1; // Invalid UTF-8
-		
-		s += n;
-		len++;
-	}
-	
-	return len;
 }

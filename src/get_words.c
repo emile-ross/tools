@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include <string.h>
+#include <locale.h>
+#include <wchar.h>
 
 #define UINT8MAX (255)
 #define UINT16MAX (65535)
@@ -289,4 +291,24 @@ void get_words(word_list *list_args)
 	}
 
 	free(buffer);
+}
+
+size_t string_length(const char *s)
+{
+	mbstate_t state = {0};
+	size_t len = 0;
+	size_t n;
+	
+	while (*s)
+	{
+		n = mbrlen(s, MB_CUR_MAX, &state);
+		
+		if (n == (size_t)-1 || n == (size_t)-2)
+			return (size_t)-1; // invalid UTF-8
+		
+		s += n;
+		len++;
+	}
+	
+	return len;
 }
