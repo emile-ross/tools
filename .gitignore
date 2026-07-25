@@ -1,6 +1,6 @@
 *.o
 *.out
-src/*.o
+obj/*.o
 *_SECRET.asc
 ID_RSA
 id_rsa

@@ -32,4 +32,4 @@ install:
 	sudo cp $(OUT) /usr/bin/
 
 strlen:
-	$(CC) -c src/strlen.c -o src/length.o $(ALL_FLAGS) -std=c89 -Wwrite-strings
+	$(CC) -c src/strlen.c -o obj/strlen.o $(ALL_FLAGS) -std=c89 -Wwrite-strings
