@@ -31,6 +31,8 @@ word_list parse_cmd(int num_args, char *arg[]);
 void get_lines(word_list *list_args);
 void get_words(word_list *list_args);
 
+size_t string_length(const char *string);
+
 int main(int argc, char *argv[])
 {
 	if (argc > 1)
@@ -238,11 +240,11 @@ void get_words(word_list *list_args)
 
 	while (valid_i < list_args->total_words && fscanf(fp, "%255s", temp) == 1)
 	{
-		if (strlen(temp) == list_args->letters_word)
+		if (string_length(temp) == list_args->letters_word)
 		{
 			if (verbose)
 			{
-				printf("%s matches with %zu length\n", temp, strlen(temp));
+				printf("%s matches with %zu length\n", temp, string_length(temp));
 			}
 
 			dest = buffer + valid_i * (list_args->letters_word + 1);
