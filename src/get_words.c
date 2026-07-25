@@ -243,6 +243,11 @@ void get_words(word_list *list_args)
 	{
 		if (strlen(temp) == list_args->letters_word)
 		{
+			if (verbose)
+			{
+				printf("%s matches with %zu length\n", temp, strlen(temp));
+			}
+
 			dest = buffer + valid_i * (list_args->letters_word + 1);
 			strncpy(dest, temp, (list_args->letters_word + 1));
 			valid_i++;
