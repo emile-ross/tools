@@ -46,5 +46,15 @@ void free_buffers(void *buffers[])
 size_t string_length(const char *s)
 {
 
-    return len;
+	mbstate_t state = {0};
+	size_t len = 0;
+	size_t n;
+	
+	while (*s)
+	{
+		n = mbrlen(s, MB_CUR_MAX, &state);
+		s += n;
+		len++;
+	}
+	return len;
 }
