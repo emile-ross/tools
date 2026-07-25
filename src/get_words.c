@@ -1,8 +1,8 @@
+#include <locale.h>
+#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdint.h>
 #include <string.h>
-#include <locale.h>
 #include <wchar.h>
 
 #define UINT8MAX (255)
@@ -303,8 +303,9 @@ size_t string_length(const char *string)
 	{
 		n = mbrlen(string, MB_CUR_MAX, &state);
 		
+		/* invalid UTF-8 */
 		if (n == (size_t)-1 || n == (size_t)-2)
-			return (size_t)-1; // invalid UTF-8
+			return (size_t)-1;
 		
 		string += n;
 		len++;
