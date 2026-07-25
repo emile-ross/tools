@@ -2,6 +2,8 @@ CC = clang
 
 OUT = backup-sync
 
+STRLEN_PATH := obj/strlen.o
+
 ALL_FLAGS := -Wconversion -Wextra -Wall -Wpedantic -Wstrict-prototypes -Wcast-qual -Wcast-align -Wshadow -Wswitch-default -Werror -Wshadow
 
 get_words_cmd := src/get_words.c -o listwords
@@ -21,8 +23,8 @@ all: list_words renaming sync
 renaming:
 	$(CC) $(renaming_cmd) $(ALL_FLAGS) -std=c89 -Wwrite-strings 
 
-list_words: 
-	$(CC) $(get_words_cmd) $(ALL_FLAGS) -std=c89 -Wwrite-strings 
+list_words: strlen
+	$(CC) $(get_words_cmd) $(STRLEN_PATH) $(ALL_FLAGS) -std=c89 -Wwrite-strings 
 
 sync: synchronise
 synchronise:
@@ -32,4 +34,4 @@ install:
 	sudo cp $(OUT) /usr/bin/
 
 strlen:
-	$(CC) -c src/strlen.c -o obj/strlen.o $(ALL_FLAGS) -std=c89 -Wwrite-strings
+	$(CC) -c src/strlen.c -o $(STRLEN_PATH) $(ALL_FLAGS) -std=c89 -Wwrite-strings
