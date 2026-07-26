@@ -1,25 +1,23 @@
 CC = clang
 
+ALL_FLAGS := -Wconversion -Wextra -Wall -Wpedantic -Wstrict-prototypes -Wcast-qual -Wcast-align -Wshadow -Wswitch-default -Werror -Wshadow
+
 OUT = backup-sync
 
 STRLEN_PATH := obj/strlen.o
 VERBOSE_PATH := obj/verbose.o
 ERRORS_PATH := obj/errors.o
 
-ALL_FLAGS := -Wconversion -Wextra -Wall -Wpedantic -Wstrict-prototypes -Wcast-qual -Wcast-align -Wshadow -Wswitch-default -Werror -Wshadow
-
 get_words_cmd := src/get_words.c -o listwords
 renaming_cmd := src/renaming.c -o rename
 
 SYNC_FILENAMES = backup config file_write main match_config mem strings
-
 SYNC_FILES := $(addprefix src/sync/, $(SYNC_FILENAMES))
 SRCS := $(addsuffix .c, $(SYNC_FILES))
 
 backup_cmd := $(SRCS) -o backup-sync
 
 base: all
-
 all: list_words renaming sync
 
 renaming:
@@ -43,3 +41,6 @@ strlen:
 
 verbose:
 	$(CC) -c src/verbose.c -o $(VERBOSE_PATH) $(ALL_FLAGS) -std=c89 -Wwrite-strings
+
+clean:
+	rm obj/*
