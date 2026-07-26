@@ -13,18 +13,6 @@ char *get_time_str(void)
 	 * will not free the 'home' buffer on error */
 	return bmalloc(NULL, "%u-%hhu-%hhu", year, month, day);
 }
-
-void verbose_print(const char *format, ...)
-{
-	va_list args;
-	printf("\x1B[96m");	/* start a light cyan sequence */
-	
-	va_start(args, format);
-	vprintf(format, args);
-	va_end(args);
-	
-	printf("\x1B[0m\n");	/* reset colour */
-}
 void err(const char *format, ...)
 {
 	va_list args;
