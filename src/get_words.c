@@ -3,6 +3,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "../include/verbose.h"
+
 #define UINT8MAX (255)
 #define UINT16MAX (65535)
 #define UINT32MAX (4294967295)

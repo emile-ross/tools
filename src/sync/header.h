@@ -57,7 +57,6 @@ struct filename_type
 	void free_buffers(void *buffers[]);
 
 /* strings.c */
-	void verbose_print(const char *format, ...);
 	char *get_time_str(void);
 	void err(const char *fmt, ...);
 
