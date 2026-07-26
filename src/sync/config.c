@@ -2,8 +2,8 @@
 
 /* choose the name of your password database (including its path) 
  * make sure you don't include the home path unless you've disabled use_home_dir_src */
-char *2fa_auths_src = "export.2fa";
-char *2fa_auths_dst = "backup/2fa/%s-2fa.2fa";
+char *mfa_auths_src = "export.2fa";
+char *mfa_auths_dst = "backup/2fa/%s-2fa.2fa";
 
 char *passwords_src = "passwords.kdbx";
 char *passwords_dst = "backup/passwords/%s-passwords.kdbx";

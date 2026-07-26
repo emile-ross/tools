@@ -4,7 +4,7 @@
 #include "../../include/verbose.h"
 #include "../../include/errors.h"
 
-#define NUM_DATA_BACKUP (5)
+#define NUM_DATA_BACKUP (6)
 
 typedef enum
 {
@@ -16,6 +16,7 @@ typedef enum
 {
 	gitconfig_data = 0,
 	passwords_data,
+	mfa_auths_data,
 	bookmarks_data,
 	wifi_logs_data,
 	dns_logs_data
@@ -33,8 +34,8 @@ struct filename_type
 };
 
 /* global variables */
-	extern char *2fa_auths_src;
-	extern char *2fa_auths_dst;
+	extern char *mfa_auths_src;
+	extern char *mfa_auths_dst;
 
 	extern char *passwords_src;
 	extern char *passwords_dst;
