@@ -75,7 +75,7 @@ word_list parse_cmd(int num_args, char *arg[])
 	uint16_t next = base_arg_r + 1;
 	Bool implicit = False;
 	long temp_input = 0;
-	char *endptr;
+	char *endptr = NULL;
 	Bool used_args[max_args];
 
 	for (i = base_arg_r; i < max_args; i++)

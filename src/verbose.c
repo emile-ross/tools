@@ -1,3 +1,5 @@
+#include <stdio.h>
+
 void verbose_print(const char *format, ...)
 {
 	va_list args;
