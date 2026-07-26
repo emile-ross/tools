@@ -2,6 +2,7 @@ CC = clang
 
 OUT = backup-sync
 STRLEN_PATH := obj/strlen.o
+VERBOSE_PATH := obj/verbose.o
 
 ALL_FLAGS := -Wconversion -Wextra -Wall -Wpedantic -Wstrict-prototypes -Wcast-qual -Wcast-align -Wshadow -Wswitch-default -Werror -Wshadow
 
@@ -34,3 +35,6 @@ install:
 
 strlen:
 	$(CC) -c src/strlen.c -o $(STRLEN_PATH) $(ALL_FLAGS) -std=c89 -Wwrite-strings
+
+verbose:
+	$(CC) -c src/verbose.c -o $(VERBOSE_PATH) $(ALL_FLAGS) -std=c89 -Wwrite-strings
