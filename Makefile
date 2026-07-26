@@ -1,7 +1,6 @@
 CC = clang
 
 OUT = backup-sync
-
 STRLEN_PATH := obj/strlen.o
 
 ALL_FLAGS := -Wconversion -Wextra -Wall -Wpedantic -Wstrict-prototypes -Wcast-qual -Wcast-align -Wshadow -Wswitch-default -Werror -Wshadow
