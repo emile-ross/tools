@@ -45,14 +45,14 @@ int main(int argc, char *argv[])
 		{
 			if (verbose)
 			{
-				printf("%s: %u lines \n", list_args.source_file, list_args.total_words);
+				verbose_print("%s: %u lines \n", list_args.source_file, list_args.total_words);
 			}
 		}
 
 		get_words(&list_args);
 		if (verbose)
 		{
-			printf("%s: %u valid words \n", list_args.output_file, list_args.valid_words);
+			verbose_print("%s: %u valid words \n", list_args.output_file, list_args.valid_words);
 		}
 		else
 		{
@@ -244,7 +244,7 @@ void get_words(word_list *list_args)
 		{
 			if (verbose)
 			{
-				printf("%s matches with %zu length\n", temp, string_length(temp));
+				verbose_print("%s matches with %zu length\n", temp, string_length(temp));
 			}
 
 			dest = buffer + valid_i * (list_args->letters_word + 1);
@@ -261,7 +261,7 @@ void get_words(word_list *list_args)
 	{
 		if (verbose)
 		{
-			printf("The words were written to %s\n", list_args->output_file);
+			verbose_print("The words were written to %s\n", list_args->output_file);
 		}
 
 		out = fopen(list_args->output_file, "w");
