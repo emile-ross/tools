@@ -1,6 +1,8 @@
 #define POSIX_C_SOURCE 200112L
 #include "libs.h"
 
+#include "../../include/verbose.h"
+
 #define NUM_DATA_BACKUP (5)
 
 typedef enum
