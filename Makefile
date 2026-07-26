@@ -27,8 +27,8 @@ list_words: strlen
 	$(CC) $(get_words_cmd) $(STRLEN_PATH) $(ALL_FLAGS) -std=c89 -Wwrite-strings 
 
 sync: synchronise
-synchronise:
-	$(CC) $(backup_cmd) $(ALL_FLAGS) -std=c99 -g
+synchronise: verbose
+	$(CC) $(backup_cmd) $(VERBOSE_PATH) $(ALL_FLAGS) -std=c99 -g
 
 install: 
 	sudo cp $(OUT) /usr/bin/
