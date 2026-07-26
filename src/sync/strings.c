@@ -13,14 +13,3 @@ char *get_time_str(void)
 	 * will not free the 'home' buffer on error */
 	return bmalloc(NULL, "%u-%hhu-%hhu", year, month, day);
 }
-void err(const char *format, ...)
-{
-	va_list args;
-	fprintf(stderr, "\x1b[31merror: ");	/* start a light cyan sequence */
-	
-	va_start(args, format);
-	vfprintf(stderr, format, args);
-	va_end(args);
-	
-	fprintf(stderr, "\x1B[0m\n");	/* reset colour */
-}
