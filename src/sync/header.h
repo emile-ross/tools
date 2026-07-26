@@ -33,6 +33,9 @@ struct filename_type
 };
 
 /* global variables */
+	extern char *2fa_auths_src;
+	extern char *2fa_auths_dst;
+
 	extern char *passwords_src;
 	extern char *passwords_dst;
 	
