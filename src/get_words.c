@@ -54,11 +54,11 @@ int main(int argc, char *argv[])
 		get_words(&list_args);
 		if (verbose)
 		{
-			verbose_print("%s: %u valid words \n", list_args.output_file, list_args.valid_words);
+			verbose_print("%s: %u valid words", list_args.source_file, list_args.valid_words);
 		}
 		else
 		{
-			printf("%u words were matching the length\n", list_args.valid_words);
+			printf("%u words were matching the length", list_args.valid_words);
 		}
 	}
 	else
@@ -246,7 +246,7 @@ void get_words(word_list *list_args)
 		{
 			if (verbose)
 			{
-				verbose_print("%s matches with %zu length\n", temp, string_length(temp));
+				verbose_print("%s matches with %zu length", temp, string_length(temp));
 			}
 
 			dest = buffer + valid_i * (list_args->letters_word + 1);
