@@ -47,7 +47,7 @@ int main(int argc, char *argv[])
 		{
 			if (verbose)
 			{
-				verbose_print("%s: %u lines \n", list_args.source_file, list_args.total_words);
+				verbose_print("%s: %u lines", list_args.source_file, list_args.total_words);
 			}
 		}
 
@@ -263,7 +263,7 @@ void get_words(word_list *list_args)
 	{
 		if (verbose)
 		{
-			verbose_print("The words were written to %s\n", list_args->output_file);
+			verbose_print("The words were written to %s", list_args->output_file);
 		}
 
 		out = fopen(list_args->output_file, "w");
