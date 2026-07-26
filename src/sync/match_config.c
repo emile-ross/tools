@@ -37,6 +37,14 @@ int match_config(void *buf_to_free, Bool backup_data_arr[NUM_DATA_BACKUP], struc
 		backup_file_conversion(buf_to_free, filename_data);
 	}
 
+	if (backup_data_arr[mfa_auths_data])
+	{
+		data_backed_up = True;
+		filename_data->source_filepath = mfa_auths_src;
+		filename_data->destination_filepath = mfa_auths_dst;
+		backup_file_conversion(buf_to_free, filename_data);
+	}
+
 	if (backup_data_arr[passwords_data])
 	{
 		filename_data->source_filepath = passwords_src;
