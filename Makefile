@@ -1,8 +1,10 @@
 CC = clang
 
 OUT = backup-sync
+
 STRLEN_PATH := obj/strlen.o
 VERBOSE_PATH := obj/verbose.o
+ERRORS_PATH := obj/errors.o
 
 ALL_FLAGS := -Wconversion -Wextra -Wall -Wpedantic -Wstrict-prototypes -Wcast-qual -Wcast-align -Wshadow -Wswitch-default -Werror -Wshadow
 
@@ -32,6 +34,9 @@ synchronise: verbose
 
 install: 
 	sudo cp $(OUT) /usr/bin/
+
+errors:
+	$(CC) -c src/errors.c -o $(ERRORS_PATH) $(ALL_FLAGS) -std=c89 -Wwrite-strings
 
 strlen:
 	$(CC) -c src/strlen.c -o $(STRLEN_PATH) $(ALL_FLAGS) -std=c89 -Wwrite-strings
