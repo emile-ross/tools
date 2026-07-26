@@ -23,8 +23,8 @@ all: list_words renaming sync
 renaming:
 	$(CC) $(renaming_cmd) $(ALL_FLAGS) -std=c89 -Wwrite-strings 
 
-list_words: strlen
-	$(CC) $(get_words_cmd) $(STRLEN_PATH) $(ALL_FLAGS) -std=c89 -Wwrite-strings 
+list_words: strlen verbose
+	$(CC) $(get_words_cmd) $(STRLEN_PATH) $(VERBOSE_PATH) $(ALL_FLAGS) -std=c89 -Wwrite-strings 
 
 sync: synchronise
 synchronise: verbose
