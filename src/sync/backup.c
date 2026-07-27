@@ -42,7 +42,7 @@ int backup_data(char *src_filepath, char *dst_filepath)
 
 		printf("\x1B[91m\x1B[1m\n");	/* start a bold red sequence */
 
-		system(cmd);
+		system(cmd);	/* execute the command created */
 
 		printf("\x1B[0m");	/* reset colour */
 		free(cmd);
