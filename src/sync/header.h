@@ -92,3 +92,5 @@ struct filebackup_data
 	extern struct filebackup_data aegis_backup;
 	extern struct filebackup_data mfa_auth_backup;
 	extern struct filebackup_data passwords_backup;
+
+void backup_file(struct filebackup_data *filename_data, struct filename_type *file_data);

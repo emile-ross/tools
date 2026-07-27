@@ -30,17 +30,15 @@ int main(int argc, char *argv[])
 			}
 			else if (strcmp(argv[i], "-a") == 0 || strcmp(argv[i], "--aegis") == 0)
 			{
-
 				struct filename_type file_data =
 				{
 					NULL, NULL,
 					get_time_str(),
 					getenv("HOME"),
-					NULL,
-					NULL,
-					NULL
+					NULL, NULL, NULL
 				};
 
+				backup_file(&aegis_backup, &file_data);
 			}
 			else if (strcmp(argv[i], "-2") == 0 || strcmp(argv[i], "--2fa") == 0)
 			{
