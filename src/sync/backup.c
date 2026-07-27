@@ -91,18 +91,14 @@ int backup_file_conversion(void *buf_to_free, struct filename_type *filename_dat
 
 void backup_file(struct filebackup_data *filename_data, struct filename_type *file_data)
 {
+	char *home_path = "%s/%s";
 	char *src_file = NULL;
 	char *dst_file = NULL;
 
 	if (file_data->home_string != NULL)
 	{
-		char *home_path = "%s/%s";
 		src_file = bmalloc(NULL, home_path, file_data->home_string, 
 				filename_data->source_filepath);
-		char *dst_file_path = bmalloc(NULL, home_path, file_data->home_string, 
-				filename_data->destination_filepath, file_data->time_string);
-		dst_file = bmalloc(NULL, dst_file_path, file_data->time_string);
-		free(dst_file_path);
 	}
 	else
 	{
@@ -113,7 +109,7 @@ void backup_file(struct filebackup_data *filename_data, struct filename_type *fi
 	if (filename_data->dest_home_string)
 	{
 		char *dst_file_path = bmalloc(NULL, home_path, file_data->home_string, 
-				filename_data->destination_filepath, file_data->time_string);
+				filename_data->destination_filepath);
 		if (filename_data->dest_time_string)
 		{
 			dst_file = bmalloc(NULL, dst_file_path, file_data->time_string);
@@ -123,6 +119,7 @@ void backup_file(struct filebackup_data *filename_data, struct filename_type *fi
 		{
 			dst_file = dst_file_path;
 		}
+	}
 
 
 	backup_data(src_file, dst_file);
