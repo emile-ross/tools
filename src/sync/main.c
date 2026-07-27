@@ -28,6 +28,20 @@ int main(int argc, char *argv[])
 				}
 				break;	/* if we don't expect anything else */
 			}
+			else if (strcmp(argv[i], "-a") == 0 || strcmp(argv[i], "--aegis") == 0)
+			{
+
+				struct filename_type file_data =
+				{
+					NULL, NULL,
+					get_time_str(),
+					getenv("HOME"),
+					NULL,
+					NULL,
+					NULL
+				};
+
+			}
 			else if (strcmp(argv[i], "-2") == 0 || strcmp(argv[i], "--2fa") == 0)
 			{
 				backup_data_arr[mfa_auths_data] = True;
