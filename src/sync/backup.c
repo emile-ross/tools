@@ -93,6 +93,14 @@ void backup_file(struct filebackup_data *filename_data, struct filename_type *fi
 {
 	char *src_file = NULL;
 	char *dst_file = NULL;
+
+	if (file_data->home_string != NULL)
+	{
+		char *home_path = "%s/%s";
+	}
+	else
+	{
+	}
 	
 	backup_data(src_file, dst_file);
 }
