@@ -30,7 +30,6 @@ int main(int argc, char *argv[])
 		NULL, NULL, NULL
 	};
 
-
 	if (argc > min_args)
 	{
 		uint8_t i = base_args;
@@ -87,19 +86,8 @@ int main(int argc, char *argv[])
 		}
 	}
 
-	if (use_home_dir_src)
-	{
-
-		backupfn(backup_data_arr, home_dir);
-	}
-	else
-	{
-		if (verbose)
-		{
-			verbose_print("Not using home directory for source file\n");
-		}
-		backupfn(backup_data_arr, NULL);
-	}
+	/* the old way of archiving */
+	backupfn(backup_data_arr, home_dir);
 
 	return 0;
 }
