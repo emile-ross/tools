@@ -26,3 +26,13 @@ const Bool use_home_dir_dst = True;
 
 const Bool verbose = True;
 const Bool testing = False;
+
+
+struct filebackup_data aegis_backup =
+{
+	"aegis.json",
+	"%s-aegis.json",
+	True,
+	True,
+	True
+};
