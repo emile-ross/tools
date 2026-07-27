@@ -35,10 +35,11 @@ struct filename_type
 
 struct filebackup_data
 {
-	char **source_filepath;
-	char **destination_filepath;
+	char *source_filepath;
+	char *destination_filepath;
 	Bool time_string;
-	Bool home_string;
+	Bool src_home_string;
+	Bool dest_home_string;
 };
 
 /* global variables */
