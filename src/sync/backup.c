@@ -114,6 +114,15 @@ void backup_file(struct filebackup_data *filename_data, struct filename_type *fi
 	{
 		char *dst_file_path = bmalloc(NULL, home_path, file_data->home_string, 
 				filename_data->destination_filepath, file_data->time_string);
+		if (filename_data->dest_time_string)
+		{
+			dst_file = bmalloc(NULL, dst_file_path, file_data->time_string);
+			free(dst_file_path);
+		}
+		else
+		{
+			dst_file = dst_file_path;
+		}
 
 
 	backup_data(src_file, dst_file);
