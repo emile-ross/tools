@@ -44,3 +44,12 @@ struct filebackup_data aegis_backup =
 	True,
 	True
 };
+
+struct filebackup_data passwords_backup =
+{
+	"passwords.kdbx",
+	"backup/passwords/%s-passwords.kdbx",
+	True,
+	True,
+	True
+};

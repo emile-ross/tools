@@ -87,3 +87,8 @@ struct filebackup_data
 /* in match_config.c */
 	int match_config(void *buf_to_free, Bool backup_data_arr[NUM_DATA_BACKUP], struct filename_type *filename_data);
 
+
+/* new config.c */
+	extern struct filebackup_data aegis_backup;
+	extern struct filebackup_data mfa_auth_backup;
+	extern struct filebackup_data passwords_backup;
