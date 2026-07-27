@@ -97,9 +97,9 @@ void backup_file(struct filebackup_data *filename_data, struct filename_type *fi
 	if (file_data->home_string != NULL)
 	{
 		char *home_path = "%s/%s";
-		src_file = bmalloc(NULL, home_path, filename_data->home_string, 
+		src_file = bmalloc(NULL, home_path, file_data->home_string, 
 				filename_data->source_filepath);
-		char *dst_file_path = bmalloc(NULL, home_path, filename_data->home_string, 
+		char *dst_file_path = bmalloc(NULL, home_path, file_data->home_string, 
 				filename_data->destination_filepath, file_data->time_string);
 		dst_file = bmalloc(NULL, dst_file_path, file_data->time_string);
 		free(dst_file_path);
@@ -112,6 +112,8 @@ void backup_file(struct filebackup_data *filename_data, struct filename_type *fi
 	
 	backup_data(src_file, dst_file);
 
-	free(dst_file);
-	free(src_file);
+	if (dst_file != NULL)
+		free(dst_file);
+	if (src_file != NULL)
+		free(src_file);
 }
