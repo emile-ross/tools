@@ -96,6 +96,7 @@ void backup_file(struct filebackup_data *filename_data, struct filename_type *fi
 	char *dst_file = NULL;
 
 	if (file_data->home_string != NULL)
+	if (filename_data->src_home_string)
 	{
 		src_file = bmalloc(NULL, home_path, file_data->home_string, 
 				filename_data->source_filepath);
@@ -103,7 +104,6 @@ void backup_file(struct filebackup_data *filename_data, struct filename_type *fi
 	else
 	{
 		src_file = bmalloc(NULL, filename_data->source_filepath);
-		dst_file = bmalloc(NULL, filename_data->destination_filepath, file_data->time_string);
 	}
 	
 	if (filename_data->dest_home_string)
