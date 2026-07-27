@@ -1,11 +1,52 @@
 #include "header.h"
 
-int fbackup(struct filebackup_data *filename_data, struct filename_type *file_data, data_types backup_type)
+int fbackup(struct filename_type *file_data, data_types backup_type)
 {
 	switch (backup_type)
 	{
 		case all_backup_opt:
-			__attribute__ ((fallthrough));	/* fallthrough **everything** */
+		case mfa_auths_data:
+
+			if (!(backup_type == all_backup_opt))
+				break;
+			else
+				__attribute__ ((fallthrough));
+		case gitconfig_data:
+
+			if (!(backup_type == all_backup_opt))
+				break;
+			else
+				__attribute__ ((fallthrough));
+		case passwords_data:
+
+			if (!(backup_type == all_backup_opt))
+				break;
+			else
+				__attribute__ ((fallthrough));
+		case mfa_auths_data:
+
+			if (!(backup_type == all_backup_opt))
+				break;
+			else
+				__attribute__ ((fallthrough));
+		case bookmarks_data:
+
+			if (!(backup_type == all_backup_opt))
+				break;
+			else
+				__attribute__ ((fallthrough));
+		case wifi_logs_data:
+
+			if (!(backup_type == all_backup_opt))
+				break;
+			else
+				__attribute__ ((fallthrough));
+		case dns_logs_data:
+
+			if (!(backup_type == all_backup_opt))
+				break;
+			else
+				__attribute__ ((fallthrough));
 		default:
 			break;
 	}
