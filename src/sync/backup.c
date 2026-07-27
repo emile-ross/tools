@@ -88,3 +88,11 @@ int backup_file_conversion(void *buf_to_free, struct filename_type *filename_dat
 	free_buffers(temp_mem_alloc);
 	return 0;
 }
+
+void backup_file(struct filebackup_data *filename_data, struct filename_type *file_data)
+{
+	char *src_file = NULL;
+	char *dst_file = NULL;
+	
+	backup_data(src_file, dst_file);
+}
