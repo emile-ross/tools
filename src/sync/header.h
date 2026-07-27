@@ -33,6 +33,14 @@ struct filename_type
 	char *custom_string;	/* unused */
 };
 
+struct filebackup_data
+{
+	char **source_filepath;
+	char **destination_filepath;
+	Bool time_string;
+	Bool home_string;
+};
+
 /* global variables */
 	extern char *mfa_auths_src;
 	extern char *mfa_auths_dst;
