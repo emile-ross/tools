@@ -27,6 +27,15 @@ const Bool use_home_dir_dst = True;
 const Bool verbose = True;
 const Bool testing = False;
 
+struct filebackup_data mfa_auth_backup =
+{
+	"export.2fa",
+	"backup/2fa/%s-2fa.2fa",
+	True,
+	True,
+	True
+};
+
 struct filebackup_data aegis_backup =
 {
 	"aegis.json",
