@@ -15,6 +15,12 @@ int main(int argc, char *argv[])
 	/* this is just all set to true in order to make the process
 	 * of setting everything to true easier */
 
+	char *home_dir = getenv("HOME");
+	if (home_dir == NULL)
+	{
+		err("Failed to get home directory");
+		return 1;
+	}
 
 	struct filename_type file_data =
 	{
@@ -83,17 +89,6 @@ int main(int argc, char *argv[])
 
 	if (use_home_dir_src)
 	{
-		if (verbose)
-		{
-			verbose_print("using home directory for source file\n");
-		}
-
-		char *home_dir = getenv("HOME");
-		if (home_dir == NULL)
-		{
-			err("Failed to get home directory");
-			return 1;
-		}
 
 		backupfn(backup_data_arr, home_dir);
 	}
