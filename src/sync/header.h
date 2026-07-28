@@ -88,8 +88,12 @@ struct filebackup_data
 
 /* new config.c */
 	extern struct filebackup_data aegis_backup;
+	extern struct filebackup_data bookmarks_files;
+	extern struct filebackup_data dns_logs_files;
+	extern struct filebackup_data gitconfig_files;
 	extern struct filebackup_data mfa_auth_backup;
-	extern struct filebackup_data passwords_backup;
+	extern struct filebackup_data passwords_files;
+	extern struct filebackup_data wifi_logs_files;
 
 	void backup_file(struct filebackup_data *filename_data, struct filename_type *file_data);
 
