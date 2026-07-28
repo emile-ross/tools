@@ -42,24 +42,8 @@ struct filebackup_data
 };
 
 /* global variables */
-
 	extern struct filename_type file_data;
 
-	extern char *bookmarks_src;
-	extern char *bookmarks_dst;
-	
-	extern char *gitconfig_src;
-	extern char *gitconfig_dst;
-	
-	extern char *wifi_logs_src;
-	extern char *wifi_logs_dst;
-
-	extern char *dns_logs_src;
-	extern char *dns_logs_dst;
-	
-	extern const Bool use_home_dir_src;
-	extern const Bool use_home_dir_dst;
-	
 	extern const Bool verbose;
 	extern const Bool testing;
 
@@ -70,10 +54,6 @@ struct filebackup_data
 
 /* strings.c */
 	char *get_time_str(void);
-
-/* backup.c */
-	int backup_data(char *src_filepath, char *dst_filepath);
-	int backup_file_conversion(void *buf_to_free, struct filename_type *filename_data);
 
 /* mem.c */
 	void free_buffers(void *buffers[]);

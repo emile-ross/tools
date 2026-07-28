@@ -28,44 +28,6 @@ int backup_data(char *src_filepath, char *dst_filepath)
 	return 0;
 }
 
-int backup_file_conversion(void *buf_to_free, struct filename_type *filename_data)
-{
-	/* set buffer iterators */
-
-	char *src_file = NULL;
-	char *dst_file = NULL;
-
-	void *temp_mem_alloc[3] = { NULL, NULL, NULL };
-	uint16_t buf_i = 0;
-
-	void *buf_arr[2] = { buf_to_free, NULL };
-
-	if (filename_data->home_string != NULL)
-	{
-		char *home_path = "%s/%s";
-		src_file = bmalloc(*buf_arr, home_path, filename_data->home_string, 
-				filename_data->source_filepath);
-		temp_mem_alloc[buf_i] = src_file;
-		buf_i++;
-		char *dst_file_path = bmalloc(*buf_arr, home_path, filename_data->home_string, 
-				filename_data->destination_filepath, filename_data->time_string);
-		dst_file = bmalloc(*buf_arr, dst_file_path, filename_data->time_string);
-		free(dst_file_path);
-		temp_mem_alloc[buf_i] = dst_file;
-		buf_i++;
-	}
-	else
-	{
-		src_file = bmalloc(*buf_arr, filename_data->source_filepath);
-		dst_file = bmalloc(*buf_arr, filename_data->destination_filepath, filename_data->time_string);
-	}
-	
-	backup_data(src_file, dst_file);
-
-	free_buffers(temp_mem_alloc);
-	return 0;
-}
-
 void backup_file(struct filebackup_data *filename_data, struct filename_type *file_str_data)
 {
 	char *home_path = "%s/%s";
