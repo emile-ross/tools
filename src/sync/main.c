@@ -31,33 +31,33 @@ int main(int argc, char *argv[])
 		{
 			if (strcmp(argv[i], "-a") == 0 || strcmp(argv[i], "--all") == 0)
 			{
-				fbackup(&file_data, all_backup_opt);
+				fbackup(all_backup_opt);
 				break;	/* if we don't expect anything else */
 			}
 			else if (strcmp(argv[i], "-2") == 0 || strcmp(argv[i], "--2fa") == 0)
 			{
-				fbackup(&file_data, mfa_auths_data);
+				fbackup(mfa_auths_data);
 			}
 			else if (strcmp(argv[i], "-p") == 0 || strcmp(argv[i], "--passwords") == 0)
 			{
-				fbackup(&file_data, passwords_data);
+				fbackup(passwords_data);
 			}
 			else if (strcmp(argv[i], "-d") == 0 || strcmp(argv[i], "--dns") == 0)
 			{
-				backup_data_arr[dns_logs_data] = True;
+				fbackup(dns_logs_data);
 			}
 			else if (strcmp(argv[i], "-b") == 0 || strcmp(argv[i], "--bookmarks") == 0)
 			{
-				backup_data_arr[bookmarks_data] = True;
+				fbackup(bookmarks_data);
 			}
 			else if (strcmp(argv[i], "-w") == 0 || strcmp(argv[i], "--wifi") == 0)
 			{
-				backup_data_arr[wifi_logs_data] = True;
+				fbackup(wifi_logs_data);
 			}
 			else if (strcmp(argv[i], "-g") == 0 || strcmp(argv[i], "--gitconfig") == 0
 					|| strcmp(argv[i], "--git") == 0)
 			{
-				backup_data_arr[gitconfig_data] = True;
+				fbackup(gitconfig_data);
 			}
 			else
 			{
@@ -67,10 +67,7 @@ int main(int argc, char *argv[])
 	}
 	else
 	{
-		for (uint8_t j = 0; j < NUM_DATA_BACKUP; j++)
-		{
-			backup_data_arr[j] = True;
-		}
+		fbackup(all_backup_opt);
 	}
 
 	/* the old way of archiving */

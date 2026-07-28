@@ -99,4 +99,4 @@ struct filebackup_data
 
 
 /* from src/sync/file_backup.c */
-	int fbackup(struct filename_type *filename_data, data_types backup_type);
+	int fbackup(data_types backup_type);
