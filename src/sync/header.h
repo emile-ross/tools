@@ -25,8 +25,6 @@ typedef enum
 
 struct filename_type
 {
-	char *source_filepath;
-	char *destination_filepath;
 	char *time_string;
 	char *home_string;
 	char *version_string;	/* unused */

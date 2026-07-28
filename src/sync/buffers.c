@@ -1,6 +1,6 @@
 #include "header.h"
 
-struct filename_type file_data = { NULL, NULL, NULL, NULL, NULL, NULL, NULL };
+struct filename_type file_data = { NULL, NULL, NULL, NULL, NULL };
 
 size_t ssnprintf(char *buffer, size_t buffer_size, const char *format, ...)
 {

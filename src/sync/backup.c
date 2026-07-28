@@ -1,28 +1,5 @@
 #include "header.h"
 
-int backupfn(Bool backup_data_arr[NUM_DATA_BACKUP], char *home)
-{
-	struct filename_type filename_data = 
-	{
-		NULL,
-		NULL,
-		NULL,
-		NULL,
-		NULL,
-		NULL,
-		NULL
-	};
-
-	filename_data.time_string = get_time_str();
-	filename_data.home_string = home;
-
-	match_config((void*)filename_data.time_string, backup_data_arr, &filename_data);
-
-	free(filename_data.time_string);
-
-	return 0;
-}
-
 int backup_data(char *src_filepath, char *dst_filepath)
 {
 	if (verbose)

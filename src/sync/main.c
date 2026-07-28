@@ -5,13 +5,6 @@
 
 int main(int argc, char *argv[])
 {
-	Bool backup_data_arr[NUM_DATA_BACKUP];
-	
-	for (uint8_t i = 0; i < NUM_DATA_BACKUP; i++)
-	{
-		backup_data_arr[i] = False;
-	}
-
 	/* this is just all set to true in order to make the process
 	 * of setting everything to true easier */
 
@@ -69,9 +62,6 @@ int main(int argc, char *argv[])
 	{
 		fbackup(all_backup_opt);
 	}
-
-	/* the old way of archiving */
-	backupfn(backup_data_arr, home_dir);
 
 	return 0;
 }
