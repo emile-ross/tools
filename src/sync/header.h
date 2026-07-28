@@ -44,12 +44,7 @@ struct filebackup_data
 };
 
 /* global variables */
-	extern char *mfa_auths_src;
-	extern char *mfa_auths_dst;
 
-	extern char *passwords_src;
-	extern char *passwords_dst;
-	
 	extern struct filename_type file_data;
 
 	extern char *bookmarks_src;

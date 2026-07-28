@@ -24,14 +24,6 @@ int main(int argc, char *argv[])
 	file_data.time_string = get_time_str();
 	file_data.home_string = home_dir;
 
-	struct filename_type file_data =
-	{
-		NULL, NULL,
-		get_time_str(),
-		home_dir,
-		NULL, NULL, NULL
-	};
-
 	if (argc > min_args)
 	{
 		uint8_t i = base_args;
