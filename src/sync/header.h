@@ -50,6 +50,8 @@ struct filebackup_data
 	extern char *passwords_src;
 	extern char *passwords_dst;
 	
+	extern struct filename_type file_data;
+
 	extern char *bookmarks_src;
 	extern char *bookmarks_dst;
 	

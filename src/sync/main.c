@@ -37,10 +37,7 @@ int main(int argc, char *argv[])
 		{
 			if (strcmp(argv[i], "-a") == 0 || strcmp(argv[i], "--all") == 0)
 			{
-				for (uint8_t j = 0; j < NUM_DATA_BACKUP; j++)
-				{
-					backup_data_arr[j] = True;
-				}
+				fbackup(&file_data, all_backup_opt);
 				break;	/* if we don't expect anything else */
 			}
 			else if (strcmp(argv[i], "-2") == 0 || strcmp(argv[i], "--2fa") == 0)
@@ -49,7 +46,7 @@ int main(int argc, char *argv[])
 			}
 			else if (strcmp(argv[i], "-p") == 0 || strcmp(argv[i], "--passwords") == 0)
 			{
-				backup_data_arr[passwords_data] = True;
+				fbackup(&file_data, passwords_data);
 			}
 			else if (strcmp(argv[i], "-d") == 0 || strcmp(argv[i], "--dns") == 0)
 			{

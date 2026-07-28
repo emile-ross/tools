@@ -12,6 +12,7 @@ int fbackup(struct filename_type *file_data, data_types backup_type)
 			else
 				__attribute__ ((fallthrough));
 		case passwords_data:
+			backup_file(&passwords_backup, file_data);
 
 			if (!(backup_type == all_backup_opt))
 				break;
