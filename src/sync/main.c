@@ -21,6 +21,8 @@ int main(int argc, char *argv[])
 		err("Failed to get home directory");
 		return 1;
 	}
+	file_data.time_string = get_time_str();
+	file_data.home_string = home_dir;
 
 	struct filename_type file_data =
 	{
