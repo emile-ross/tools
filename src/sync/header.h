@@ -72,7 +72,6 @@ struct filebackup_data
 	char *get_time_str(void);
 
 /* backup.c */
-	int backupfn(Bool backup_data_arr[NUM_DATA_BACKUP], char *home);
 	int backup_data(char *src_filepath, char *dst_filepath);
 	int backup_file_conversion(void *buf_to_free, struct filename_type *filename_data);
 
