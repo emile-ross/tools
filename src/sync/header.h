@@ -73,6 +73,7 @@ struct filebackup_data
 	extern struct filebackup_data wifi_logs_files;
 
 	void backup_file(struct filebackup_data *filename_data, struct filename_type *file_data);
+	void backup_file(struct filebackup_data *filename_data);
 
 
 /* from src/sync/file_backup.c */
