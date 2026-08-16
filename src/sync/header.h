@@ -20,6 +20,7 @@ typedef enum
 	bookmarks_data,
 	wifi_logs_data,
 	nvim_conf_data,
+	sway_conf_data,
 	dns_logs_data,
 	all_backup_opt
 } data_types;

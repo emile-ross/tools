@@ -56,6 +56,14 @@ int fbackup(data_types backup_type)
 				break;
 			else
 				__attribute__ ((fallthrough));
+		case sway_conf_data:
+			backup_file(&sway_conf_files);
+
+			if (!(backup_type == all_backup_opt))
+				break;
+			else
+				__attribute__ ((fallthrough));
+
 		default:
 			break;
 	}

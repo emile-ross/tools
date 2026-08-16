@@ -56,6 +56,10 @@ int main(int argc, char *argv[])
 			{
 				fbackup(gitconfig_data);
 			}
+			else if (strcmp(argv[i], "-s") == 0 || strcmp(argv[i], "--sway") == 0)
+			{
+				fbackup(sway_conf_data);
+			}
 			else
 			{
 				verbose_print("%s flag ignored (unknown flag)\n", argv[i]);
