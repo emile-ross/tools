@@ -74,6 +74,7 @@ struct filebackup_data
 	extern struct filebackup_data passwords_files;
 	extern struct filebackup_data wifi_logs_files;
 	extern struct filebackup_data nvim_conf_files;
+	extern struct filebackup_data sway_conf_files;
 
 	void backup_file(struct filebackup_data *filename_data);
 
