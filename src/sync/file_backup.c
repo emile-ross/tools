@@ -1,5 +1,12 @@
 #include "header.h"
 
+#define backup(file) \
+	do { \
+		backup_file(&(file)); \
+		if (backup_type != all_backup_opt) \
+			return 0; \
+	} while (0)
+
 int fbackup(data_types backup_type)
 {
 	switch (backup_type)
