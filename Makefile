@@ -28,7 +28,7 @@ list_words: strlen verbose
 
 sync: synchronise
 synchronise: verbose errors
-	$(CC) $(backup_cmd) $(VERBOSE_PATH) $(ERRORS_PATH) $(ALL_FLAGS) -std=c99 -g
+	$(CC) $(backup_cmd) $(VERBOSE_PATH) $(ERRORS_PATH) $(ALL_FLAGS) -std=c99
 
 install: 
 	sudo cp $(OUT) /usr/bin/

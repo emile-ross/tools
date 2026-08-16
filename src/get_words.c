@@ -75,6 +75,7 @@ word_list parse_cmd(int num_args, char *arg[])
 	uint8_t i = 0;
 	uint8_t base_arg_r = 1;
 	uint16_t next = base_arg_r + 1;
+
 	Bool implicit = False;
 	long temp_input = 0;
 	char *endptr = NULL;
@@ -228,6 +229,7 @@ void get_words(word_list *list_args)
 	/* allocate space for all words accounting for null terminator */
 	char *buffer = malloc(list_args->total_words * (list_args->letters_word + 1));
 	uint32_t valid_i = 0;
+
 	char *dest;
 	FILE *out;
 	uint8_t i = 0;

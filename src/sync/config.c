@@ -66,4 +66,11 @@ struct filebackup_data wifi_logs_files =
 	True,
 	True
 };
-
+struct filebackup_data nvim_conf_files =
+{
+	"~/.config/nvim/init.lua",
+	"backup/nvim/%s-init.lua",
+	True,
+	True,
+	True
+};
