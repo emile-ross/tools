@@ -13,7 +13,7 @@ const Bool testing = False;
 struct filebackup_data mfa_auth_backup =
 {
 	"export.2fa",
-	"backup/2fa/%s-2fa.2fa",
+	"2fa/%s-2fa.2fa",
 	True,
 	True,
 	True
@@ -29,7 +29,7 @@ struct filebackup_data aegis_backup =
 struct filebackup_data passwords_files =
 {
 	"passwords.kdbx",
-	"backup/passwords/%s-passwords.kdbx",
+	"passwords/%s-passwords.kdbx",
 	True,
 	True,
 	True
@@ -37,7 +37,7 @@ struct filebackup_data passwords_files =
 struct filebackup_data bookmarks_files =
 {
 	"bookmarks.json",
-	"backup/bookmarks/%s-bookmarks.json",
+	"bookmarks/%s-bookmarks.json",
 	True,
 	True,
 	True
@@ -45,7 +45,7 @@ struct filebackup_data bookmarks_files =
 struct filebackup_data gitconfig_files =
 {
 	".gitconfig",
-	"backup/git/.%s-gitconfig",
+	"git/.%s-gitconfig",
 	True,
 	True,
 	True
@@ -53,7 +53,7 @@ struct filebackup_data gitconfig_files =
 struct filebackup_data dns_logs_files =
 {
 	"logs/dns.log",
-	"backup/dns-logs/%s-dns.log",
+	"dns-logs/%s-dns.log",
 	True,
 	True,
 	True
@@ -61,7 +61,7 @@ struct filebackup_data dns_logs_files =
 struct filebackup_data wifi_logs_files =
 {
 	"logs/wifi_log.log",
-	"backup/logs/%s-wifi.log",
+	"logs/%s-wifi.log",
 	True,
 	True,
 	True
@@ -69,7 +69,7 @@ struct filebackup_data wifi_logs_files =
 struct filebackup_data nvim_conf_files =
 {
 	"~/.config/nvim/init.lua",
-	"backup/nvim/%s-init.lua",
+	"config/nvim/%s-init.lua",
 	True,
 	False,
 	True
@@ -77,7 +77,7 @@ struct filebackup_data nvim_conf_files =
 struct filebackup_data sway_conf_files =
 {
 	"~/.config/sway/config",
-	"backup/config/sway/%s-config",
+	"config/sway/%s-config",
 	True,
 	False,
 	True
