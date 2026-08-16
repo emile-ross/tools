@@ -41,6 +41,14 @@ int fbackup(data_types backup_type)
 				break;
 			else
 				__attribute__ ((fallthrough));
+		case nvim_conf_data:
+			backup_file(&nvim_conf_files);
+
+			if (!(backup_type == all_backup_opt))
+				break;
+			else
+				__attribute__ ((fallthrough));
+
 		case dns_logs_data:
 			backup_file(&dns_logs_files);
 

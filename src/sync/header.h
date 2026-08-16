@@ -19,8 +19,8 @@ typedef enum
 	mfa_auths_data,
 	bookmarks_data,
 	wifi_logs_data,
-	dns_logs_data,
 	nvim_conf_data,
+	dns_logs_data,
 	all_backup_opt
 } data_types;
 
