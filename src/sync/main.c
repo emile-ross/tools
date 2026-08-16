@@ -47,6 +47,10 @@ int main(int argc, char *argv[])
 			{
 				fbackup(wifi_logs_data);
 			}
+			else if (strcmp(argv[i], "-n") == 0 || strcmp(argv[i], "--nvim") == 0)
+			{
+				fbackup(nvim_conf_data);
+			}
 			else if (strcmp(argv[i], "-g") == 0 || strcmp(argv[i], "--gitconfig") == 0
 					|| strcmp(argv[i], "--git") == 0)
 			{

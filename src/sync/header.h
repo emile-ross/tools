@@ -4,7 +4,7 @@
 #include "../../include/verbose.h"
 #include "../../include/errors.h"
 
-#define NUM_DATA_BACKUP (6)
+#define NUM_DATA_BACKUP (7)
 
 typedef enum
 {
@@ -20,6 +20,7 @@ typedef enum
 	bookmarks_data,
 	wifi_logs_data,
 	dns_logs_data,
+	nvim_conf_data,
 	all_backup_opt
 } data_types;
 
