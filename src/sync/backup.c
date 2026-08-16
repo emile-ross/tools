@@ -31,6 +31,7 @@ int backup_data(char *src_filepath, char *dst_filepath)
 void backup_file(struct filebackup_data *filename_data)
 {
 	char *home_path = "%s/%s";
+	char *backup_home_path = "%s/backup/%s";
 
 	char *src_file = NULL;
 	char *dst_file = NULL;
@@ -47,7 +48,7 @@ void backup_file(struct filebackup_data *filename_data)
 	
 	if (filename_data->dest_home_string)
 	{
-		char *dst_file_path = bmalloc(NULL, home_path, file_data.home_string, 
+		char *dst_file_path = bmalloc(NULL, backup_home_path, file_data.home_string, 
 				filename_data->destination_filepath);
 		if (filename_data->dest_time_string)
 		{
