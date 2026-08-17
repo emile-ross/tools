@@ -22,7 +22,10 @@ int main(int argc, char *argv[])
 		uint8_t i = base_args;
 		for (; i < argc; i++)
 		{
-			if (strcmp(argv[i], "-a") == 0 || strcmp(argv[i], "--all") == 0)
+			if (strcmp(argv[i], "-p") == 0 || strcmp(argv[i], "--path") == 0)
+			{
+			}
+			else if (strcmp(argv[i], "-a") == 0 || strcmp(argv[i], "--all") == 0)
 			{
 				fbackup(all_backup_opt);
 				break;	/* if we don't expect anything else */
@@ -31,7 +34,7 @@ int main(int argc, char *argv[])
 			{
 				fbackup(mfa_auths_data);
 			}
-			else if (strcmp(argv[i], "-p") == 0 || strcmp(argv[i], "--passwords") == 0)
+			else if (strcmp(argv[i], "-psw") == 0 || strcmp(argv[i], "--passwords") == 0)
 			{
 				fbackup(passwords_data);
 			}
