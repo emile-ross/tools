@@ -45,6 +45,7 @@
 
 	void backup_file(struct filebackup_data *filename_data);
 
+char *get_path(void);
 
 /* from src/sync/file_backup.c */
 	int fbackup(data_types backup_type);
