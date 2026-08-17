@@ -1,6 +1,3 @@
-// TODO make an output path to direct the backup to a specific directory
-
-
 #define POSIX_C_SOURCE 200112L
 #include "libs.h"
 #include "enums.h"

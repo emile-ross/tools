@@ -11,7 +11,7 @@ ERRORS_PATH := obj/errors.o
 get_words_cmd := src/get_words.c -o listwords
 renaming_cmd := src/renaming.c -o rename
 
-SYNC_FILENAMES = backup config buffers main mem strings file_backup
+SYNC_FILENAMES = backup config buffers main mem strings file_backup path
 SYNC_FILES := $(addprefix src/sync/, $(SYNC_FILENAMES))
 SRCS := $(addsuffix .c, $(SYNC_FILES))
 
