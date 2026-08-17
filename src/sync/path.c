@@ -9,4 +9,12 @@ char *get_path(void)
 	{
 		fprintf(stderr, "Failed to get the user path\n");
 	}
+
+	size_t length = strcspn(user_path, "\r\n\0");
+	char *path = malloc(length + 1);
+
+	snprintf(path, length + 1, "%s", user_path);
+	free(user_path);
+
+	return path;
 }
