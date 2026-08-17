@@ -1,6 +1,7 @@
 CC = clang
 
-ALL_FLAGS := -Wconversion -Wextra -Wall -Wpedantic -Wstrict-prototypes -Wcast-qual -Wcast-align -Wshadow -Wswitch-default -Werror -Wshadow
+ALL_FLAGS = -Wall -Wcast-align -Wcast-qual -Wconversion -Werror -Wextra -Wpedantic -Wshadow -Wstrict-prototypes -Wswitch-default
+
 
 OUT = backup-sync
 
@@ -11,7 +12,8 @@ ERRORS_PATH := obj/errors.o
 get_words_cmd := src/get_words.c -o listwords
 renaming_cmd := src/renaming.c -o rename
 
-SYNC_FILENAMES = backup config buffers main mem strings file_backup path
+SYNC_FILENAMES = backup buffers compare config file_backup main mem path strings
+
 SYNC_FILES := $(addprefix src/sync/, $(SYNC_FILENAMES))
 SRCS := $(addsuffix .c, $(SYNC_FILES))
 
