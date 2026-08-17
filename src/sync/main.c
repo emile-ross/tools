@@ -22,44 +22,43 @@ int main(int argc, char *argv[])
 		uint8_t i = base_args;
 		for (; i < argc; i++)
 		{
-			if (strcmp(argv[i], "-p") == 0 || strcmp(argv[i], "--path") == 0)
+			if (cmp(argv[i], "-p", "--path"))
 			{
 			}
-			else if (strcmp(argv[i], "-a") == 0 || strcmp(argv[i], "--all") == 0)
+			else if (cmp(argv[i], "-a", "--all"))
 			{
 				fbackup(all_backup_opt);
 				break;	/* if we don't expect anything else */
 			}
-			else if (strcmp(argv[i], "-2") == 0 || strcmp(argv[i], "--2fa") == 0)
+			else if (cmp(argv[i], "-2", "--2fa"))
 			{
 				fbackup(mfa_auths_data);
 			}
-			else if (strcmp(argv[i], "-psw") == 0 || strcmp(argv[i], "--passwords") == 0)
+			else if (cmp(argv[i], "-psw", "--passwords"))
 			{
 				fbackup(passwords_data);
 			}
-			else if (strcmp(argv[i], "-d") == 0 || strcmp(argv[i], "--dns") == 0)
+			else if (cmp(argv[i], "-d", "--dns"))
 			{
 				fbackup(dns_logs_data);
 			}
-			else if (strcmp(argv[i], "-b") == 0 || strcmp(argv[i], "--bookmarks") == 0)
+			else if (cmp(argv[i], "-b", "--bookmarks"))
 			{
 				fbackup(bookmarks_data);
 			}
-			else if (strcmp(argv[i], "-w") == 0 || strcmp(argv[i], "--wifi") == 0)
+			else if (cmp(argv[i], "-w", "--wifi"))
 			{
 				fbackup(wifi_logs_data);
 			}
-			else if (strcmp(argv[i], "-n") == 0 || strcmp(argv[i], "--nvim") == 0)
+			else if (cmp(argv[i], "-n", "--nvim"))
 			{
 				fbackup(nvim_conf_data);
 			}
-			else if (strcmp(argv[i], "-g") == 0 || strcmp(argv[i], "--gitconfig") == 0
-					|| strcmp(argv[i], "--git") == 0)
+			else if (cmp(argv[i], "-g", "--gitconfig") || strcmp(argv[i], "--git") == 0)
 			{
 				fbackup(gitconfig_data);
 			}
-			else if (strcmp(argv[i], "-s") == 0 || strcmp(argv[i], "--sway") == 0)
+			else if (cmp(argv[i], "-s", "--sway"))
 			{
 				fbackup(sway_conf_data);
 			}

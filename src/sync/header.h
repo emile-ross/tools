@@ -20,12 +20,18 @@
 	char *bmalloc(void *bufs_to_free[], const char *format, ...);
 	void free_buffers(void *buffers[]);
 
+
 /* strings.c */
 	char *get_time_str(void);
+
 
 /* mem.c */
 	void free_buffers(void *buffers[]);
 	int arrfree(uint16_t *buffer_i, uint16_t *prev_i, void *buf_array[]);
+
+
+/* compare.c */
+	Bool cmp(char *argument, const char *short_flag, const char *long_flag);
 
 
 /* in match_config.c */
