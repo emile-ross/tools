@@ -3,49 +3,13 @@
 
 #define POSIX_C_SOURCE 200112L
 #include "libs.h"
+#include "enums.h"
+#include "structs.h"
 
 #include "../../include/verbose.h"
 #include "../../include/errors.h"
 
 #define NUM_DATA_BACKUP (7)
-
-typedef enum
-{
-	True = 1,
-	False = 0
-} Bool;
-
-typedef enum
-{
-	gitconfig_data = 0,
-	passwords_data,
-	mfa_auths_data,
-	bookmarks_data,
-	wifi_logs_data,
-	nvim_conf_data,
-	sway_conf_data,
-	dns_logs_data,
-	all_backup_opt
-} data_types;
-
-
-struct filename_type
-{
-	char *time_string;
-	char *home_string;
-	char *version_string;	/* unused */
-	char *duplicate_string;	/* unused */
-	char *custom_string;	/* unused */
-};
-
-struct filebackup_data
-{
-	char *source_filepath;
-	char *destination_filepath;
-	Bool dest_time_string;
-	Bool src_home_string;
-	Bool dest_home_string;
-};
 
 /* global variables */
 	extern struct filename_type file_data;
