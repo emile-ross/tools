@@ -49,6 +49,7 @@ struct filebackup_data
 	extern const Bool verbose;
 	extern const Bool testing;
 
+
 /* file_write.c */
 	size_t ssnprintf(char *buffer, size_t buffer_size, const char *format, ...);
 	char *bmalloc(void *bufs_to_free[], const char *format, ...);
@@ -60,6 +61,7 @@ struct filebackup_data
 /* mem.c */
 	void free_buffers(void *buffers[]);
 	int arrfree(uint16_t *buffer_i, uint16_t *prev_i, void *buf_array[]);
+
 
 /* in match_config.c */
 	int match_config(void *buf_to_free, Bool backup_data_arr[NUM_DATA_BACKUP], struct filename_type *filename_data);
