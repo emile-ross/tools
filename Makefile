@@ -2,6 +2,7 @@ CC = clang
 
 ALL_FLAGS = -Wall -Wcast-align -Wcast-qual -Wconversion -Werror -Wextra -Wpedantic -Wshadow -Wstrict-prototypes -Wswitch-default
 
+89_FLAGS = -std=c89 -Wwrite-strings
 
 OUT = backup-sync
 
@@ -23,10 +24,10 @@ base: all
 all: list_words renaming sync
 
 renaming:
-	$(CC) $(renaming_cmd) $(ALL_FLAGS) -std=c89 -Wwrite-strings 
+	$(CC) $(renaming_cmd) $(ALL_FLAGS) $(89_FLAGS)
 
 list_words: strlen verbose
-	$(CC) $(get_words_cmd) $(STRLEN_PATH) $(VERBOSE_PATH) $(ALL_FLAGS) -std=c89 -Wwrite-strings 
+	$(CC) $(get_words_cmd) $(STRLEN_PATH) $(VERBOSE_PATH) $(ALL_FLAGS) $(89_FLAGS)
 
 sync: synchronise
 synchronise: verbose errors
@@ -36,13 +37,13 @@ install:
 	sudo cp $(OUT) /usr/bin/
 
 errors:
-	$(CC) -c src/errors.c -o $(ERRORS_PATH) $(ALL_FLAGS) -std=c89 -Wwrite-strings
+	$(CC) -c src/errors.c -o $(ERRORS_PATH) $(ALL_FLAGS) $(89_FLAGS)
 
 strlen:
-	$(CC) -c src/strlen.c -o $(STRLEN_PATH) $(ALL_FLAGS) -std=c89 -Wwrite-strings
+	$(CC) -c src/strlen.c -o $(STRLEN_PATH) $(ALL_FLAGS) $(89_FLAGS)
 
 verbose:
-	$(CC) -c src/verbose.c -o $(VERBOSE_PATH) $(ALL_FLAGS) -std=c89 -Wwrite-strings
+	$(CC) -c src/verbose.c -o $(VERBOSE_PATH) $(ALL_FLAGS) $(89_FLAGS)
 
 clean:
 	rm obj/*
