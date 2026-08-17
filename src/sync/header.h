@@ -32,6 +32,7 @@
 
 /* compare.c */
 	Bool cmp(char *argument, const char *short_flag, const char *long_flag);
+	Bool scmp(char *argument, const char *flag);
 
 
 /* in match_config.c */

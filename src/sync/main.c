@@ -54,7 +54,7 @@ int main(int argc, char *argv[])
 			{
 				fbackup(nvim_conf_data);
 			}
-			else if (cmp(argv[i], "-g", "--gitconfig") || strcmp(argv[i], "--git") == 0)
+			else if (cmp(argv[i], "-g", "--gitconfig") || scmp(argv[i], "--git"))
 			{
 				fbackup(gitconfig_data);
 			}
