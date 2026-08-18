@@ -10,6 +10,8 @@ STRLEN_PATH := obj/strlen.o
 VERBOSE_PATH := obj/verbose.o
 ERRORS_PATH := obj/errors.o
 
+sync_obj = $(ERRORS_PATH) $(VERBOSE_PATH)
+
 get_words_cmd := src/get_words.c -o listwords
 renaming_cmd := src/renaming.c -o rename
 
@@ -26,12 +28,12 @@ all: list_words renaming sync
 renaming:
 	$(CC) $(renaming_cmd) $(ALL_FLAGS) $(89_FLAGS)
 
-list_words: strlen verbose
+list_words: sync_obj
 	$(CC) $(get_words_cmd) $(STRLEN_PATH) $(VERBOSE_PATH) $(ALL_FLAGS) $(89_FLAGS)
 
 sync: synchronise
 synchronise: verbose errors
-	$(CC) $(backup_cmd) $(VERBOSE_PATH) $(ERRORS_PATH) $(ALL_FLAGS) -std=c99
+	$(CC) $(backup_cmd) $(sync_obj) $(ALL_FLAGS) -std=c99
 
 install: 
 	sudo cp $(OUT) /usr/bin/
@@ -47,3 +49,5 @@ verbose:
 
 clean:
 	rm obj/*
+
+sync_obj: errors verbose
