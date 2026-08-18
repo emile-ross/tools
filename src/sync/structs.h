@@ -15,3 +15,9 @@ struct filebackup_data
 	Bool src_home_string;
 	Bool dest_home_string;
 };
+
+struct backup_args
+{
+	Bool path_bl;
+	char *path;
+};
