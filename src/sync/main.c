@@ -35,6 +35,8 @@ int main(int argc, char *argv[])
 		fprintf(stderr, "Number of arguments is too large\n");
 		return -1;
 	}
+	data_types backup_args[num_args];
+	struct backup_args BackupArgs = { False, NULL, (int8_t)num_args };
 
 	if (argc > min_args)
 	{

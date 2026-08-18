@@ -3,13 +3,13 @@
 #define backup(file) \
 	do { \
 		backup_file(&(file)); \
-		if (backup_type != all_backup_opt) \
+		if (backup_type[i] != all_backup_opt) \
 			return 0; \
 	} while (0)
 
-int fbackup(struct backup_args args, data_types *backup_type[])
+int fbackup(struct backup_args args, data_types (*backup_type)[])
 {
-	switch (backup_type)
+	for (int i = 0; i <= args.num_args; i++)
 	{
 		switch (backup_type[i])
 		{
