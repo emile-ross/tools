@@ -55,4 +55,4 @@
 char *get_path(void);
 
 /* from src/sync/file_backup.c */
-	int fbackup(struct backup_args args, data_types *backup_type[])
+	int fbackup(struct backup_args args, data_types *backup_type[]);

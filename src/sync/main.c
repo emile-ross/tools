@@ -24,18 +24,22 @@ int main(int argc, char *argv[])
 	file_data.home_string = home_dir;
 
 	int16_t num_args = 0;
+
 	if (argc > min_args)
 	{
 		num_args = (int8_t)argc - min_args;
 	}
 
-		
 	if (num_args > 128)
 	{
 		fprintf(stderr, "Number of arguments is too large\n");
 		return -1;
 	}
 
+	if (argc > min_args)
+	{
+		int8_t i = base_args;
+		int8_t j = 0;
 
 		for (; i < argc; i++)
 		{
@@ -85,9 +89,8 @@ int main(int argc, char *argv[])
 				verbose_print("%s flag ignored (unknown flag)\n", argv[i]);
 			}
 		}
-
 	
-		fbackup(BackupArgs);
+		fbackup(BackupArgs, &backup_args);
 	}
 
 	return 0;
