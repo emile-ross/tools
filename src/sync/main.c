@@ -19,10 +19,13 @@ int main(int argc, char *argv[])
 
 	if (argc > min_args)
 	{
-		char *path = NULL;
-		Bool path_specified = False;
 		uint8_t i = base_args;
+
 		struct backup_args BackupArgs = { False, NULL };
+		
+		uint8_t num_args = argc - min_args;
+		data_types backup_args[num_args];
+
 
 		for (; i < argc; i++)
 		{
@@ -73,6 +76,7 @@ int main(int argc, char *argv[])
 				verbose_print("%s flag ignored (unknown flag)\n", argv[i]);
 			}
 		}
+
 	}
 	else
 	{
