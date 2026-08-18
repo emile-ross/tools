@@ -19,11 +19,16 @@ int main(int argc, char *argv[])
 
 	if (argc > min_args)
 	{
+		char *path = NULL;
+		Bool path_specified = False;
 		uint8_t i = base_args;
+
 		for (; i < argc; i++)
 		{
 			if (cmp(argv[i], "-p", "--path"))
 			{
+				path_specified = True;
+				path = get_path();
 			}
 			else if (cmp(argv[i], "-a", "--all"))
 			{
