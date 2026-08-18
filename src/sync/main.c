@@ -25,6 +25,7 @@ int main(int argc, char *argv[])
 		
 		uint8_t num_args = argc - min_args;
 		data_types backup_args[num_args];
+		uint8_t j = 0;
 
 
 		for (; i < argc; i++)
@@ -41,35 +42,43 @@ int main(int argc, char *argv[])
 			}
 			else if (cmp(argv[i], "-2", "--2fa"))
 			{
-				fbackup(mfa_auths_data);
+				backup_args[j] = mfa_auths_data;
+				j++;
 			}
 			else if (cmp(argv[i], "-psw", "--passwords"))
 			{
-				fbackup(passwords_data);
+				backup_args[j] = passwords_data;
+				j++;
 			}
 			else if (cmp(argv[i], "-d", "--dns"))
 			{
-				fbackup(dns_logs_data);
+				backup_args[j] = dns_logs_data;
+				j++;
 			}
 			else if (cmp(argv[i], "-b", "--bookmarks"))
 			{
-				fbackup(bookmarks_data);
+				backup_args[j] = bookmarks_data;
+				j++;
 			}
 			else if (cmp(argv[i], "-w", "--wifi"))
 			{
-				fbackup(wifi_logs_data);
+				backup_args[j] = wifi_logs_data;
+				j++;
 			}
 			else if (cmp(argv[i], "-n", "--nvim"))
 			{
-				fbackup(nvim_conf_data);
+				backup_args[j] = nvim_conf_data;
+				j++;
 			}
 			else if (cmp(argv[i], "-g", "--gitconfig") || scmp(argv[i], "--git"))
 			{
-				fbackup(gitconfig_data);
+				backup_args[j] = gitconfig_data;
+				j++;
 			}
 			else if (cmp(argv[i], "-s", "--sway"))
 			{
-				fbackup(sway_conf_data);
+				backup_args[j] = sway_conf_data;
+				j++;
 			}
 			else
 			{
