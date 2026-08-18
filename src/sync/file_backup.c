@@ -7,7 +7,7 @@
 			return 0; \
 	} while (0)
 
-int fbackup(data_types backup_type)
+int fbackup(data_types backup_type, struct backup_args args)
 {
 	switch (backup_type)
 	{
