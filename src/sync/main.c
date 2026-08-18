@@ -23,15 +23,18 @@ int main(int argc, char *argv[])
 	file_data.time_string = get_time_str();
 	file_data.home_string = home_dir;
 
+	int16_t num_args = 0;
 	if (argc > min_args)
 	{
-		uint8_t i = base_args;
+		num_args = (int8_t)argc - min_args;
+	}
 
-		struct backup_args BackupArgs = { False, NULL };
 		
-		uint8_t num_args = argc - min_args;
-		data_types backup_args[num_args];
-		uint8_t j = 0;
+	if (num_args > 128)
+	{
+		fprintf(stderr, "Number of arguments is too large\n");
+		return -1;
+	}
 
 
 		for (; i < argc; i++)
