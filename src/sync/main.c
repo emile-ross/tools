@@ -38,53 +38,44 @@ int main(int argc, char *argv[])
 		{
 			if (cmp(argv[i], "-p", "--path"))
 			{
-				backup_args.path_bl = True;
-				backup_args.path = get_path();
+				BackupArgs.path_bl = True;
+				BackupArgs.path = get_path();
 			}
 			else if (cmp(argv[i], "-a", "--all"))
 			{
-				fbackup(all_backup_opt);
-				break;	/* if we don't expect anything else */
+				BACKUP_ARG(all_backup_opt);
 			}
 			else if (cmp(argv[i], "-2", "--2fa"))
 			{
-				backup_args[j] = mfa_auths_data;
-				j++;
+				BACKUP_ARG(mfa_auths_data);
 			}
 			else if (cmp(argv[i], "-psw", "--passwords"))
 			{
-				backup_args[j] = passwords_data;
-				j++;
+				BACKUP_ARG(passwords_data);
 			}
 			else if (cmp(argv[i], "-d", "--dns"))
 			{
-				backup_args[j] = dns_logs_data;
-				j++;
+				BACKUP_ARG(dns_logs_data);
 			}
 			else if (cmp(argv[i], "-b", "--bookmarks"))
 			{
-				backup_args[j] = bookmarks_data;
-				j++;
+				BACKUP_ARG(bookmarks_data);
 			}
 			else if (cmp(argv[i], "-w", "--wifi"))
 			{
-				backup_args[j] = wifi_logs_data;
-				j++;
+				BACKUP_ARG(wifi_logs_data);
 			}
 			else if (cmp(argv[i], "-n", "--nvim"))
 			{
-				backup_args[j] = nvim_conf_data;
-				j++;
+				BACKUP_ARG(nvim_conf_data);
 			}
 			else if (cmp(argv[i], "-g", "--gitconfig") || scmp(argv[i], "--git"))
 			{
-				backup_args[j] = gitconfig_data;
-				j++;
+				BACKUP_ARG(gitconfig_data);
 			}
 			else if (cmp(argv[i], "-s", "--sway"))
 			{
-				backup_args[j] = sway_conf_data;
-				j++;
+				BACKUP_ARG(sway_conf_data);
 			}
 			else
 			{
