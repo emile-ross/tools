@@ -83,10 +83,8 @@ int main(int argc, char *argv[])
 			}
 		}
 
-	}
-	else
-	{
-		fbackup(all_backup_opt);
+	
+		fbackup(BackupArgs);
 	}
 
 	return 0;

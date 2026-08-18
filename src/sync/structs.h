@@ -20,5 +20,5 @@ struct backup_args
 {
 	Bool path_bl;
 	char *path;
-	data_types backup_data_type;
+	int8_t num_args;
 };
