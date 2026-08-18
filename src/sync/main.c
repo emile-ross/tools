@@ -22,13 +22,14 @@ int main(int argc, char *argv[])
 		char *path = NULL;
 		Bool path_specified = False;
 		uint8_t i = base_args;
+		struct backup_args BackupArgs = { False, NULL };
 
 		for (; i < argc; i++)
 		{
 			if (cmp(argv[i], "-p", "--path"))
 			{
-				path_specified = True;
-				path = get_path();
+				backup_args.path_bl = True;
+				backup_args.path = get_path();
 			}
 			else if (cmp(argv[i], "-a", "--all"))
 			{
