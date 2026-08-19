@@ -19,12 +19,7 @@ int fbackup(struct backup_args args, data_types (*backup_type)[])
 		case gitconfig_data:
 			backup(gitconfig_files);
 		case passwords_data:
-			backup_file(&passwords_files);
-
-			if (!(backup_type == all_backup_opt))
-				break;
-			else
-				__attribute__ ((fallthrough));
+			backup(passwords_files);
 		case mfa_auths_data:
 			backup_file(&mfa_auth_backup);
 			backup_file(&aegis_backup);
@@ -38,28 +33,11 @@ int fbackup(struct backup_args args, data_types (*backup_type)[])
 		case wifi_logs_data:
 			backup(wifi_logs_files);
 		case nvim_conf_data:
-			backup_file(&nvim_conf_files);
-
-			if (!(backup_type == all_backup_opt))
-				break;
-			else
-				__attribute__ ((fallthrough));
-
+			backup(nvim_conf_files);
 		case dns_logs_data:
-			backup_file(&dns_logs_files);
-
-			if (!(backup_type == all_backup_opt))
-				break;
-			else
-				__attribute__ ((fallthrough));
+			backup(dns_logs_files);
 		case sway_conf_data:
-			backup_file(&sway_conf_files);
-
-			if (!(backup_type == all_backup_opt))
-				break;
-			else
-				__attribute__ ((fallthrough));
-
+			backup(sway_conf_files);
 		default:
 			break;
 		}
