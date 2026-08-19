@@ -2,7 +2,9 @@
 
 #define backup(file) \
 		backup_file(&(file)); \
-		if ((*backup_type)[i] == all_backup_opt) \
+		if ((*backup_type)[i] != all_backup_opt) \
+			break; \
+		else \
 			__attribute__ ((fallthrough)); \
 
 int fbackup(struct backup_args args, data_types (*backup_type)[])
