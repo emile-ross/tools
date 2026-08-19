@@ -5,6 +5,8 @@
 		backup_file(&(file)); \
 		if (backup_type[i] != all_backup_opt) \
 			return 0; \
+		else \
+			__attribute__ ((fallthrough)); \
 	} while (0)
 
 int fbackup(struct backup_args args, data_types (*backup_type)[])
@@ -15,12 +17,7 @@ int fbackup(struct backup_args args, data_types (*backup_type)[])
 		{
 		case all_backup_opt:
 		case gitconfig_data:
-			backup_file(&gitconfig_files);
-
-			if (!(backup_type[i] == all_backup_opt))
-				break;
-			else
-				__attribute__ ((fallthrough));
+			backup(gitconfig_files);
 		case passwords_data:
 			backup_file(&passwords_files);
 
