@@ -34,19 +34,9 @@ int fbackup(struct backup_args args, data_types (*backup_type)[])
 			else
 				__attribute__ ((fallthrough));
 		case bookmarks_data:
-			backup_file(&bookmarks_files);
-
-			if (!(backup_type == all_backup_opt))
-				break;
-			else
-				__attribute__ ((fallthrough));
+			backup(bookmarks_files);
 		case wifi_logs_data:
-			backup_file(&wifi_logs_files);
-
-			if (!(backup_type == all_backup_opt))
-				break;
-			else
-				__attribute__ ((fallthrough));
+			backup(wifi_logs_files);
 		case nvim_conf_data:
 			backup_file(&nvim_conf_files);
 
