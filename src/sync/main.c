@@ -4,10 +4,11 @@
 #define base_args (1)	/* the number of useless arguments preceeding the command (with info) */
 
 #define BACKUP_ARG(data) \
-    do { \
-        backup_args[j] = data; \
+	do \
+	{ \
+		backup_args[j] = data; \
         j++; \
-    } while (0)
+	} while (0)
 
 int main(int argc, char *argv[])
 {
