@@ -3,7 +3,7 @@
 #define backup(file) \
 	do { \
 		backup_file(&(file)); \
-		if (backup_type[i] != all_backup_opt) \
+		if ((*backup_type)[i] != all_backup_opt) \
 			return 0; \
 		else \
 			__attribute__ ((fallthrough)); \
@@ -24,7 +24,7 @@ int fbackup(struct backup_args args, data_types (*backup_type)[])
 			backup_file(&mfa_auth_backup);
 			backup_file(&aegis_backup);
 
-			if (!(backup_type == all_backup_opt))
+			if (!(backup_type[i] == all_backup_opt))
 				break;
 			else
 				__attribute__ ((fallthrough));
