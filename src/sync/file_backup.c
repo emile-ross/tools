@@ -9,6 +9,11 @@
 
 int fbackup(struct backup_args args, data_types (*backup_type)[])
 {
+	if (verbose)
+	{
+		printf("%d args\n", args.num_args);
+	}
+
 	for (int i = 0; i <= args.num_args; i++)
 	{
 		switch ((*backup_type)[i])
