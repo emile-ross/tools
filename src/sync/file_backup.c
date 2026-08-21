@@ -53,4 +53,9 @@ int fbackup(struct backup_args args, data_types (*backup_type)[])
 
 void file_check(char *directory)
 {
+	DIR* dir = opendir(directory);
+	if (dir)
+	{
+		closedir(dir);
+	}
 }
