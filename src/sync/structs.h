@@ -11,6 +11,7 @@ struct filebackup_data
 {
 	char *source_filepath;
 	char *destination_filepath;
+	char *destination_directory;
 	Bool dest_time_string;
 	Bool src_home_string;
 	Bool dest_home_string;

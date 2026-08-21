@@ -33,6 +33,8 @@ void backup_file(struct filebackup_data *filename_data)
 	char *home_path = "%s/%s";
 	char *backup_home_path = "%s/backup/%s";
 
+	/* if (file_check()) */
+
 	char *src_file = NULL;
 	char *dst_file = NULL;
 
