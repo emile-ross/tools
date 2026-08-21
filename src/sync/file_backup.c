@@ -51,16 +51,18 @@ int fbackup(struct backup_args args, data_types (*backup_type)[])
 	return 0;
 }
 
-void file_check(char *directory)
+Bool file_check(char *directory)
 {
 	DIR* dir = opendir(directory);
 	if (dir)
 	{
 		closedir(dir);
+		return True;
 	}
 	else if (ENOENT == errno) 
 	{
 		/* dir does not exist. */
+		return False;
 	}
 	else
 	{
