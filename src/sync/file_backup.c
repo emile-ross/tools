@@ -1,5 +1,8 @@
 #include "header.h"
 
+#include <dirent.h>
+#include <errno.h>
+
 #define backup(file) \
 		backup_file(&(file)); \
 		if ((*backup_type)[i] != all_backup_opt) \
@@ -47,3 +50,4 @@ int fbackup(struct backup_args args, data_types (*backup_type)[])
 	}
 	return 0;
 }
+
