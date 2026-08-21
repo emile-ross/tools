@@ -56,6 +56,7 @@ Bool file_check(char *directory)
 	DIR* dir = opendir(directory);
 	if (dir)
 	{
+		/* directory exists */
 		closedir(dir);
 		return True;
 	}

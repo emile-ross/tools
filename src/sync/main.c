@@ -10,6 +10,8 @@
         j++; \
 	} while (0)
 
+struct filename_type file_data = { NULL, NULL, NULL, NULL, NULL };
+
 int main(int argc, char *argv[])
 {
 	/* this is just all set to true in order to make the process
