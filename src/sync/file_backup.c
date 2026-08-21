@@ -67,5 +67,8 @@ Bool file_check(char *directory)
 	else
 	{
 		/* opendir() failed */
+		fprintf(stderr, "opendir() function failed\n");
+		exit(1);
 	}
+	return False;
 }

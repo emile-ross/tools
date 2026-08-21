@@ -55,5 +55,5 @@
 char *get_path(void);
 
 /* from src/sync/file_backup.c */
-	void file_check(char *directory);
+	Bool file_check(char *directory);
 	int fbackup(struct backup_args args, data_types (*backup_type)[]);
