@@ -58,4 +58,12 @@ void file_check(char *directory)
 	{
 		closedir(dir);
 	}
+	else if (ENOENT == errno) 
+	{
+		/* dir does not exist. */
+	}
+	else
+	{
+		/* opendir() failed */
+	}
 }
