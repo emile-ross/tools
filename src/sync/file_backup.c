@@ -51,3 +51,6 @@ int fbackup(struct backup_args args, data_types (*backup_type)[])
 	return 0;
 }
 
+void file_check(char *directory)
+{
+}
