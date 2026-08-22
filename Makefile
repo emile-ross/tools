@@ -17,7 +17,7 @@ renaming_cmd := src/renaming.c -o rename
 
 SYNC_FILENAMES = backup buffers compare config file_backup main mem path strings
 
-SYNC_FILES := $(addprefix src/sync/, $(SYNC_FILENAMES))
+SYNC_FILES := $(addprefix sync/, $(SYNC_FILENAMES))
 SRCS := $(addsuffix .c, $(SYNC_FILES))
 
 backup_cmd := $(SRCS) -o backup-sync
@@ -50,4 +50,6 @@ verbose:
 clean:
 	rm obj/*
 
-sync_obj: errors verbose
+sync_obj:
+
+
