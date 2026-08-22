@@ -36,7 +36,9 @@ void backup_file(struct filebackup_data *filename_data)
 	char *file_path = bmalloc(NULL, "%s/%s/%s", file_data.home_string, "backup", filename_data->destination_directory);
 	if (!(file_check(file_path)))
 	{
-		system("mkdir -p %s", file_path);
+		char *command = bmalloc(NULL, "mkdir -p %s", file_path);
+		system(command);
+		free(command);
 	}
 	free(file_path);
 
