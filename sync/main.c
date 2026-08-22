@@ -35,7 +35,7 @@ int main(int argc, char *argv[])
 
 	if (num_args > 128)
 	{
-		fprintf(stderr, "Number of arguments is too large\n");
+		err("Number of arguments is too large");
 		return -1;
 	}
 	data_types backup_args[num_args];

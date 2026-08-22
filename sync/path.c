@@ -7,7 +7,8 @@ char *get_path(void)
 	char *user_path = malloc(max_length);
 	if (fgets(user_path, (int)max_length, stdin) == NULL) 
 	{
-		fprintf(stderr, "Failed to get the user path\n");
+		err("Failed to get the user path");
+		exit(1);
 	}
 
 	size_t length = 1 + strcspn(user_path, "\r\n\0");
