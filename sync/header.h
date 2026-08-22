@@ -3,8 +3,8 @@
 #include "enums.h"
 #include "structs.h"
 
-#include "../../include/verbose.h"
-#include "../../include/errors.h"
+#include "../include/verbose.h"
+#include "../include/errors.h"
 
 #define NUM_DATA_BACKUP (7)
 
