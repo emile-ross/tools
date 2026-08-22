@@ -38,6 +38,7 @@ void backup_file(struct filebackup_data *filename_data)
 	{
 		system("mkdir -p %s", file_path);
 	}
+	free(file_path);
 
 	char *src_file = NULL;
 	char *dst_file = NULL;
