@@ -33,9 +33,10 @@ void backup_file(struct filebackup_data *filename_data)
 	char *home_path = "%s/%s";
 	char *backup_home_path = "%s/backup/%s";
 
-	char *file_path = bmalloc(NULL, "%s/%s/%s", file_data.home_string);
+	char *file_path = bmalloc(NULL, "%s/%s/%s", file_data.home_string, "backup", );
 	if (!(file_check(file_path)))
 	{
+		system("mkdir -p %s", dir);
 	}
 
 	char *src_file = NULL;
