@@ -21,8 +21,8 @@ const Bool verbose = False;
 
 typedef struct
 {
-	char *source_file;
-	char *output_file;
+	const char *source_file;
+	const char *output_file;
 	Bool success;
 	uint8_t letters_word;
 	uint32_t total_words;
