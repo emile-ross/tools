@@ -41,9 +41,10 @@ char *bmalloc(void *bufs_to_free[], const char *format, ...)
 
 	int ret = vsnprintf(format_str, string_size, format, args);
 
-	if (ret > format_str) 
+	if (ret > string_size) 
 	{
-
+		fprintf(stderr, "bmalloc(): failed writting to format_str buffer (truncated string)\n");
+		exit(1);
 	}
 
 	va_end(args);
