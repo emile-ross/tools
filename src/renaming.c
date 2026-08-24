@@ -94,4 +94,8 @@ int main(int argc, char *argv[])
 
 Bool cmp(char *argument, char *str)
 {
+	if (strcmp(argument, str) == 0)
+	{
+		return True;
+	}
 }
