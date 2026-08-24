@@ -39,7 +39,7 @@ char *bmalloc(void *bufs_to_free[], const char *format, ...)
 		exit(1);
 	}
 
-	int ret = vsnprintf(format_str, string_size, format, args);
+	size_t ret = (size_t)vsnprintf(format_str, string_size, format, args);
 
 	if (ret > string_size) 
 	{
