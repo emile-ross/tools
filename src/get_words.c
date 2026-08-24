@@ -29,13 +29,13 @@ typedef struct
 	uint32_t valid_words;
 } word_list;
 
-word_list parse_cmd(int num_args, char *arg[]);
+word_list parse_cmd(const int num_args, const char *arg[]);
 void get_lines(word_list *list_args);
 void get_words(word_list *list_args);
 
 size_t string_length(const char *string);
 
-int main(int argc, char *argv[])
+int main(const int argc, const char *argv[])
 {
 	if (argc > 1)
 	{
@@ -69,7 +69,7 @@ int main(int argc, char *argv[])
 	return 0;
 }
 
-word_list parse_cmd(int num_args, char *arg[])
+word_list parse_cmd(const int num_args, const char *arg[])
 {
 	word_list word_list_qualifiers = { NULL, NULL, False, 0, 0, 0 };
 	uint8_t i = 0;
