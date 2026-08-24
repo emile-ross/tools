@@ -29,10 +29,10 @@ typedef struct
 	char new_char;
 } all_files_opt;
 
-Bool cmp(char *argument, char *str);
+Bool cmp(const char *argument, const char *str);
 
 /* this will rename files with certain characters in the filename */
-int main(int argc, char *argv[])
+int main(const int argc, const char *argv[])
 {
 	if (argc > 2)
 	{
@@ -92,10 +92,14 @@ int main(int argc, char *argv[])
 	return 0;
 }
 
-Bool cmp(char *argument, char *str)
+Bool cmp(const char *argument, const char *str)
 {
 	if (strcmp(argument, str) == 0)
 	{
 		return True;
+	}
+	else
+	{
+		return False;
 	}
 }
