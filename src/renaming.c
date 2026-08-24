@@ -29,6 +29,8 @@ typedef struct
 	char new_char;
 } all_files_opt;
 
+Bool cmp(char *argument, char *str);
+
 /* this will rename files with certain characters in the filename */
 int main(int argc, char *argv[])
 {
@@ -88,4 +90,8 @@ int main(int argc, char *argv[])
 	}
 
 	return 0;
+}
+
+Bool cmp(char *argument, char *str)
+{
 }
