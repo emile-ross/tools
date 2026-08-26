@@ -4,7 +4,7 @@ ALL_FLAGS = -Wall -Wcast-align -Wcast-qual -Wconversion -Werror -Wextra -Wpedant
 
 89_FLAGS = -std=c89 -Wwrite-strings
 
-OUT = backup-sync
+BIN_NAME = backup-sync
 
 STRLEN_PATH := obj/strlen.o
 VERBOSE_PATH := obj/verbose.o
@@ -31,12 +31,11 @@ renaming:
 list_words: errors verbose strlen
 	$(CC) $(get_words_cmd) $(STRLEN_PATH) $(VERBOSE_PATH) $(ALL_FLAGS) $(89_FLAGS)
 
-sync: synchronise
-synchronise: errors verbose
+sync: errors verbose
 	$(CC) $(backup_cmd) $(sync_obj) $(ALL_FLAGS) -std=c99
 
 install: 
-	sudo cp $(OUT) /usr/bin/
+	sudo cp $(BIN_NAME) /usr/bin/
 
 errors:
 	$(CC) -c src/errors.c -o $(ERRORS_PATH) $(ALL_FLAGS) $(89_FLAGS)
