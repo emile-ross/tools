@@ -7,23 +7,27 @@ int backup_data(char *src_filepath, char *dst_filepath)
 		verbose_print("Source file path: %s", src_filepath);
 		verbose_print("Destination path: %s", dst_filepath);
 	}
-
-	if (!testing)
+	
+	if (testing)
 	{
-		char *cmd = bmalloc(NULL, "cp %s %s", src_filepath, dst_filepath);
-		if (verbose)
-		{
-			verbose_print("Backing up %s...", src_filepath);
-			verbose_print("Executing: \"%s\"", cmd);
-		}
-
-		printf("\x1B[91m\x1B[1m\n");	/* start a bold red sequence */
-
-		system(cmd);	/* execute the command created */
-
-		printf("\x1B[0m");	/* reset colour */
-		free(cmd);
+		/* skip testing phase */
+		return 0;
 	}
+	
+	char *cmd = bmalloc(NULL, "cp %s %s", src_filepath, dst_filepath);
+	if (verbose)
+	{
+		verbose_print("Backing up %s...", src_filepath);
+		verbose_print("Executing: \"%s\"", cmd);
+	}
+
+       printf("\x1B[91m\x1B[1m\n");	/* start a bold red sequence */
+
+       system(cmd);	/* execute the command created */
+
+       printf("\x1B[0m");	/* reset colour */
+       free(cmd);
+
 
 	return 0;
 }
