@@ -21,13 +21,12 @@ int backup_data(char *src_filepath, char *dst_filepath)
 		verbose_print("Executing: \"%s\"", cmd);
 	}
 
-       printf("\x1B[91m\x1B[1m\n");	/* start a bold red sequence */
-
-       system(cmd);	/* execute the command created */
-
-       printf("\x1B[0m");	/* reset colour */
-       free(cmd);
-
+	printf("\x1B[91m\x1B[1m\n");	/* start a bold red sequence */
+	
+	system(cmd);	/* execute the command created */
+	
+	printf("\x1B[0m");	/* reset colour */
+	free(cmd);
 
 	return 0;
 }
