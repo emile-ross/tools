@@ -82,6 +82,15 @@ struct filebackup_data nvim_conf_files =
 	False,
 	True
 };
+struct filebackup_data rofi_conf_files =
+{
+	"~/.config/rofi/config.rasi",
+	"config/rofi/%s-config.rasi",
+	"config/rofi",
+	True,
+	False,
+	True
+};
 struct filebackup_data sway_conf_files =
 {
 	"~/.config/sway/config",

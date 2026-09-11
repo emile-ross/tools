@@ -42,6 +42,8 @@ int fbackup(struct backup_args args, data_types (*backup_type)[])
 			backup(nvim_conf_files);
 		case dns_logs_data:
 			backup(dns_logs_files);
+		case rofi_conf_data:
+			backup(rofi_conf_files);
 		case sway_conf_data:
 			backup(sway_conf_files);
 		default:
