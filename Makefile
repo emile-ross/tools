@@ -38,12 +38,15 @@ install:
 	sudo cp $(BIN_NAME) /usr/bin/
 
 errors:
+	mkdir obj
 	$(CC) -c src/errors.c -o $(ERRORS_PATH) $(ALL_FLAGS) $(89_FLAGS)
 
 strlen:
+	mkdir obj
 	$(CC) -c src/strlen.c -o $(STRLEN_PATH) $(ALL_FLAGS) $(89_FLAGS)
 
 verbose:
+	mkdir obj
 	$(CC) -c src/verbose.c -o $(VERBOSE_PATH) $(ALL_FLAGS) $(89_FLAGS)
 
 clean:
