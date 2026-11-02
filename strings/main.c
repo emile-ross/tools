@@ -29,8 +29,21 @@ int main(void)
 	{
 		/* reads the directory for a filename */
 		directory = readdir(cur);
+		/* TODO: check d_type for DT_CHR
+		 * this DT_CHR means this file is
+		 * actually a directory we can 
+		 * recursively call check_dir()
+		 * function in order to handle it */
+
 		if (directory != NULL)
 		{
+			/* reallocate space on the array if we're out of bounds */
+			if (current_element >= alloc_elements)
+			{
+				alloc_elements += element_increment;
+				array = realloc(array, alloc_elements);
+				element_increment <<= 1;
+			}
 			snprintf(array[current_element], FILENAME_SIZE, "%s", directory->d_name);
 			current_element++;
 		}
@@ -43,6 +56,8 @@ int main(void)
 	}
 
 	printf("\n");
+
+	free(array);
 
 	return 0;
 }

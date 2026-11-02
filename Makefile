@@ -1,5 +1,3 @@
-CC = clang
-
 ALL_FLAGS = -Wall -Wcast-align -Wcast-qual -Wconversion -Werror -Wextra -Wpedantic -Wshadow -Wstrict-prototypes -Wswitch-default
 
 89_FLAGS = -std=c89 -Wwrite-strings

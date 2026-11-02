@@ -1,3 +1,7 @@
+BIN = search
 
 all:
-	$(CC) main.c -o search -Wall -Wextra -Wconversion
+	$(CC) main.c -o $(BIN) -Wall -Wextra -Wconversion
+
+clean:
+	rm $(BIN)
