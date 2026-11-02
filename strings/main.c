@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <inttypes.h>
 #include <dirent.h>
 #include <stdlib.h>
 
@@ -7,13 +8,17 @@
 int main(void)
 {
 	DIR *cur = opendir(".");
+	if (cur == NULL)
+	{
+		fprintf(stderr, "Failed to open current directory\n");
+	}
 
 	struct dirent *directory = NULL;
 	size_t alloc_elements = 16;
 	size_t element_increment = 2;	/* unused */
 	size_t current_element = 0;
 
-	char *(array[256]) = malloc(alloc_elements * FILENAME_SIZE);
+	char (*array)[256] = calloc(alloc_elements, FILENAME_SIZE);
 	if (array == NULL)
 	{
 		fprintf(stderr, "malloc() function failed to allocate memory on the heap\n");
@@ -26,14 +31,18 @@ int main(void)
 		directory = readdir(cur);
 		if (directory != NULL)
 		{
-			printf("%s\n", directory->d_name);
+			snprintf(array[current_element], FILENAME_SIZE, "%s", directory->d_name);
+			current_element++;
 		}
-		printf("\n");
 	}
 	while (directory != NULL);
 
-	printf("\n");
+	for (size_t i = 0; i < current_element; i++)
+	{
+		printf("Element #%"PRIu64": %s\n", i, array[i]);
+	}
 
+	printf("\n");
 
 	return 0;
 }
