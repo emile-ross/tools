@@ -7,7 +7,18 @@ int main(void)
 
 	struct dirent *directory = NULL;
 
-	directory = readdir(cur)
+	do
+	{
+		/* reads the directory for a filename */
+		directory = readdir(cur);
+		if (directory != NULL)
+			printf(directory->d_name);
+		printf("\n");
+	}
+	while (directory != NULL);
+
+	printf("\n");
+
 
 	return 0;
 }
