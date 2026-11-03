@@ -1,3 +1,5 @@
+#include "header.h"
+
 #include <stdio.h>
 #include <inttypes.h>
 #include <dirent.h>
@@ -55,7 +57,6 @@ int main(void)
 		printf("Element #%"PRIu64": %s\n", i, array[i]);
 	}
 
-	printf("\n");
 
 	free(array);
 

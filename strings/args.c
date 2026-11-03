@@ -1,15 +1,22 @@
+#include "header.h"
+
 #include <stdio.h>
 #include <string.h>
 #include <stdint.h>
-#include <stdbool.h>
 
-struct args_type parse_args(const int num_args, const char *restrict args)
+struct args_type parse_args(const int num_args, const char *restrict args[])
 {
 	size_t len = 0;
 	for (uint16_t i = 0; i < num_args; i++)
 	{
 		len = strlen(args[i]);
 		if (str_n_compare(args[i], "-t") || str_n_compare(args[i], "--target"))
+		{
+
+		}
+		if (str_n_compare(args[i], "-i") || str_n_compare(args[i], "--insensitive"))
+		{
+		}
 	}
 }
 
@@ -29,7 +36,7 @@ bool scmp(const char *arg, const char *str)
 }
 
 /* with size version */
-bool str_n_compare(const char *restrict arg, const char *str, size_t size)
+bool str_n_compare(const char *restrict arg, const char *restrict str, size_t size)
 {
 	size_t i = 0;
 
