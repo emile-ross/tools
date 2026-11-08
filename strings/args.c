@@ -6,16 +6,22 @@
 
 struct args_type parse_args(const int num_args, const char *restrict args[])
 {
+	struct args_type ret = { NULL, NULL, 0 };
 	size_t len = 0;
 	for (uint16_t i = 0; i < num_args; i++)
 	{
 		len = strlen(args[i]);
-		if (str_n_compare(args[i], "-t") || str_n_compare(args[i], "--target"))
+		if (str_n_compare(args[i], "-t", 3) || str_n_compare(args[i], "--target", 9))
 		{
-
+			if (i + 1 >= num_args)
+			{
+				fprintf(stderr, "error: missing args in command\n");
+			}
+			ret.target_directory = args[i++];
 		}
 		if (str_n_compare(args[i], "-i") || str_n_compare(args[i], "--insensitive"))
 		{
+			ret.case_sensitive = False;
 		}
 	}
 }

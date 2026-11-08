@@ -48,7 +48,3 @@ verbose:
 
 clean:
 	rm obj/*
-
-sync_obj:
-
-
