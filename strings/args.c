@@ -7,26 +7,30 @@
 struct args_type parse_args(const int num_args, const char *restrict args[])
 {
 	struct args_type ret = { NULL, NULL, 0 };
-	size_t len = 0;
+	size_t len = 0;	/* TODO use len in order to optimise string length comparaisons */
 	for (uint16_t i = 0; i < num_args; i++)
 	{
 		len = strlen(args[i]);
-		if (str_n_compare(args[i], "-t", 3) || str_n_compare(args[i], "--target", 9))
+		if (scmp(args[i], "-t") || scmp(args[i], "--target"))
 		{
 			if (i + 1 >= num_args)
 			{
 				fprintf(stderr, "error: missing args in command\n");
 			}
-			ret.target_directory = args[i++];
+			ret.target_directory = args[i + 1];
+			i++;
 		}
-		if (str_n_compare(args[i], "-i") || str_n_compare(args[i], "--insensitive"))
+		else if (scmp(args[i], "-i") || scmp(args[i], "--insensitive"))
 		{
-			ret.case_sensitive = False;
+			ret.case_sensitive = false;
 		}
+		
+
 	}
+	return ret;
 }
 
-bool scmp(const char *arg, const char *str)
+bool scmp(const char *restrict arg, const char *restrict str)
 {
 	/* match arg to str */
 	uint8_t i = 0;

@@ -3,6 +3,7 @@
 
 struct args_type parse_args(const int num_args, const char *restrict args[]);
 bool str_n_compare(const char *restrict arg, const char *restrict str, size_t size);
+bool scmp(const char *restrict arg, const char *restrict str);
 
 struct args_type
 {
