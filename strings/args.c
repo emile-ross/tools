@@ -6,7 +6,15 @@
 
 #define CHECK_NEXT_ARG(FLAG) \
 	if (i + 1 >= num_args) \
-		fprintf(stderr, "error: missing arguments following the %s flag\n", FLAG);
+	{ \
+		fprintf(stderr, "error: missing arguments following the %s flag\n", FLAG); \
+		return ret; \
+	}
+
+#define OVERWRITE_WARN() \
+	if (ret.string != NULL) \
+		fprintf(stderr, "warning: overwriting old string \'%s\' with \'%s\'\n", ret.string, args[i]);
+
 struct args_type parse_args(const int num_args, const char *restrict args[])
 {
 	struct args_type ret = { NULL, NULL, 0 };
@@ -29,15 +37,14 @@ struct args_type parse_args(const int num_args, const char *restrict args[])
 		{
 			CHECK_NEXT_ARG(args[i]);
 			printf("This is the string being parsed %s\n", args[i + 1]);
-			if (ret.string != NULL)
-				fprintf(stderr, "warning: overwriting old string \'%s\' with \'%s\'\n", ret.string, args[i + 1]);
-			ret.string = args[i + 1];
 			i++;
+			OVERWRITE_WARN();
+			ret.string = args[i + 1];
 		}
 		else
 		{
-			fprintf(stderr, "warning: overwriting old string \'%s\' with \'%s\'\n", ret.string, args[i]);
-			ret.string = args[i + 1];
+			OVERWRITE_WARN();
+			ret.string = args[i];
 		}
 	}
 	return ret;
