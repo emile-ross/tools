@@ -7,8 +7,10 @@
 
 #define FILENAME_SIZE (256)
 
-int main(void)
+int main(const int32_t argc, const char *restrict argv[])
 {
+	struct args_type args = parse_args(argc, argv);
+
 	DIR *cur = opendir(".");
 	if (cur == NULL)
 	{

@@ -11,7 +11,7 @@ struct args_type parse_args(const int num_args, const char *restrict args[])
 	for (uint16_t i = 0; i < num_args; i++)
 	{
 		len = strlen(args[i]);
-		if (scmp(args[i], "-t") || scmp(args[i], "--target"))
+		if (str_n_compare(args[i], "-t", 3) || str_n_compare(args[i], "--target", len))
 		{
 			if (i + 1 >= num_args)
 			{
@@ -20,12 +20,19 @@ struct args_type parse_args(const int num_args, const char *restrict args[])
 			ret.target_directory = args[i + 1];
 			i++;
 		}
-		else if (scmp(args[i], "-i") || scmp(args[i], "--insensitive"))
+		else if (str_n_compare(args[i], "-i", 3) || str_n_compare(args[i], "--insensitive", len))
 		{
 			ret.case_sensitive = false;
 		}
-		
-
+		else if (str_n_compare(args[i], "-s", 3) || str_n_compare(args[i], "--string", len))
+		{
+			printf("This is the string being parsed %s\n", args[i + 1]);
+			i++;
+		}
+		else
+		{
+			printf("This is the string being parsed %s\n", args[i]);
+		}
 	}
 	return ret;
 }
