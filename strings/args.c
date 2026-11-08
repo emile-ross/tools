@@ -4,19 +4,20 @@
 #include <string.h>
 #include <stdint.h>
 
+#define CHECK_NEXT_ARG(FLAG) \
+	if (i + 1 >= num_args) \
+		fprintf(stderr, "error: missing arguments following the %s flag\n", FLAG);
 struct args_type parse_args(const int num_args, const char *restrict args[])
 {
 	struct args_type ret = { NULL, NULL, 0 };
-	size_t len = 0;	/* TODO use len in order to optimise string length comparaisons */
-	for (uint16_t i = 0; i < num_args; i++)
+	size_t len = 0;
+	/* starting at 1 because we ignore the command executed */
+	for (uint16_t i = 1; i < num_args; i++)
 	{
 		len = strlen(args[i]);
 		if (str_n_compare(args[i], "-t", 3) || str_n_compare(args[i], "--target", len))
 		{
-			if (i + 1 >= num_args)
-			{
-				fprintf(stderr, "error: missing args in command\n");
-			}
+			CHECK_NEXT_ARG(args[i]);
 			ret.target_directory = args[i + 1];
 			i++;
 		}
@@ -26,12 +27,17 @@ struct args_type parse_args(const int num_args, const char *restrict args[])
 		}
 		else if (str_n_compare(args[i], "-s", 3) || str_n_compare(args[i], "--string", len))
 		{
+			CHECK_NEXT_ARG(args[i]);
 			printf("This is the string being parsed %s\n", args[i + 1]);
+			if (ret.string != NULL)
+				fprintf(stderr, "warning: overwriting old string \'%s\' with \'%s\'\n", ret.string, args[i + 1]);
+			ret.string = args[i + 1];
 			i++;
 		}
 		else
 		{
-			printf("This is the string being parsed %s\n", args[i]);
+			fprintf(stderr, "warning: overwriting old string \'%s\' with \'%s\'\n", ret.string, args[i]);
+			ret.string = args[i + 1];
 		}
 	}
 	return ret;
