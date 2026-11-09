@@ -47,7 +47,12 @@ int main(const int32_t argc, const char *restrict argv[])
 			if (current_element >= alloc_elements)
 			{
 				alloc_elements += element_increment;
-				array = realloc(array, alloc_elements);
+				array = realloc(array, alloc_elements * FILENAME_SIZE);
+				if (array == NULL)
+				{
+					fprintf(stderr, "realloc() failed to allocate memory of size %" PRIu64"\n", alloc_elements * FILENAME_SIZE);
+					exit(EXIT_FAILURE);
+				}
 				element_increment <<= 1;
 			}
 			snprintf(array[current_element], FILENAME_SIZE, "%s", directory->d_name);
