@@ -11,6 +11,8 @@ int main(const int32_t argc, const char *restrict argv[])
 {
 	struct args_type args = parse_args(argc, argv);
 
+	printf("string: %s\n", args.string);
+
 	DIR *cur = opendir(".");
 	if (cur == NULL)
 	{
@@ -25,7 +27,7 @@ int main(const int32_t argc, const char *restrict argv[])
 	char (*array)[256] = calloc(alloc_elements, FILENAME_SIZE);
 	if (array == NULL)
 	{
-		fprintf(stderr, "malloc() function failed to allocate memory on the heap\n");
+		fprintf(stderr, "calloc() function failed to allocate memory on the heap\n");
 		return -1;
 	}
 
@@ -50,6 +52,11 @@ int main(const int32_t argc, const char *restrict argv[])
 			}
 			snprintf(array[current_element], FILENAME_SIZE, "%s", directory->d_name);
 			current_element++;
+
+			if (directory->d_type == DT_CHR)
+			{
+				/* TODO: recursively call check_dir() function */
+			}
 		}
 	}
 	while (directory != NULL);

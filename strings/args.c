@@ -13,7 +13,8 @@
 
 #define OVERWRITE_WARN() \
 	if (ret.string != NULL) \
-		fprintf(stderr, "warning: overwriting old string \'%s\' with \'%s\'\n", ret.string, args[i]);
+		fprintf(stderr, "warning: overwriting old string \'%s\' with \'%s\'\n", ret.string, args[i]); \
+	ret.string = args[i];
 
 struct args_type parse_args(const int num_args, const char *restrict args[])
 {
@@ -36,15 +37,12 @@ struct args_type parse_args(const int num_args, const char *restrict args[])
 		else if (str_n_compare(args[i], "-s", 3) || str_n_compare(args[i], "--string", len))
 		{
 			CHECK_NEXT_ARG(args[i]);
-			printf("This is the string being parsed %s\n", args[i + 1]);
 			i++;
 			OVERWRITE_WARN();
-			ret.string = args[i + 1];
 		}
 		else
 		{
 			OVERWRITE_WARN();
-			ret.string = args[i];
 		}
 	}
 	return ret;
