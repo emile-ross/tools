@@ -2,6 +2,7 @@
 
 HOME_PATH="/home/$SUDO_USER"
 GIT_DIRECTORY="$HOME_PATH/temp"
+USED_GIT_DIRECTORY="$HOME_PATH/n"
 
 GIT_SOURCE="https://github.com"
 GIT_USERNAME="emile-ross"
@@ -17,11 +18,13 @@ function goto_repo
 
 	cd $GIT_DIRECTORY/
 
-	if [ ! -d "$GIT_DIRECTORY/$1" ];
+	if [ ! -d "$USED_GIT_DIRECTORY/$1" ];
 	then
 		if "$DOWNLOADING_ENABLED"; then
-			echo "$GIT_SOURCE:$GIT_USERNAME/$1.git"
-			git clone "$GIT_SOURCE:$GIT_USERNAME/$1.git"
+			mkdir -p $GIT_SOURCE
+
+			echo "$GIT_SOURCE/$GIT_USERNAME/$1.git"
+			git clone "$GIT_SOURCE/$GIT_USERNAME/$1.git"
 			if [ "$EUID" -eq 0 ] ;
 			then
 				DOWNLOADED_REPO=true
@@ -36,25 +39,20 @@ function goto_repo
 
 	fi
 
-	if [ ! -d "$GIT_DIRECTORY/$1" ];
-	then
-		echo "git repo download failed"
-		return 1
-	fi
-	cd $1/
 
 	if "$DOWNLOADED_REPO" ;
 	then
-		echo "repo has been downloaded"
+		cd $1/
+		echo "repo has been downloaded!"
 	else
-		echo "not downloaded"
+		cd $USED_GIT_DIRECTORY/$1
+		if "$DOWNLOADING_ENABLED";
+		then
+			# update the repository
+			git pull --all
+		fi
 	fi
-	if "$DOWNLOADING_ENABLED";
-	then
-		git pull --all
-	fi
-
-
+	# continue with build/install instructions
 }
 
 function question
@@ -93,5 +91,11 @@ then
 fi
 
 
-goto_repo "wordle"
+goto_repo "dwm-config"
+cd dwl/
+make clean
+make
+make install
 
+# now sys-update
+# pacman -Syu
