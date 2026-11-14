@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 
-GIT_DIRECTORY=~/n
+HOME_PATH="/home/$SUDO_USER"
+GIT_DIRECTORY="$HOME_PATH/nd"
+
+GIT_SOURCE="git@github.com:"
 
 goto_repo()
 {
@@ -8,20 +11,25 @@ goto_repo()
 	then
 		echo "Missing arguments to goto_repo() function"
 	fi
+
+
+	if [ ! -d $GIT_DIRECTORY ];
+	then
+		question "Do you want to clone $1 from github"
+	fi
+
+
 }
 
 function question
 {
-
 	while true; do
 
-		read answer
+		read -p "$1 [Y/n] " answer
 		case $answer in
 			[Yy]*) return 0 ;;
 			[Nn]*) 
 				echo "Denied" ;
-				return 1 ;;
-			*)
 				return 1 ;;
 		esac
 
@@ -35,9 +43,16 @@ fi
 
 if [ ! -d $GIT_DIRECTORY ];
 then
-	echo "git directory wasn't found \'$GIT_DIRECTORY\'"
-	read -p "Do you want to clone it from github"
+	echo "The target git directory wasn't found \"$GIT_DIRECTORY\""
 fi
 
-goto_repo $GIT_DIRECTORY
+question "Do you want to allow downloading"
+
+DOWNLOADING_ENABLED=[ $EUID -eq 0 ]
+
+if [ "$EUID" -eq 0 ];
+then
+
+fi
+
 
