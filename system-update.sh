@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 
 HOME_PATH="/home/$SUDO_USER"
-GIT_DIRECTORY="$HOME_PATH/nd"
+GIT_DIRECTORY="$HOME_PATH/n"
 
-GIT_SOURCE="git@github.com:"
+GIT_SOURCE="git@github.com"
+GIT_USERNAME="emile-ross"
 
 goto_repo()
 {
@@ -13,9 +14,16 @@ goto_repo()
 	fi
 
 
-	if [ ! -d $GIT_DIRECTORY ];
+	cd $GIT_DIRECTORY/
+
+	if [ ! -d "$GIT_DIRECTORY/$1" ];
 	then
-		question "Do you want to clone $1 from github"
+		if "$DOWNLOADING_ENABLED"; then
+			git clone "$GIT_SOURCE:$GIT_USERNAME/$1.git"
+		else
+			echo "skipping unknown \"$1\" repo"
+		fi
+
 	fi
 
 
@@ -46,13 +54,15 @@ then
 	echo "The target git directory wasn't found \"$GIT_DIRECTORY\""
 fi
 
-question "Do you want to allow downloading"
 
-DOWNLOADING_ENABLED=[ $EUID -eq 0 ]
 
-if [ "$EUID" -eq 0 ];
+DOWNLOADING_ENABLED=false
+
+if question "Do you want to allow downloading" ;
 then
-
+	DOWNLOADING_ENABLED=true
 fi
 
+
+goto_repo "wordle"
 
