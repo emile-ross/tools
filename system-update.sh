@@ -1,29 +1,57 @@
 #!/usr/bin/env bash
 
 HOME_PATH="/home/$SUDO_USER"
-GIT_DIRECTORY="$HOME_PATH/n"
+GIT_DIRECTORY="$HOME_PATH/temp"
 
-GIT_SOURCE="git@github.com"
+GIT_SOURCE="https://github.com"
 GIT_USERNAME="emile-ross"
 
-goto_repo()
+function goto_repo
 {
 	if [ $# -lt 1 ];
 	then
 		echo "Missing arguments to goto_repo() function"
 	fi
 
+	DOWNLOADED_REPO=false
 
 	cd $GIT_DIRECTORY/
 
 	if [ ! -d "$GIT_DIRECTORY/$1" ];
 	then
 		if "$DOWNLOADING_ENABLED"; then
+			echo "$GIT_SOURCE:$GIT_USERNAME/$1.git"
 			git clone "$GIT_SOURCE:$GIT_USERNAME/$1.git"
+			if [ "$EUID" -eq 0 ] ;
+			then
+				DOWNLOADED_REPO=true
+			else
+				echo "encountered an error during the $1 downloading phase"
+				return 1
+			fi
 		else
-			echo "skipping unknown \"$1\" repo"
+			echo "skipping download for \"$1\" repo"
+			return -1
 		fi
 
+	fi
+
+	if [ ! -d "$GIT_DIRECTORY/$1" ];
+	then
+		echo "git repo download failed"
+		return 1
+	fi
+	cd $1/
+
+	if "$DOWNLOADED_REPO" ;
+	then
+		echo "repo has been downloaded"
+	else
+		echo "not downloaded"
+	fi
+	if "$DOWNLOADING_ENABLED";
+	then
+		git pull --all
 	fi
 
 
@@ -52,6 +80,7 @@ fi
 if [ ! -d $GIT_DIRECTORY ];
 then
 	echo "The target git directory wasn't found \"$GIT_DIRECTORY\""
+	mkdir $GIT_DIRECTORY
 fi
 
 
