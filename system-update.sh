@@ -16,6 +16,12 @@ function goto_repo
 
 	DOWNLOADED_REPO=false
 
+	if [ ! -d $GIT_DIRECTORY ];
+	then
+		echo "The target git directory wasn't found \"$GIT_DIRECTORY\""
+		mkdir $GIT_DIRECTORY
+	fi
+
 	cd $GIT_DIRECTORY/
 
 	if [ ! -d "$USED_GIT_DIRECTORY/$1" ];
@@ -24,7 +30,7 @@ function goto_repo
 			mkdir -p $GIT_SOURCE
 
 			echo "$GIT_SOURCE/$GIT_USERNAME/$1.git"
-			git clone "$GIT_SOURCE/$GIT_USERNAME/$1.git"
+			git clone --depth=1 "$GIT_SOURCE/$GIT_USERNAME/$1.git"
 			if [ "$EUID" -eq 0 ] ;
 			then
 				DOWNLOADED_REPO=true
@@ -50,6 +56,8 @@ function goto_repo
 		then
 			# update the repository
 			git pull --all
+			# TODO: if git pull fails, attempt (due to missing permission) 
+			# attempt to download the repo normally just like we did above
 		fi
 	fi
 	# continue with build/install instructions
@@ -75,13 +83,6 @@ if [ "$EUID" -ne 0 ]; then
 	exit 1
 fi
 
-if [ ! -d $GIT_DIRECTORY ];
-then
-	echo "The target git directory wasn't found \"$GIT_DIRECTORY\""
-	mkdir $GIT_DIRECTORY
-fi
-
-
 
 DOWNLOADING_ENABLED=false
 
@@ -98,4 +99,7 @@ make
 make install
 
 # now sys-update
-# pacman -Syu
+if question "System update?" ;
+then
+	pacman -Syu --no-confirm
+fi
