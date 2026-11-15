@@ -16,7 +16,7 @@ function download
 		echo "Missing arguments to download function"
 	fi
 
-	git clone "$GIT_SOURCE/$GIT_USERNAME/$1.git"
+	git clone --depth=1 "$GIT_SOURCE/$GIT_USERNAME/$1.git"
 
 	return 0
 }
@@ -44,7 +44,7 @@ function goto_repo
 			mkdir -p $GIT_SOURCE
 
 			echo "$GIT_SOURCE/$GIT_USERNAME/$1.git"
-			git clone --depth=1 "$GIT_SOURCE/$GIT_USERNAME/$1.git"
+			download "$1"
 			if [ "$EUID" -eq 0 ] ;
 			then
 				DOWNLOADED_REPO=true
@@ -109,7 +109,6 @@ if question "Do you want to allow downloading" ;
 then
 	DOWNLOADING_ENABLED=true
 fi
-
 
 goto_repo "dwm-config"
 cd dwl/

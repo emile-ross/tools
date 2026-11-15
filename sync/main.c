@@ -12,7 +12,7 @@
 
 struct filename_type file_data = { NULL, NULL, NULL, NULL, NULL };
 
-int main(int argc, char *argv[])
+int main(int argc, const char *argv[])
 {
 	/* this is just all set to true in order to make the process
 	 * of setting everything to true easier */
