@@ -7,6 +7,18 @@ USED_GIT_DIRECTORY="$HOME_PATH/n"
 GIT_SOURCE="https://github.com"
 GIT_USERNAME="emile-ross"
 
+function download
+{
+	echo "Downloading remote $1"
+
+	if [ $# -lt 1 ] ;
+	then
+		git clone "$GIT_SOURCE/$GIT_USERNAME/$1.git"
+	fi
+
+	return 0
+}
+
 function goto_repo
 {
 	if [ $# -lt 1 ];
