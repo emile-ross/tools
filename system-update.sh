@@ -13,8 +13,10 @@ function download
 
 	if [ $# -lt 1 ] ;
 	then
-		git clone "$GIT_SOURCE/$GIT_USERNAME/$1.git"
+		echo "Missing arguments to download function"
 	fi
+
+	git clone "$GIT_SOURCE/$GIT_USERNAME/$1.git"
 
 	return 0
 }
@@ -70,6 +72,10 @@ function goto_repo
 			git pull --all
 			# TODO: if git pull fails, attempt (due to missing permission) 
 			# attempt to download the repo normally just like we did above
+			if [ "$EUID" -ne 0 ];
+				then
+					download
+			fi
 		fi
 	fi
 	# continue with build/install instructions
@@ -90,7 +96,8 @@ function question
 	done
 }
 
-if [ "$EUID" -ne 0 ]; then
+if [ "$EUID" -ne 0 ] ;
+then
 	echo "Missing root privileges"
 	exit 1
 fi
@@ -113,5 +120,5 @@ make install
 # now sys-update
 if question "System update?" ;
 then
-	pacman -Syu --no-confirm
+	pacman -Syu --noconfirm
 fi
