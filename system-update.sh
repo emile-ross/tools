@@ -115,9 +115,20 @@ cd dwl/
 make clean
 make
 make install
+cd -
+goto_repo "dotfiles"
+# install each configuration selected below
+ls
+./script.sh -c btop
+./script.sh -c bpytop
+./script.sh -c waybar
+./script.sh -c fastfetch
+cd -
+
 
 # now sys-update
 if question "System update?" ;
 then
 	pacman -Syu --noconfirm
 fi
+
