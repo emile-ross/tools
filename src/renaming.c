@@ -34,59 +34,57 @@ Bool cmp(const char *argument, const char *str);
 /* this will rename files with certain characters in the filename */
 int main(const int argc, const char *argv[])
 {
-	if (argc > 2)
-	{
-		uint8_t i = 0;
-		uint8_t next_index = i + 1;
+	uint8_t i = 0;
+	uint8_t next_index = i + 1;
 
-		flag_type command_flag_types[max_args];
-		for (; i < argc; i++)
-		{
-			if (strcmp("-r", argv[i]) == 0 || strcmp("--replace", argv[i]) == 0)
-			{
-				command_flag_types[i] = char_flag;
-
-				if (next_index > argc)
-				{
-					fprintf(stderr, "Missing arguments after %s\nExpected character to replace\n", argv[i]);
-					return 1;
-				}
-			}
-			else if (strcmp("-c", argv[i]) == 0 || strcmp("--character", argv[i]) == 0)
-			{
-				command_flag_types[i] = char_flag;
-
-				if (next_index > argc)
-				{
-					fprintf(stderr, "Missing arguments after %s\nExpected the new characters\n", argv[i]);
-					return 1;
-				}
-			}
-			else if (strcmp("--all", argv[i]) == 0 || strcmp("-a", argv[i]) == 0)
-			{
-				/* all files option */
-				command_flag_types[i] = all_files_flag;
-			}
-			else if (strcmp("-s", argv[i]) == 0)
-			{
-				command_flag_types[i] = single_file_flag;
-			}
-			else
-			{
-				if (command_flag_types[i] == undefined_flag || command_flag_types[i] == invalid_flag)
-				{
-					command_flag_types[i] = invalid_flag;
-				}
-			}
-			next_index++;
-		}
-	}
-	else
+	flag_type command_flag_types[max_args];
+	if (argc <= 2)
 	{
 		/* this is not intended behaviour for now.. */
 		return 1;
 		printf("Provide the filename\n");
 		/* get input */
+	}
+
+	for (; i < argc; i++)
+	{
+		if (strcmp("-r", argv[i]) == 0 || strcmp("--replace", argv[i]) == 0)
+		{
+			command_flag_types[i] = char_flag;
+
+			if (next_index > argc)
+			{
+				fprintf(stderr, "Missing arguments after %s\nExpected character to replace\n", argv[i]);
+				return 1;
+			}
+		}
+		else if (strcmp("-c", argv[i]) == 0 || strcmp("--character", argv[i]) == 0)
+		{
+			command_flag_types[i] = char_flag;
+
+			if (next_index > argc)
+			{
+				fprintf(stderr, "Missing arguments after %s\nExpected the new characters\n", argv[i]);
+				return 1;
+			}
+		}
+		else if (strcmp("--all", argv[i]) == 0 || strcmp("-a", argv[i]) == 0)
+		{
+			/* all files option */
+			command_flag_types[i] = all_files_flag;
+		}
+		else if (strcmp("-s", argv[i]) == 0)
+		{
+			command_flag_types[i] = single_file_flag;
+		}
+		else
+		{
+			if (command_flag_types[i] == undefined_flag || command_flag_types[i] == invalid_flag)
+			{
+				command_flag_types[i] = invalid_flag;
+			}
+		}
+		next_index++;
 	}
 
 	return 0;
