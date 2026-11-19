@@ -125,6 +125,9 @@ ls
 ./script.sh -c fastfetch
 cd -
 
+goto_repo "wordle-solver"
+make install
+
 
 # now sys-update
 if question "System update?" ;
@@ -132,3 +135,5 @@ then
 	pacman -Syu --noconfirm
 fi
 
+pacman -Qdtq
+echo "These orphaned packages can be removed with 'pacman -Rns \$(pacman -Qdtq)'"
