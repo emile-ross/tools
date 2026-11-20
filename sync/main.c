@@ -32,6 +32,11 @@ int main(int argc, const char *argv[])
 	{
 		num_args = (int8_t)argc - min_args;
 	}
+	else
+	{
+		fprintf(stderr, "Missing arguments to backup\nSpecify what configs to use\n");
+		exit(1);
+	}
 
 	if (num_args > 128)
 	{

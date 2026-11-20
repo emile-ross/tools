@@ -21,7 +21,7 @@ struct filebackup_data mfa_auth_backup =
 };
 struct filebackup_data aegis_backup =
 {
-	"aegis.json",
+	"export.json",
 	"2fa/%s-aegis.json",
 	"2fa",
 	True,
