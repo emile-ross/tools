@@ -33,9 +33,9 @@ sync: errors verbose
 	$(CC) $(backup_cmd) $(sync_obj) $(ALL_FLAGS) -std=c99
 
 install: 
-	# TODO: use install instead 
-	# better suited for installing binaries
-	sudo cp $(BIN_NAME) /usr/bin/
+	@ if [ "$$(id -u)" -ne 0 ]; then echo "Missing root privileges" && exit 255 ; fi
+
+	install -C $(BIN_NAME) /usr/bin/
 
 errors:
 	rm -rf obj
