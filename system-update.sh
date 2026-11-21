@@ -70,11 +70,9 @@ function goto_repo
 		then
 			# update the repository
 			git pull --all
-			# TODO: if git pull fails, attempt (due to missing permission) 
-			# attempt to download the repo normally just like we did above
 			if [ "$EUID" -ne 0 ];
-				then
-					download
+			then
+					download "$1"
 			fi
 		fi
 	fi
