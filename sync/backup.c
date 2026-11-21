@@ -49,23 +49,27 @@ void backup_file(struct filebackup_data *filename_data)
 	char *src_file = NULL;
 	char *dst_file = NULL;
 
+	void *bufs[3] = { file_path, NULL, NULL };
+
 	if (filename_data->src_home_string)
 	{
-		src_file = bmalloc(NULL, home_path, file_data.home_string, 
+		src_file = bmalloc(bufs, home_path, file_data.home_string, 
 				filename_data->source_filepath);
 	}
 	else
 	{
-		src_file = bmalloc(NULL, filename_data->source_filepath);
+		src_file = bmalloc(bufs, filename_data->source_filepath);
 	}
+
+	bufs[1] = src_file;
 	
 	if (filename_data->dest_home_string)
 	{
-		char *dst_file_path = bmalloc(NULL, backup_home_path, file_data.home_string, 
+		char *dst_file_path = bmalloc(bufs, backup_home_path, file_data.home_string, 
 				filename_data->destination_filepath);
 		if (filename_data->dest_time_string)
 		{
-			dst_file = bmalloc(NULL, dst_file_path, file_data.time_string);
+			dst_file = bmalloc(bufs, dst_file_path, file_data.time_string);
 			free(dst_file_path);
 		}
 		else
@@ -77,11 +81,11 @@ void backup_file(struct filebackup_data *filename_data)
 	{
 		if (filename_data->dest_time_string)
 		{
-			dst_file = bmalloc(NULL, filename_data->destination_filepath, file_data.time_string);
+			dst_file = bmalloc(bufs, filename_data->destination_filepath, file_data.time_string);
 		}
 		else
 		{
-			dst_file = bmalloc(NULL, filename_data->destination_filepath);
+			dst_file = bmalloc(bufs, filename_data->destination_filepath);
 		}
 	}
 
